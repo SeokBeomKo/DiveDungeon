@@ -21,7 +21,7 @@ public class LevelGenerator : MonoBehaviour
         gridSizeX = Mathf.RoundToInt(worldSize.x); // 그리드의 가로 크기
         gridSizeY = Mathf.RoundToInt(worldSize.y); // 그리드의 세로 크기
         CreateRooms(); // 방 생성 함수 호출
-        // SetRoomDoors(); // 방의 문 설정 함수 호출
+        SetRoomDoors(); // 방의 문 설정 함수 호출
         // DrawMap(); // 맵 그리는 함수 호출
         // GetComponent<SheetAssigner>().Assign(rooms); // 방의 정보를 다른 스크립트로 전달하는 함수 호출
     }
@@ -165,5 +165,33 @@ public class LevelGenerator : MonoBehaviour
         // : 이웃 방의 수를 반환
         return ret;
     }
+    void SetRoomDoors()
+    {
+		int maxX = gridSizeX * 2;
+    	int maxY = gridSizeY * 2;
+	
+    	for (int x = 0; x < maxX; x++) {
+    	    for (int y = 0; y < maxY; y++) {
+    	        Room room = rooms[x, y];
+    	        if (room != null) 
+                {
+    	            // : 위쪽 방향의 문을 설정합니다. 
+                    // : 현재 위치가 맵의 상단 경계를 넘지 않고, 위쪽에 방이 있는 경우에만 문을 만듭니다.
+                    room.doorBot = y - 1 >= 0 && rooms[x, y - 1] != null;
 
+                    // : 아래쪽 방향의 문을 설정합니다. 
+                    // : 현재 위치가 맵의 하단 경계를 넘지 않고, 아래쪽에 방이 있는 경우에만 문을 만듭니다.
+                    room.doorTop = y + 1 < maxY && rooms[x, y + 1] != null;
+
+                    // : 왼쪽 방향의 문을 설정합니다.
+                    // : 현재 위치가 맵의 왼쪽 경계를 넘지 않고, 왼쪽에 방이 있는 경우에만 문을 만듭니다.
+                    room.doorLeft = x - 1 >= 0 && rooms[x - 1, y] != null;
+
+                    // : 오른쪽 방향의 문을 설정합니다.
+                    // : 현재 위치가 맵의 오른쪽 경계를 넘지 않고, 오른쪽에 방이 있는 경우에만 문을 만듭니다.
+                    room.doorRight = x + 1 < maxX && rooms[x + 1, y] != null;
+    	        }
+    	    }
+    	}
+	}
 }
