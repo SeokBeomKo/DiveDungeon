@@ -403,6 +403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 4
+  rollSpeed: 1000
   jumpPower: 10
 --- !u!1 &1865651862
 GameObject:

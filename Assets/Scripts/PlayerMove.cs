@@ -5,7 +5,10 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     public float maxSpeed;
+    public float rollSpeed;
     public float jumpPower;
+    public float defaultTime;
+
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator anim;
@@ -19,31 +22,37 @@ public class PlayerMove : MonoBehaviour
     private void Update() // 단발적인 키 입력
     {
         // Jump
-        if(Input.GetButtonDown("Jump") && !anim.GetBool("isJumping"))
+        if(Input.GetButtonDown("Jump") && (anim.GetInteger("isJumping") == 0))
         {
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-            anim.SetBool("isJumping", true);
+            anim.SetInteger("isJumping", 1);
+        }
+        else if(Input.GetButtonDown("Jump") && (anim.GetInteger("isJumping") == 1))
+        {
+            rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+            anim.SetInteger("isJumping", 2);
+        }
+
+        // Roll
+        if(Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            anim.SetTrigger("isRolling");
+
+            Vector2 rollDirection = spriteRenderer.flipX ? Vector2.left : Vector2.right;
+            rigid.AddForce(rollDirection * rollSpeed);
         }
 
         // Stop Speed
         if(Input.GetButtonUp("Horizontal"))
         {
-            rigid.velocity = new Vector2(rigid.velocity.normalized.x * 0.5f, rigid.velocity.y);
+            rigid.velocity = Vector2.zero;
+            anim.SetBool("isWalking", false);
         }
 
         // Direction Sprite
         if (Input.GetButtonDown("Horizontal"))
         {
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
-        }
-
-        // Animation
-        if (Mathf.Abs(rigid.velocity.normalized.x) < 0.3)
-        {
-            anim.SetBool("isWalking", false);
-        }
-        else
-        {
             anim.SetBool("isWalking", true);
         }
     }
@@ -52,7 +61,6 @@ public class PlayerMove : MonoBehaviour
     {
         // Move Speed
         float h = Input.GetAxisRaw("Horizontal");
-
         rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
         
         // velocity : 리지드바디의 현재 속도
@@ -76,9 +84,11 @@ public class PlayerMove : MonoBehaviour
             {
                 if (rayHit.distance < 0.5f)
                 {
-                    anim.SetBool("isJumping", false);
+                    anim.SetInteger("isJumping", 0);
                 }
             }
         }
     }
+
+    
 }
