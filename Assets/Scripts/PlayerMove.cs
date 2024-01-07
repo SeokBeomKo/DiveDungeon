@@ -5,9 +5,10 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     public float maxSpeed;
-    public float rollSpeed;
     public float jumpPower;
-    public float defaultTime;
+    public float rollSpeed;
+
+    private float rollTime;
 
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
@@ -22,7 +23,7 @@ public class PlayerMove : MonoBehaviour
     private void Update() // 단발적인 키 입력
     {
         // Jump
-        if(Input.GetButtonDown("Jump") && (anim.GetInteger("isJumping") == 0))
+        if (Input.GetButtonDown("Jump") && (anim.GetInteger("isJumping") == 0))
         {
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             anim.SetInteger("isJumping", 1);
@@ -34,12 +35,28 @@ public class PlayerMove : MonoBehaviour
         }
 
         // Roll
-        if(Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !anim.GetCurrentAnimatorStateInfo(0).IsName("isRolling"))
         {
             anim.SetTrigger("isRolling");
-
+            
             Vector2 rollDirection = spriteRenderer.flipX ? Vector2.left : Vector2.right;
             rigid.AddForce(rollDirection * rollSpeed);
+        }
+
+        // Attack
+        if (Input.GetMouseButton(0))
+        {
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
+            {
+                anim.SetTrigger("isAttack");
+            }
+        }
+
+        // Direction Sprite
+        if (Input.GetButtonDown("Horizontal"))
+        {
+            spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
+            anim.SetBool("isWalking", true);
         }
 
         // Stop Speed
@@ -49,12 +66,6 @@ public class PlayerMove : MonoBehaviour
             anim.SetBool("isWalking", false);
         }
 
-        // Direction Sprite
-        if (Input.GetButtonDown("Horizontal"))
-        {
-            spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
-            anim.SetBool("isWalking", true);
-        }
     }
 
     void FixedUpdate() // 지속적인 키 입력
