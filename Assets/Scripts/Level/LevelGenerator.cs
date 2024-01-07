@@ -8,6 +8,7 @@ public class LevelGenerator : MonoBehaviour
     Room[,] rooms;      // : 2 차원 배열 방의 집합 ( 실제 방이 존재하는 그리드 값 )
     List<Vector2> takenPositions = new List<Vector2>(); // : 이미 존재하는 방의 위치를 저장하는 리스트
     int gridSizeX, gridSizeY, numberOfRooms = 20; // : 그리드 크기와 방의 개수를 정의
+    bool createdShop = false, createdExit = false;
 
     public GameObject roomWhiteObj; // : 방의 프리팹 오브젝트
     public Transform mapRoot; // : 맵의 루트 Transform
@@ -25,6 +26,8 @@ public class LevelGenerator : MonoBehaviour
         DrawMap(); // 맵 그리는 함수 호출
         // GetComponent<SheetAssigner>().Assign(rooms); // 방의 정보를 다른 스크립트로 전달하는 함수 호출
     }
+
+    RoomType settinfType;
 
     void CreateRooms()
     {
@@ -64,19 +67,20 @@ public class LevelGenerator : MonoBehaviour
             takenPositions.Insert(0,checkPos);
         }
 
-        PrintRooms();
+        SettingType();
     }
 
-    void PrintRooms() 
+    int shopindex, exitindex;
+    void SettingType()
     {
-        for(int i=0; i<takenPositions.Count; i++) 
-        {
-            Vector2 pos = takenPositions[i];
-            Room room = rooms[(int)pos.x + gridSizeX, (int)pos.y + gridSizeY];
+        shopindex = Mathf.RoundToInt(Random.value * (takenPositions.Count - 1));
+        rooms[(int) takenPositions[shopindex].x + gridSizeX, (int) takenPositions[shopindex].y + gridSizeY].type = RoomType.SHOP;
 
-            Debug.Log("Room " + (i+1) + ": Position - " + room.gridPosition.ToString() +
-                      ", Type - " + room.type);
-        }
+        do 
+        {
+            exitindex = Mathf.RoundToInt(Random.value * (takenPositions.Count - 1));
+        } while (shopindex == exitindex);
+        rooms[(int) takenPositions[exitindex].x + gridSizeX, (int) takenPositions[exitindex].y + gridSizeY].type = RoomType.EXIT;
     }
 
     // : 새로운 위치를 생성하는 함수
@@ -202,25 +206,23 @@ public class LevelGenerator : MonoBehaviour
         foreach (Vector2 pos in takenPositions) 
         {
             Room room = rooms[(int)pos.x + gridSizeX, (int)pos.y + gridSizeY];
-    
+
             if (room == null)
             {
-                Debug.Log(null);
                 continue;      
             }
-    
+
             Vector2 drawPos = room.gridPosition;
             drawPos.x *= 16; 
             drawPos.y *= 8;  
-    
-            Debug.Log(drawPos);
+
             MapSpriteSelector mapper = Object.Instantiate(roomWhiteObj, drawPos, Quaternion.identity).GetComponent<MapSpriteSelector>();
             mapper.type = room.type;       
             mapper.up = room.doorTop;      
             mapper.down = room.doorBot;    
             mapper.right = room.doorRight; 
             mapper.left = room.doorLeft;   
-    
+
             mapper.gameObject.transform.parent = mapRoot;
         }   
     }
