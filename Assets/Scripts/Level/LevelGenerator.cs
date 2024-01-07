@@ -22,7 +22,7 @@ public class LevelGenerator : MonoBehaviour
         gridSizeY = Mathf.RoundToInt(worldSize.y); // 그리드의 세로 크기
         CreateRooms(); // 방 생성 함수 호출
         SetRoomDoors(); // 방의 문 설정 함수 호출
-        // DrawMap(); // 맵 그리는 함수 호출
+        DrawMap(); // 맵 그리는 함수 호출
         // GetComponent<SheetAssigner>().Assign(rooms); // 방의 정보를 다른 스크립트로 전달하는 함수 호출
     }
 
@@ -67,15 +67,17 @@ public class LevelGenerator : MonoBehaviour
         PrintRooms();
     }
 
-    void PrintRooms() {
-    for(int i=0; i<takenPositions.Count; i++) {
-        Vector2 pos = takenPositions[i];
-        Room room = rooms[(int)pos.x + gridSizeX, (int)pos.y + gridSizeY];
-        
-        Debug.Log("Room " + (i+1) + ": Position - " + room.gridPosition.ToString() +
-                  ", Type - " + room.type);
+    void PrintRooms() 
+    {
+        for(int i=0; i<takenPositions.Count; i++) 
+        {
+            Vector2 pos = takenPositions[i];
+            Room room = rooms[(int)pos.x + gridSizeX, (int)pos.y + gridSizeY];
+
+            Debug.Log("Room " + (i+1) + ": Position - " + room.gridPosition.ToString() +
+                      ", Type - " + room.type);
+        }
     }
-}
 
     // : 새로운 위치를 생성하는 함수
     Vector2 NewPosition()
@@ -194,4 +196,32 @@ public class LevelGenerator : MonoBehaviour
     	    }
     	}
 	}
+
+    void DrawMap() 
+    {
+        foreach (Vector2 pos in takenPositions) 
+        {
+            Room room = rooms[(int)pos.x + gridSizeX, (int)pos.y + gridSizeY];
+    
+            if (room == null)
+            {
+                Debug.Log(null);
+                continue;      
+            }
+    
+            Vector2 drawPos = room.gridPosition;
+            drawPos.x *= 16; 
+            drawPos.y *= 8;  
+    
+            Debug.Log(drawPos);
+            MapSpriteSelector mapper = Object.Instantiate(roomWhiteObj, drawPos, Quaternion.identity).GetComponent<MapSpriteSelector>();
+            mapper.type = room.type;       
+            mapper.up = room.doorTop;      
+            mapper.down = room.doorBot;    
+            mapper.right = room.doorRight; 
+            mapper.left = room.doorLeft;   
+    
+            mapper.gameObject.transform.parent = mapRoot;
+        }   
+    }
 }
