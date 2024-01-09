@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3966489630430132210}
   - component: {fileID: 3966489630430132209}
-  - component: {fileID: 3966489630430132208}
+  - component: {fileID: 3681131444644502017}
   m_Layer: 0
   m_Name: RoomMap
   m_TagString: Untagged
@@ -53,7 +53,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3966489630430132208
+--- !u!114 &3681131444644502017
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3966489630430132223}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b12e5615d7dfe04ba05688ef5a26a5a, type: 3}
+  m_Script: {fileID: 11500000, guid: bed51bfa3408390419d8640040777f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spU: {fileID: 21300000, guid: 38112ee8475e01b428f631e8147b8f7b, type: 3}
