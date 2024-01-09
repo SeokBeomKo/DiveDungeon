@@ -35,12 +35,17 @@ public class PlayerMove : MonoBehaviour
         }
 
         // Roll
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !anim.GetCurrentAnimatorStateInfo(0).IsName("isRolling"))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !anim.GetCurrentAnimatorStateInfo(0).IsName("Roll"))
         {
-            anim.SetTrigger("isRolling");
+            StartCoroutine(RollCoroutine());
+           
+
+            /*anim.SetTrigger("isRolling");
             
             Vector2 rollDirection = spriteRenderer.flipX ? Vector2.left : Vector2.right;
-            rigid.AddForce(rollDirection * rollSpeed);
+            rigid.velocity = rollDirection * rollSpeed;
+*/
+            //rigid.AddForce(rollDirection * rollSpeed);
         }
 
         // Attack
@@ -53,7 +58,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         // Direction Sprite
-        if (Input.GetButtonDown("Horizontal"))
+        if (Input.GetButton("Horizontal"))
         {
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
             anim.SetBool("isWalking", true);
@@ -101,5 +106,17 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    
+    private IEnumerator RollCoroutine()
+    {
+        //anim.SetTrigger("isRolling");
+        anim.SetBool("isRolling", true);
+        //yield return new WaitForSeconds(0.2f);
+        maxSpeed *= 2f;
+        Vector2 rollDirection = spriteRenderer.flipX ? Vector2.left : Vector2.right;
+        rigid.velocity = rollDirection * rollSpeed;
+
+        yield return new WaitForSeconds(0.2f);
+        anim.SetBool("isRolling", false);
+        maxSpeed *= 0.5f;
+    }
 }
