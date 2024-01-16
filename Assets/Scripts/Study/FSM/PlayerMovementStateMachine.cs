@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,7 @@ public class PlayerMovementStateMachine : MonoBehaviour
     [Header("플레이어 컨트롤러")]
     [SerializeField] public PlayerController playerController;
     [HideInInspector] public IPlayerState curState;
-
+ 
     public Dictionary<PlayerMovementStateEnums, IPlayerState> stateDictionary;
 
     private void Awake() 
@@ -42,3 +42,4 @@ public class PlayerMovementStateMachine : MonoBehaviour
         }
     }
 }
+*/

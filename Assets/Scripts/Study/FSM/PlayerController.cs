@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,14 +17,14 @@ public class PlayerController : MonoBehaviour
 
     public int direction = 1;
 
-    private void Update() 
+    private void Update()
     {
         if (moveStateMachine.curState != null)
             moveStateMachine.curState.Update();
         Debug.Log(moveStateMachine.curState);
     }
 
-    private void FixedUpdate() 
+    private void FixedUpdate()
     {
         if (moveStateMachine.curState != null)
             moveStateMachine.curState.FixedUpdate();
@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
 
     public void MaxSpeed()
     {
-        if(Mathf.Abs(rigid.velocity.x) > maxSpeed) // Right Max Speed
+        if (Mathf.Abs(rigid.velocity.x) > maxSpeed) // Right Max Speed
         {
             rigid.velocity = new Vector2(maxSpeed * direction, rigid.velocity.y);
         }
@@ -78,3 +78,4 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 }
+*/

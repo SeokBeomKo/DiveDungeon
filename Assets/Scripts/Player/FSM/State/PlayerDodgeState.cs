@@ -1,4 +1,4 @@
-/*using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,14 +13,21 @@ public class PlayerDodgeState : IPlayerState
         player = stateMachine.playerController;
     }
 
+
     public void Update()
     {
+        //float animationDuration = player.animator.GetCurrentAnimatorStateInfo(0).length;
+
+        /*if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.3f / animationDuration)
+        {
+            player.rigid.velocity = Vector3.zero;
+        }*/
         if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.35f)
         {
-            stateMachine.ChangeState(PlayerMovementStateEnums.IDLE);
-            return;
+            stateMachine.ChangeState(PlayerMovementEnums.IDLE);
         }
     }
+
     public void FixedUpdate()
     {
         player.Dodge();
@@ -30,12 +37,12 @@ public class PlayerDodgeState : IPlayerState
     {
         player.animator.Play("Dodge");
 
-        player.maxSpeed *= 2f;
+        player.moveSpeed *= 1.5f;
     }
+
     public void OnExit()
     {
         player.rigid.velocity = Vector3.zero;
-        player.maxSpeed *= 0.5f;
+        player.moveSpeed /= 1.5f;
     }
 }
-*/

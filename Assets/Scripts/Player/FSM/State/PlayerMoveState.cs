@@ -1,4 +1,4 @@
-/*using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,14 +15,19 @@ public class PlayerMoveState : IPlayerState
 
     public void Update()
     {
-        if (Input.GetAxisRaw("Horizontal") == 0)
+        if(Input.GetAxisRaw("Horizontal") == 0)
         {
-            stateMachine.ChangeState(PlayerMovementStateEnums.IDLE);
+            stateMachine.ChangeState(PlayerMovementEnums.IDLE);
             return;
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if(Input.GetButtonDown("Fire3"))
         {
-            stateMachine.ChangeState(PlayerMovementStateEnums.DODGE);
+            stateMachine.ChangeState(PlayerMovementEnums.DODGE);
+            return;
+        }
+        if(Input.GetButtonDown("Jump"))
+        {
+            stateMachine.ChangeState(PlayerMovementEnums.JUMPREADY);
             return;
         }
 
@@ -38,9 +43,9 @@ public class PlayerMoveState : IPlayerState
     {
         player.animator.Play("Move");
     }
+
     public void OnExit()
     {
         player.rigid.velocity = Vector3.zero;
     }
 }
-*/

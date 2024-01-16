@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -40,11 +40,11 @@ public class PlayerMove : MonoBehaviour
             StartCoroutine(RollCoroutine());
            
 
-            /*anim.SetTrigger("isRolling");
+            *//*anim.SetTrigger("isRolling");
             
             Vector2 rollDirection = spriteRenderer.flipX ? Vector2.left : Vector2.right;
             rigid.velocity = rollDirection * rollSpeed;
-*/
+*//*
             //rigid.AddForce(rollDirection * rollSpeed);
         }
 
@@ -120,3 +120,4 @@ public class PlayerMove : MonoBehaviour
         maxSpeed *= 0.5f;
     }
 }
+*/

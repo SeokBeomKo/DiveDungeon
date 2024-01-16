@@ -1,11 +1,11 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerJumpState : IPlayerState
 {
-    public PlayerController player {get; set;}
-    public PlayerMovementStateMachine stateMachine {get; set;}
+    public PlayerController player { get; set; }
+    public PlayerMovementStateMachine stateMachine { get; set; }
 
     public PlayerJumpState(PlayerMovementStateMachine _stateMachine)
     {
@@ -20,7 +20,7 @@ public class PlayerJumpState : IPlayerState
 
     public void FixedUpdate()
     {
-        if(player.rigid.velocity.y < 0)
+        if (player.rigid.velocity.y < 0)
         {
             stateMachine.ChangeState(PlayerMovementStateEnums.FALL);
         }
@@ -34,8 +34,9 @@ public class PlayerJumpState : IPlayerState
 
     public void OnExit()
     {
-        
+
     }
 
 
 }
+*/

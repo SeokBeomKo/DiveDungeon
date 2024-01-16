@@ -1,4 +1,4 @@
-/*using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +7,8 @@ public class PlayerIdleState : IPlayerState
     public PlayerController player { get; set; }
     public PlayerMovementStateMachine stateMachine { get; set; }
 
+
+    // 생성자의 주요 목적은 객체를 초기화하고 초기 상태로 설정하는 것
     public PlayerIdleState(PlayerMovementStateMachine _stateMachine)
     {
         stateMachine = _stateMachine;
@@ -17,20 +19,26 @@ public class PlayerIdleState : IPlayerState
     {
         if (Input.GetAxisRaw("Horizontal") != 0)
         {
-            stateMachine.ChangeState(PlayerMovementStateEnums.MOVE);
+            stateMachine.ChangeState(PlayerMovementEnums.MOVE);
             return;
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetButtonDown("Fire3"))
         {
-            stateMachine.ChangeState(PlayerMovementStateEnums.DODGE);
+            stateMachine.ChangeState(PlayerMovementEnums.DODGE);
             return;
         }
         if (Input.GetButtonDown("Jump"))
         {
-            stateMachine.ChangeState(PlayerMovementStateEnums.JUMP);
+            stateMachine.ChangeState(PlayerMovementEnums.JUMPREADY);
+            return;
+        }
+        if (Input.GetMouseButton(0))
+        {
+            stateMachine.ChangeState(PlayerMovementEnums.ATTACK);
             return;
         }
     }
+
     public void FixedUpdate()
     {
 
@@ -40,9 +48,9 @@ public class PlayerIdleState : IPlayerState
     {
         player.animator.Play("Idle");
     }
+
     public void OnExit()
     {
 
     }
 }
-*/

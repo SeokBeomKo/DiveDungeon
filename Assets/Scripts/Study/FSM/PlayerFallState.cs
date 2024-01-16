@@ -1,11 +1,11 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerFallState : IPlayerState
 {
-    public PlayerController player {get; set;}
-    public PlayerMovementStateMachine stateMachine {get; set;}
+    public PlayerController player { get; set; }
+    public PlayerMovementStateMachine stateMachine { get; set; }
 
     public PlayerFallState(PlayerMovementStateMachine _stateMachine)
     {
@@ -20,7 +20,7 @@ public class PlayerFallState : IPlayerState
 
     public void FixedUpdate()
     {
-        if(player.CheckGround())
+        if (player.CheckGround())
         {
             stateMachine.ChangeState(PlayerMovementStateEnums.IDLE);
             return;
@@ -37,3 +37,4 @@ public class PlayerFallState : IPlayerState
 
     }
 }
+*/
