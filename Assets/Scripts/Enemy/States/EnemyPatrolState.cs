@@ -19,6 +19,11 @@ public class EnemyPatrolState : IEnemyState
             stateMachine.ChangeState(EnemyStateEnums.IDLE);
             return;
         }
+        if (controller.FindPlayerInRadius() != null)
+        {
+            stateMachine.ChangeState(EnemyStateEnums.TRACE);
+            return;
+        }
     }
     public void FixedUpdate()
     {

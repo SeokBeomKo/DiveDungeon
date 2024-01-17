@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyTraceState : IEnemyState
@@ -18,14 +19,25 @@ public class EnemyTraceState : IEnemyState
     }
     public void FixedUpdate()
     {
+        if (controller.FindPlayerInRadius() == null)
+        {
+            stateMachine.ChangeState(EnemyStateEnums.IDLE);
+            return;
+        }
+        if (Vector2.Distance(controller.FindPlayerInRadius().transform.position, controller.transform.position) <= controller.attackDistance)
+        {
+            stateMachine.ChangeState(EnemyStateEnums.ATTACK);
+            return;
+        }
 
+        controller.Trace();
     }
     public void OnEnter()
     {
-
+        controller.EnterTrace();
     }
     public void OnExit()
     {
-
+        controller.ExitTrace();
     }
 }

@@ -8,6 +8,11 @@ public class EnemyEpicController : EnemyController
     {
 
     }
+    public override void Move()
+    {
+        
+    }
+
     public override void Patrol()
     {
 

@@ -19,6 +19,11 @@ public class EnemyIdleState : IEnemyState
             stateMachine.ChangeState(EnemyStateEnums.PATROL);
             return;
         }
+        if (controller.FindPlayerInRadius() != null)
+        {
+            stateMachine.ChangeState(EnemyStateEnums.TRACE);
+            return;
+        }
     }
     public void FixedUpdate()
     {
@@ -27,7 +32,7 @@ public class EnemyIdleState : IEnemyState
     public void OnEnter()
     {
         controller.maxPatrolTime = Random.Range(3,5);
-        controller.PlayAnimation("Idle");
+        controller.animator.Play("Idle");
     }
     public void OnExit()
     {

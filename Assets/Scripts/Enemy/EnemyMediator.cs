@@ -9,6 +9,6 @@ public abstract class EnemyMediator : MonoBehaviour
 
     private void Awake() 
     {
-        stateMachine.OnPlayAnimation += controller.PlayAnimation;
+        // stateMachine.OnPlayAnimation += controller.PlayAnimation;
     }
 }
