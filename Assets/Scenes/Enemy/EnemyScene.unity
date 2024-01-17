@@ -515,8 +515,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3685e3b2b90e03f47adeebdfbbfe116c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 1022220271}
-  stateMachine: {fileID: 1022220272}
 --- !u!114 &1022220271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -540,6 +538,8 @@ MonoBehaviour:
   direction: 1
   maxPatrolTime: 1
   curPatrolTime: 0
+  maxPreparationTime: 1
+  curPreparationTime: 0
 --- !u!114 &1022220272
 MonoBehaviour:
   m_ObjectHideFlags: 0

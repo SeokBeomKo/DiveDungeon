@@ -26,7 +26,7 @@ public class EnemyTraceState : IEnemyState
         }
         if (Vector2.Distance(controller.FindPlayerInRadius().transform.position, controller.transform.position) <= controller.attackDistance)
         {
-            stateMachine.ChangeState(EnemyStateEnums.ATTACK);
+            stateMachine.ChangeState(EnemyStateEnums.PREPARATION);
             return;
         }
 

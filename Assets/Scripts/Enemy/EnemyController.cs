@@ -4,8 +4,6 @@ using UnityEngine;
 
 abstract public class EnemyController : MonoBehaviour
 {
-    public delegate void EnemyChangeState();
-    
     [SerializeField]    public Animator             animator;
     [SerializeField]    public Rigidbody2D          rigid;
     [SerializeField]    public SpriteRenderer       spriteRenderer;
@@ -22,6 +20,9 @@ abstract public class EnemyController : MonoBehaviour
     [Header("임시 변수")]
     public float maxPatrolTime = 1f;
     public float curPatrolTime;
+
+    public float maxPreparationTime = 1f;
+    public float curPreparationTime;
 
 
     private void Update() 
@@ -75,6 +76,16 @@ abstract public class EnemyController : MonoBehaviour
         ExitMove();
     }
 
+    public abstract void Preparation();
+    public void EnterPreparation()
+    {
+        animator.Play("Preparation");
+    }
+    public void ExitPreparation()
+    {
+        curPreparationTime = 0;
+    }   
+
     public abstract void Attack();
     public void EnterAttack()
     {
@@ -113,12 +124,21 @@ abstract public class EnemyController : MonoBehaviour
         return null;
     }
 
+    public bool CheckAttack()
+    {
+        if (maxPreparationTime <= curPreparationTime)
+        {
+            return true;
+        }
+        curPreparationTime += Time.deltaTime;
+        return false;
+    }
+
     // : IdleToPatrol 을 Invoke 나 Coroutine 을 쓰지 않고 시간을 재는 이유 : Idle 상태에서 플레이어 범위 안으로 들어왔을 시 바로 Trace 또는 Attack 상태로 전환
     public bool CheckPatrol()
     {
         if (maxPatrolTime <= curPatrolTime)
         {
-            curPatrolTime = 0f;
             return true;
         }
         curPatrolTime += Time.deltaTime;

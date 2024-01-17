@@ -8,15 +8,18 @@ public class EnemyNormalController : EnemyController
     {
 
     }
+    
     public override void Move()
     {
         rigid.AddForce(Vector3.right * direction * moveSpeed);
     }
+
     public override void Patrol()
     {
         Move();
         ControlSpped();
     }
+
     public override void Trace()
     {
         direction = FindPlayerInRadius().transform.position.x < transform.position.x ? -1 : 1;
@@ -24,6 +27,11 @@ public class EnemyNormalController : EnemyController
         SetSpriteFlip();
         Move();
         ControlSpped();
+    }
+
+    public override void Preparation()
+    {
+
     }
 
     public override void Attack()

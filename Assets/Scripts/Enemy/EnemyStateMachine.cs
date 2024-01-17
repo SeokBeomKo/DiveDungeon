@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class EnemyStateMachine : MonoBehaviour
 {
-    public delegate void EnemyPlayAnimation(string name);
-    public event EnemyPlayAnimation OnPlayAnimation;
-
     public EnemyController controller;
     public IEnemyState curState;
     public Dictionary<EnemyStateEnums, IEnemyState> stateDic;
@@ -15,12 +12,13 @@ public class EnemyStateMachine : MonoBehaviour
     {
         stateDic = new Dictionary<EnemyStateEnums, IEnemyState>
         {
-            { EnemyStateEnums.IDLE,      new EnemyIdleState(this)},
-            { EnemyStateEnums.PATROL,    new EnemyPatrolState(this)},
-            { EnemyStateEnums.TRACE,     new EnemyTraceState(this)},
-            { EnemyStateEnums.ATTACK,    new EnemyAttackState(this)},
-            { EnemyStateEnums.DEAD,      new EnemyDeadState(this)},
-            { EnemyStateEnums.Hit,       new EnemyHitState(this)}
+            { EnemyStateEnums.IDLE,         new EnemyIdleState(this)},
+            { EnemyStateEnums.PATROL,       new EnemyPatrolState(this)},
+            { EnemyStateEnums.TRACE,        new EnemyTraceState(this)},
+            { EnemyStateEnums.PREPARATION,  new EnemyPreparationState(this)},
+            { EnemyStateEnums.ATTACK,       new EnemyAttackState(this)},
+            { EnemyStateEnums.DEAD,         new EnemyDeadState(this)},
+            { EnemyStateEnums.Hit,          new EnemyHitState(this)}
         };
 
         ChangeState(EnemyStateEnums.IDLE);
@@ -35,11 +33,5 @@ public class EnemyStateMachine : MonoBehaviour
             curState = newState;
             curState.OnEnter();
         }
-    }
-
-    public void PlayAnimation(string name)
-    {
-        Debug.Log(name);
-        OnPlayAnimation?.Invoke(name);
     }
 }

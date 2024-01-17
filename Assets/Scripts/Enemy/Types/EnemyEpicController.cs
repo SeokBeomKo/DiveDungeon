@@ -21,6 +21,10 @@ public class EnemyEpicController : EnemyController
     {
 
     }
+    public override void Preparation()
+    {
+
+    }
     public override void Attack()
     {
 
