@@ -4,7 +4,9 @@ using UnityEngine;
 
 abstract public class EnemyController : MonoBehaviour
 {
-    [SerializeField]    public Animator             enemyAnimator;
+    public delegate void EnemyChangeState();
+    
+    [SerializeField]    public Animator             animator;
     [SerializeField]    public Rigidbody2D          rigid;
     [SerializeField]    public EnemyStateMachine    stateMachine;
 
@@ -21,11 +23,16 @@ abstract public class EnemyController : MonoBehaviour
             stateMachine.curState.FixedUpdate();
     }
 
+    public void PlayAnimation(string name)
+    {
+        animator.Play(name);
+    }
+
     public abstract void Idle();
     public abstract void Patrol();
     public abstract void Trace();
     public abstract void Attack();
     public abstract void OnAttack();
     
-    
+    // public abstract void CheckToIdle();
 }

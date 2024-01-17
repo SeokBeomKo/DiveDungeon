@@ -22,7 +22,7 @@ public class EnemyIdleState : IEnemyState
     }
     public void OnEnter()
     {
-
+        stateMachine.PlayAnimation("Idle");
     }
     public void OnExit()
     {

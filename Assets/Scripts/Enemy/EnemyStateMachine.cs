@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class EnemyStateMachine : MonoBehaviour
 {
+    public delegate void EnemyPlayAnimation(string name);
+    public event EnemyPlayAnimation OnPlayAnimation;
+
     public EnemyController controller;
     public IEnemyState curState;
     public Dictionary<EnemyStateEnums, IEnemyState> stateDic;
+
     private void Awake()
     {
         stateDic = new Dictionary<EnemyStateEnums, IEnemyState>
@@ -31,5 +35,10 @@ public class EnemyStateMachine : MonoBehaviour
             curState = newState;
             curState.OnEnter();
         }
+    }
+
+    public void PlayAnimation(string name)
+    {
+        OnPlayAnimation?.Invoke(name);
     }
 }
