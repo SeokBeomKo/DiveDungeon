@@ -1,13 +1,13 @@
-/*using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerJumpState : IPlayerState
+public class PlayerFallState : IPlayerState
 {
     public PlayerController player { get; set; }
     public PlayerMovementStateMachine stateMachine { get; set; }
 
-    public PlayerJumpState(PlayerMovementStateMachine _stateMachine)
+    public PlayerFallState(PlayerMovementStateMachine _stateMachine)
     {
         stateMachine = _stateMachine;
         player = stateMachine.playerController;
@@ -20,23 +20,19 @@ public class PlayerJumpState : IPlayerState
 
     public void FixedUpdate()
     {
-        if (player.rigid.velocity.y < 0)
+        if(player.CheckGround())
         {
-            stateMachine.ChangeState(PlayerMovementStateEnums.FALL);
+            stateMachine.ChangeState(PlayerMovementEnums.LAND);
+            return;
         }
     }
 
     public void OnEnter()
     {
-        player.Jump();
-        player.animator.Play("Jump");
+        player.animator.Play("Fall");
     }
 
     public void OnExit()
     {
-
     }
-
-
 }
-*/

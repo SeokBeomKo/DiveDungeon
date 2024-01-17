@@ -17,6 +17,10 @@ public class PlayerMovementStateMachine : MonoBehaviour
             {PlayerMovementEnums.IDLE, new PlayerIdleState(this) },
             {PlayerMovementEnums.MOVE, new PlayerMoveState(this) },
             {PlayerMovementEnums.DODGE, new PlayerDodgeState(this) },
+            {PlayerMovementEnums.JUMPREADY, new PlayerJumpReadyState(this) },
+            {PlayerMovementEnums.JUMP, new PlayerJumpState(this) },
+            {PlayerMovementEnums.FALL, new PlayerFallState(this) },
+            {PlayerMovementEnums.LAND, new PlayerLandState(this) },
         };
 
         if(stateDictionary.TryGetValue(PlayerMovementEnums.IDLE, out IPlayerState newState))

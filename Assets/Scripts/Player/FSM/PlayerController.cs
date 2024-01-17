@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("¼öÄ¡ °ª")]
     public float moveSpeed;
-
+    public float jumpForce;
 
     public int direction = 1;  // 1:R -1:L
 
@@ -51,5 +51,24 @@ public class PlayerController : MonoBehaviour
     {
         rigid.AddForce(Vector2.right * direction, ForceMode2D.Impulse);
         SetMoveSpeed();
+    }
+
+    public void Jump()
+    {
+        rigid.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+    }
+
+    public bool CheckGround()
+    {
+        Debug.DrawRay(rigid.position, Vector3.down, new Color(0, 1, 0));
+        RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 1, LayerMask.GetMask("Platform")); 
+        if (rayHit.collider != null)
+        {
+            if (rayHit.distance < 0.5f)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
