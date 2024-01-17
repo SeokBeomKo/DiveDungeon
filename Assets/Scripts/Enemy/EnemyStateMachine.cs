@@ -39,6 +39,7 @@ public class EnemyStateMachine : MonoBehaviour
 
     public void PlayAnimation(string name)
     {
+        Debug.Log(name);
         OnPlayAnimation?.Invoke(name);
     }
 }

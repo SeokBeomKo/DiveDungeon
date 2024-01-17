@@ -14,7 +14,11 @@ public class EnemyIdleState : IEnemyState
     }
     public void Update()
     {
-
+        if (controller.CheckPatrol())
+        {
+            stateMachine.ChangeState(EnemyStateEnums.PATROL);
+            return;
+        }
     }
     public void FixedUpdate()
     {
@@ -22,7 +26,8 @@ public class EnemyIdleState : IEnemyState
     }
     public void OnEnter()
     {
-        stateMachine.PlayAnimation("Idle");
+        controller.maxPatrolTime = Random.Range(3,5);
+        controller.PlayAnimation("Idle");
     }
     public void OnExit()
     {

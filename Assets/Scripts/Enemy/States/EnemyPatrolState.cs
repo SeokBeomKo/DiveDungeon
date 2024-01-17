@@ -14,18 +14,22 @@ public class EnemyPatrolState : IEnemyState
     }
     public void Update()
     {
-
+        if (controller.CheckPatrol())
+        {
+            stateMachine.ChangeState(EnemyStateEnums.IDLE);
+            return;
+        }
     }
     public void FixedUpdate()
     {
-
+        controller.Patrol();
     }
     public void OnEnter()
     {
-
+        controller.EnterPatrol();
     }
     public void OnExit()
     {
-
+        controller.ExitPatrol();
     }
 }
