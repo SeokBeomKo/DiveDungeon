@@ -15,28 +15,40 @@ public class PlayerIdleState : IPlayerState
         player = stateMachine.playerController;
     }
 
+    public HashSet<PlayerMovementEnums> inputHash { get; } = new HashSet<PlayerMovementEnums>()
+    {
+        PlayerMovementEnums.MOVE,
+        PlayerMovementEnums.JUMPREADY,
+        PlayerMovementEnums.DODGE,
+        PlayerMovementEnums.ATTACK
+    };
+
+    public HashSet<PlayerMovementEnums> logicHash { get; } = new HashSet<PlayerMovementEnums>()
+    {
+    };
+
     public void Update()
     {
-        if (Input.GetAxisRaw("Horizontal") != 0)
+        /*if (Input.GetAxisRaw("Horizontal") != 0)
         {
-            stateMachine.ChangeState(PlayerMovementEnums.MOVE);
+            stateMachine.ChangeStateAny(PlayerMovementEnums.MOVE);
             return;
         }
         if (Input.GetButtonDown("Fire3"))
         {
-            stateMachine.ChangeState(PlayerMovementEnums.DODGE);
+            stateMachine.ChangeStateAny(PlayerMovementEnums.DODGE);
             return;
         }
         if (Input.GetButtonDown("Jump"))
         {
-            stateMachine.ChangeState(PlayerMovementEnums.JUMPREADY);
+            stateMachine.ChangeStateAny(PlayerMovementEnums.JUMPREADY);
             return;
         }
         if (Input.GetMouseButton(0))
         {
-            stateMachine.ChangeState(PlayerMovementEnums.ATTACK);
+            stateMachine.ChangeStateAny(PlayerMovementEnums.ATTACK);
             return;
-        }
+        }*/
     }
 
     public void FixedUpdate()

@@ -13,6 +13,16 @@ public class PlayerFallState : IPlayerState
         player = stateMachine.playerController;
     }
 
+    public HashSet<PlayerMovementEnums> inputHash { get; } = new HashSet<PlayerMovementEnums>()
+    {
+        PlayerMovementEnums.JUMP,
+        PlayerMovementEnums.DODGE
+    };
+
+    public HashSet<PlayerMovementEnums> logicHash { get; } = new HashSet<PlayerMovementEnums>()
+    {
+        PlayerMovementEnums.LAND
+    };
     public void Update()
     {
 
@@ -22,7 +32,7 @@ public class PlayerFallState : IPlayerState
     {
         if(player.CheckGround())
         {
-            stateMachine.ChangeState(PlayerMovementEnums.LAND);
+            stateMachine.ChangeStateAny(PlayerMovementEnums.LAND);
             return;
         }
     }

@@ -12,19 +12,27 @@ public class PlayerJumpState : IPlayerState
         stateMachine = _stateMachine;
         player = stateMachine.playerController;
     }
+    public HashSet<PlayerMovementEnums> inputHash { get; } = new HashSet<PlayerMovementEnums>()
+    {
+        PlayerMovementEnums.DODGE,
+    };
 
+    public HashSet<PlayerMovementEnums> logicHash { get; } = new HashSet<PlayerMovementEnums>()
+    {
+        PlayerMovementEnums.FALL
+    };
     public void Update()
     {
-
+        if (player.rigid.velocity.y < 0)
+        {
+            stateMachine.ChangeStateLogic(PlayerMovementEnums.FALL);
+            return;
+        }
     }
 
     public void FixedUpdate()
     {
-        if (player.rigid.velocity.y < 0)
-        {
-            stateMachine.ChangeState(PlayerMovementEnums.FALL);
-            return;
-        }
+        
     }
 
     public void OnEnter()

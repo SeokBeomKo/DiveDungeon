@@ -5,15 +5,16 @@ using UnityEngine;
 public class InputHandler : MonoBehaviour
 {
     public delegate void PlayerInputHandler();
+    public event PlayerInputHandler OnPlayerIdle;
     public event PlayerInputHandler OnPlayerMove;
     public event PlayerInputHandler OnPlayerDodge;
     public event PlayerInputHandler OnPlayerJump;
     public event PlayerInputHandler OnPlayerAttack;
 
-    public delegate void DirectionInputHandler(float dir);
+    public delegate void DirectionInputHandler(int dir);
     public event DirectionInputHandler OnPlayerCheckDir;
 
-    void Update()
+    private void Update()
     {
 #if UNITY_EDITOR
         // 이동
@@ -21,7 +22,13 @@ public class InputHandler : MonoBehaviour
         {
             OnPlayerMove?.Invoke();
         }
-        OnPlayerCheckDir(Input.GetAxisRaw("Horizontal"));
+
+        if (Input.GetAxisRaw("Horizontal") == 0)
+        {
+            OnPlayerIdle?.Invoke();
+        }
+
+        OnPlayerCheckDir?.Invoke((int)Input.GetAxisRaw("Horizontal"));
 
         // 대시
         if (Input.GetButtonDown("Fire3"))

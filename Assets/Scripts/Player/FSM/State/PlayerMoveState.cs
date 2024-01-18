@@ -13,30 +13,27 @@ public class PlayerMoveState : IPlayerState
         player = stateMachine.playerController;
     }
 
+    public HashSet<PlayerMovementEnums> inputHash { get; } = new HashSet<PlayerMovementEnums>()
+    {
+        PlayerMovementEnums.IDLE,
+        PlayerMovementEnums.JUMPREADY,
+        PlayerMovementEnums.DODGE
+    };
+
+    public HashSet<PlayerMovementEnums> logicHash { get; } = new HashSet<PlayerMovementEnums>()
+    {
+        PlayerMovementEnums.FALL
+    };
+
     public void Update()
     {
-        if(Input.GetAxisRaw("Horizontal") == 0)
-        {
-            stateMachine.ChangeState(PlayerMovementEnums.IDLE);
-            return;
-        }
-        if(Input.GetButtonDown("Fire3"))
-        {
-            stateMachine.ChangeState(PlayerMovementEnums.DODGE);
-            return;
-        }
-        if(Input.GetButtonDown("Jump"))
-        {
-            stateMachine.ChangeState(PlayerMovementEnums.JUMPREADY);
-            return;
-        }
-
-        player.SetDirection(((int)Input.GetAxisRaw("Horizontal")));
+        
     }
 
     public void FixedUpdate()
     {
         player.Move();
+        player.isRight = player.direction == 1;
     }
 
     public void OnEnter()

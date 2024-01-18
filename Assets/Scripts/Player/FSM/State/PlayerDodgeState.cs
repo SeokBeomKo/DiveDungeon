@@ -13,18 +13,21 @@ public class PlayerDodgeState : IPlayerState
         player = stateMachine.playerController;
     }
 
+    public HashSet<PlayerMovementEnums> inputHash { get; } = new HashSet<PlayerMovementEnums>()
+    {
+        // PlayerMovementEnums.MOVE <- 나중에 받아오기
+    };
 
+    public HashSet<PlayerMovementEnums> logicHash { get; } = new HashSet<PlayerMovementEnums>()
+    {
+        PlayerMovementEnums.IDLE,
+        PlayerMovementEnums.FALL
+    };
     public void Update()
     {
-        //float animationDuration = player.animator.GetCurrentAnimatorStateInfo(0).length;
-
-        /*if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.3f / animationDuration)
-        {
-            player.rigid.velocity = Vector3.zero;
-        }*/
         if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.35f)
         {
-            stateMachine.ChangeState(PlayerMovementEnums.IDLE);
+            stateMachine.ChangeStateAny(PlayerMovementEnums.IDLE);
         }
     }
 

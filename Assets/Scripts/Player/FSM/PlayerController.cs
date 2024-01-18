@@ -10,10 +10,12 @@ public class PlayerController : MonoBehaviour
     public PlayerMovementStateMachine movementStateMachine;
 
     [Header("수치 값")]
+    public float maxSpeed;
     public float moveSpeed;
     public float jumpForce;
 
     public int direction = 1;  // 1:R -1:L
+    public bool isRight;
 
     private void Update()
     {
@@ -30,20 +32,20 @@ public class PlayerController : MonoBehaviour
     public void SetDirection(int dir)
     {
         direction = dir;
-        spriteRenderer.flipX = direction == -1; // -1이면 true 반환 -> 뒤집어짐
+        spriteRenderer.flipX = !isRight; // -1이면 true 반환 -> 뒤집어짐
     }
 
     public void SetMoveSpeed()
     {
-        if(Mathf.Abs(rigid.velocity.x) > moveSpeed)
+        if(Mathf.Abs(rigid.velocity.x) > maxSpeed)
         {
-            rigid.velocity = new Vector2(moveSpeed * direction, rigid.velocity.y);
+            rigid.velocity = new Vector2(maxSpeed * direction, rigid.velocity.y);
         }
     }
 
     public void Move()
     {
-        rigid.AddForce(Vector2.right * direction, ForceMode2D.Impulse);
+        rigid.AddForce(Vector2.right * direction * moveSpeed, ForceMode2D.Impulse);
         SetMoveSpeed();
     }
 

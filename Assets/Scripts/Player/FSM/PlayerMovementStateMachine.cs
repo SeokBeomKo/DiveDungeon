@@ -32,7 +32,7 @@ public class PlayerMovementStateMachine : MonoBehaviour
         }
     }
 
-    public void ChangeState(PlayerMovementEnums newStateType)
+    public void ChangeStateAny(PlayerMovementEnums newStateType) // 언제든지 변경 가능
     {
         if (curState == null) return;
 
@@ -44,5 +44,32 @@ public class PlayerMovementStateMachine : MonoBehaviour
             curState.OnEnter();
         }
     }
+
+    public void ChangeStateInput(PlayerMovementEnums newStateType) // 입력받았을 때 상태 변경
+    {
+        if (curState == null) return;
+        if (!curState.inputHash.Contains(newStateType)) return;
+
+        curState.OnExit();
+
+        if(stateDictionary.TryGetValue(newStateType, out IPlayerState newState))
+        {
+            curState = newState;
+            curState.OnEnter();
+        }
+    }
+
+    public void ChangeStateLogic(PlayerMovementEnums newStateType) // 스스로 상태 변경 
+    {
+        if (curState == null) return;
+        if (!curState.logicHash.Contains(newStateType)) return;
     
+        curState.OnExit();
+
+        if (stateDictionary.TryGetValue(newStateType, out IPlayerState newState))
+        {
+            curState = newState;
+            curState.OnEnter();
+        }
+    }
 }

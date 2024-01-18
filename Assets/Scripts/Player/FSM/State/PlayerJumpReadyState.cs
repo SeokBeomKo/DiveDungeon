@@ -13,12 +13,20 @@ public class PlayerJumpReadyState : IPlayerState
         player = stateMachine.playerController;
     }
 
+    public HashSet<PlayerMovementEnums> inputHash { get; } = new HashSet<PlayerMovementEnums>()
+    {
+    };
+
+    public HashSet<PlayerMovementEnums> logicHash { get; } = new HashSet<PlayerMovementEnums>()
+    {   
+        PlayerMovementEnums.JUMP
+    };
 
     public void Update()
     {
         if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.70f)
         {
-            stateMachine.ChangeState(PlayerMovementEnums.JUMP);
+            stateMachine.ChangeStateAny(PlayerMovementEnums.JUMP);
             return;
         }
     }

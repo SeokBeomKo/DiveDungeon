@@ -13,6 +13,16 @@ public class PlayerLandState : IPlayerState
         player = stateMachine.playerController;
     }
 
+    public HashSet<PlayerMovementEnums> inputHash { get; } = new HashSet<PlayerMovementEnums>()
+    {
+        PlayerMovementEnums.MOVE
+    };
+
+    public HashSet<PlayerMovementEnums> logicHash { get; } = new HashSet<PlayerMovementEnums>()
+    {
+        PlayerMovementEnums.IDLE
+    };
+
     public void Update()
     {
 
@@ -22,7 +32,7 @@ public class PlayerLandState : IPlayerState
     {
         if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.70f)
         {
-            stateMachine.ChangeState(PlayerMovementEnums.IDLE);
+            stateMachine.ChangeStateLogic(PlayerMovementEnums.IDLE);
         }
     }
 
