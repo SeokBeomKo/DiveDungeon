@@ -30,7 +30,10 @@ public class PlayerFallState : IPlayerState
 
     public void FixedUpdate()
     {
-        if(player.CheckGround())
+        player.Move();
+        player.SetFacingDirection();
+
+        if (player.CheckGround())
         {
             stateMachine.ChangeStateAny(PlayerMovementEnums.LAND);
             return;

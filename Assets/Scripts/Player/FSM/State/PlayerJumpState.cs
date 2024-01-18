@@ -32,7 +32,8 @@ public class PlayerJumpState : IPlayerState
 
     public void FixedUpdate()
     {
-        
+        player.Move();
+        player.SetFacingDirection();
     }
 
     public void OnEnter()

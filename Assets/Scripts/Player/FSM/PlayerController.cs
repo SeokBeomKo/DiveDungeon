@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(movementStateMachine.curState);
         if (movementStateMachine.curState != null)
             movementStateMachine.curState.Update();
     }
@@ -29,17 +30,26 @@ public class PlayerController : MonoBehaviour
             movementStateMachine.curState.FixedUpdate();
     }
 
-    public void SetDirection(int dir)
+    public void SetInputDirection(int dir) // 1, 0, -1 방향 다 받아오는 함수
     {
         direction = dir;
         spriteRenderer.flipX = !isRight; // -1이면 true 반환 -> 뒤집어짐
+    }
+
+    public void SetFacingDirection() // -1과 1만 받아오는 함수
+    {
+        if (direction == 1)
+            isRight = true;
+        else if (direction == -1)
+            isRight = false;
     }
 
     public void SetMoveSpeed()
     {
         if(Mathf.Abs(rigid.velocity.x) > maxSpeed)
         {
-            rigid.velocity = new Vector2(maxSpeed * direction, rigid.velocity.y);
+            float dir = isRight ? 1 : -1;
+            rigid.velocity = new Vector2(maxSpeed * dir, rigid.velocity.y);
         }
     }
 
@@ -51,7 +61,8 @@ public class PlayerController : MonoBehaviour
 
     public void Dodge()
     {
-        rigid.AddForce(Vector2.right * direction, ForceMode2D.Impulse);
+        Vector2 dir = isRight ? Vector2.right : Vector2.left * moveSpeed;
+        rigid.AddForce(dir, ForceMode2D.Impulse);
         SetMoveSpeed();
     }
 
@@ -63,13 +74,11 @@ public class PlayerController : MonoBehaviour
     public bool CheckGround()
     {
         Debug.DrawRay(rigid.position, Vector3.down, new Color(0, 1, 0));
-        RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 1, LayerMask.GetMask("Platform")); 
+        RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 0.1f, LayerMask.GetMask("Platform")); 
+       
         if (rayHit.collider != null)
         {
-            if (rayHit.distance < 0.5f)
-            {
-                return true;
-            }
+             return true;
         }
         return false;
     }

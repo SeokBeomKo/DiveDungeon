@@ -27,7 +27,12 @@ public class PlayerDodgeState : IPlayerState
     {
         if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.35f)
         {
-            stateMachine.ChangeStateAny(PlayerMovementEnums.IDLE);
+            if (player.CheckGround())
+                stateMachine.ChangeStateLogic(PlayerMovementEnums.IDLE);
+            else
+                stateMachine.ChangeStateLogic(PlayerMovementEnums.FALL);
+
+            return;
         }
     }
 
@@ -40,12 +45,15 @@ public class PlayerDodgeState : IPlayerState
     {
         player.animator.Play("Dodge");
 
-        player.moveSpeed *= 1.5f;
+        player.moveSpeed *= 5f;
+        player.maxSpeed *= 1.8f;
     }
 
     public void OnExit()
     {
-        player.rigid.velocity = Vector3.zero;
-        player.moveSpeed /= 1.5f;
+        player.rigid.velocity = new Vector2(0, player.rigid.velocity.y);
+
+        player.moveSpeed /= 5f;
+        player.maxSpeed /= 1.8f;
     }
 }

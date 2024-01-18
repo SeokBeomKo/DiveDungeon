@@ -46,6 +46,6 @@ public class InputCenter : MonoBehaviour
 
     void CheckDirection(int dir)
     {
-        controller.SetDirection(dir) ;
+        controller.SetInputDirection(dir) ;
     }
 }

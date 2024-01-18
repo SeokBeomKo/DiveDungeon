@@ -1166,6 +1166,7 @@ MonoBehaviour:
   moveSpeed: 10
   jumpForce: 15
   direction: 1
+  isRight: 0
 --- !u!114 &1139222527
 MonoBehaviour:
   m_ObjectHideFlags: 0

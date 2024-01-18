@@ -33,7 +33,7 @@ public class PlayerMoveState : IPlayerState
     public void FixedUpdate()
     {
         player.Move();
-        player.isRight = player.direction == 1;
+        player.SetFacingDirection();
     }
 
     public void OnEnter()
