@@ -9,6 +9,8 @@ abstract public class EnemyController : MonoBehaviour
     [SerializeField]    public SpriteRenderer       spriteRenderer;
     [SerializeField]    public EnemyStateMachine    stateMachine;
 
+    [SerializeField]    public EnemyDamager         enemyDamager;
+
     public float maxSpeed;
     public float moveSpeed;
 
@@ -16,6 +18,8 @@ abstract public class EnemyController : MonoBehaviour
     public float attackDistance;    // 공격 거리
 
     public int direction;
+
+    public int damage;
 
     [Header("임시 변수")]
     public float maxPatrolTime = 1f;

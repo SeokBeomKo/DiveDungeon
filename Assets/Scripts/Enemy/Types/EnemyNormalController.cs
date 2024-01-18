@@ -8,7 +8,7 @@ public class EnemyNormalController : EnemyController
     {
 
     }
-    
+
     public override void Move()
     {
         rigid.AddForce(Vector3.right * direction * moveSpeed);
@@ -40,6 +40,7 @@ public class EnemyNormalController : EnemyController
     }
     public override void OnAttack()
     {
-
+        enemyDamager.SettingValue(damage, direction == 1);
+        enemyDamager.gameObject.SetActive(!enemyDamager.gameObject.activeSelf);
     }
 }
