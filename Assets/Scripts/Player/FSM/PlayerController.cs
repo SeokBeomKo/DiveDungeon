@@ -16,10 +16,10 @@ public class PlayerController : MonoBehaviour
 
     public int direction = 1;  // 1:R -1:L
     public bool isRight;
+    public bool isClick;
 
     private void Update()
     {
-        Debug.Log(movementStateMachine.curState);
         if (movementStateMachine.curState != null)
             movementStateMachine.curState.Update();
     }
@@ -28,6 +28,16 @@ public class PlayerController : MonoBehaviour
     {
         if (movementStateMachine.curState != null)
             movementStateMachine.curState.FixedUpdate();
+    }
+
+    public void ISMouseClick(bool click)
+    {
+        isClick = click;
+    }
+
+    public bool CheckMouseClick()
+    {
+        return isClick;
     }
 
     public void SetInputDirection(int dir) // 1, 0, -1 방향 다 받아오는 함수
