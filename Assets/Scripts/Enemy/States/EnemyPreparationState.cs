@@ -19,6 +19,7 @@ public class EnemyPreparationState : IEnemyState
             stateMachine.ChangeState(EnemyStateEnums.ATTACK);
             return;
         }
+        controller.Preparation();
     }
     public void FixedUpdate()
     {

@@ -7,6 +7,12 @@ public class EnemyRangeController : EnemyController
     [SerializeField] Transform shootPosition;
     [SerializeField] GameObject projectile;
 
+    [SerializeField] LineRenderer predictionLine;
+    [SerializeField] LayerMask predictionLayerMask;
+
+    private RaycastHit2D predictionHit;
+    
+
     public override void Idle()
     {
 
@@ -32,10 +38,37 @@ public class EnemyRangeController : EnemyController
         ControlSpped();
     }
 
+    public override void EnterPreparation()
+    {
+        animator.Play("Preparation");
+        predictionLine.enabled = true;
+    }   
+
     public override void Preparation()
     {
+        Debug.Log("Preparation");
+        
+        predictionLine.SetPosition(0, shootPosition.position);
+        predictionHit = Physics2D.Raycast(shootPosition.position, new Vector2(direction,0), Mathf.Infinity, predictionLayerMask);
 
+        Debug.Log(predictionHit);
+
+        if(predictionHit.collider == null)
+        {
+            
+            predictionLine.enabled = false;
+            return;
+        }
+
+        // draw first collision point
+        predictionLine.SetPosition(1, predictionHit.point);
     }
+
+    public override void ExitPreparation()
+    {
+        curPreparationTime = 0;
+        predictionLine.enabled = false;
+    }   
 
     public override void Attack()
     {

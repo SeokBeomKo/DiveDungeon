@@ -81,11 +81,11 @@ abstract public class EnemyController : MonoBehaviour
     }
 
     public abstract void Preparation();
-    public void EnterPreparation()
+    public virtual void EnterPreparation()
     {
         animator.Play("Preparation");
     }
-    public void ExitPreparation()
+    public virtual void ExitPreparation()
     {
         curPreparationTime = 0;
     }   
