@@ -9,15 +9,21 @@ public class PlayerController : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public PlayerMovementStateMachine movementStateMachine;
 
-    [Header("수치 값")]
+    [Header("이동 관련 값")]
     public float maxSpeed;
     public float moveSpeed;
-    public float jumpForce;
 
+    [Header("방향 관련 값")]
     public int direction = 1;  // 1:R -1:L
     public bool isRight;
+
+    [Header("점프 관련 값")]
     private int maxJumpCount = 2;
+    public float jumpForce;
     public int curJumpCount;
+
+    [Header("공격 관련 값")]
+    public bool isAttack;
 
     private void Start()
     {

@@ -9,10 +9,12 @@ public class InputHandler : MonoBehaviour
     public event PlayerInputHandler OnPlayerMove;
     public event PlayerInputHandler OnPlayerDodge;
     public event PlayerInputHandler OnPlayerJump;
-    public event PlayerInputHandler OnPlayerAttack;
 
-    public delegate void DirectionInputHandler(int dir);
-    public event DirectionInputHandler OnPlayerCheckDir;
+    public delegate void InputIntHandler(int value);
+    public event InputIntHandler OnPlayerCheckDir;
+
+    public delegate void InputBoolHandler(bool value);
+    public event InputBoolHandler OnPlayerAttack;
 
     private void Update()
     {
@@ -43,10 +45,8 @@ public class InputHandler : MonoBehaviour
         }
 
         // АјАн
-        if (Input.GetMouseButton(0))
-        {
-            OnPlayerAttack?.Invoke();
-        }
+        OnPlayerAttack?.Invoke(Input.GetMouseButton(0));
+
 
 #endif
     }
