@@ -15,7 +15,8 @@ public class PlayerAttackState : IPlayerState
 
     public HashSet<PlayerMovementEnums> inputHash { get; } = new HashSet<PlayerMovementEnums>()
     {
-
+        PlayerMovementEnums.MOVE,
+        PlayerMovementEnums.DODGE
     };
 
     public HashSet<PlayerMovementEnums> logicHash { get; } = new HashSet<PlayerMovementEnums>()
@@ -25,11 +26,7 @@ public class PlayerAttackState : IPlayerState
 
     public void Update()
     {
-        if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.98f)
-        {
-            if(!player.CheckMouseClick())
-                stateMachine.ChangeStateLogic(PlayerMovementEnums.IDLE);
-        }
+        
     }
 
     public void FixedUpdate()

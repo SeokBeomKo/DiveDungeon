@@ -15,6 +15,8 @@ public class PlayerJumpState : IPlayerState
     public HashSet<PlayerMovementEnums> inputHash { get; } = new HashSet<PlayerMovementEnums>()
     {
         PlayerMovementEnums.DODGE,
+        PlayerMovementEnums.ATTACK,
+        PlayerMovementEnums.JUMP
     };
 
     public HashSet<PlayerMovementEnums> logicHash { get; } = new HashSet<PlayerMovementEnums>()

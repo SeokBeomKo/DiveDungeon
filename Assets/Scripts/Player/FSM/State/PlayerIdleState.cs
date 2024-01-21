@@ -29,26 +29,7 @@ public class PlayerIdleState : IPlayerState
 
     public void Update()
     {
-        /*if (Input.GetAxisRaw("Horizontal") != 0)
-        {
-            stateMachine.ChangeStateAny(PlayerMovementEnums.MOVE);
-            return;
-        }
-        if (Input.GetButtonDown("Fire3"))
-        {
-            stateMachine.ChangeStateAny(PlayerMovementEnums.DODGE);
-            return;
-        }
-        if (Input.GetButtonDown("Jump"))
-        {
-            stateMachine.ChangeStateAny(PlayerMovementEnums.JUMPREADY);
-            return;
-        }
-        if (Input.GetMouseButton(0))
-        {
-            stateMachine.ChangeStateAny(PlayerMovementEnums.ATTACK);
-            return;
-        }*/
+        
     }
 
     public void FixedUpdate()

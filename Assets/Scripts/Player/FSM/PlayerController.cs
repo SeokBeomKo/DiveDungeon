@@ -16,7 +16,18 @@ public class PlayerController : MonoBehaviour
 
     public int direction = 1;  // 1:R -1:L
     public bool isRight;
-    public bool isClick;
+    private int maxJumpCount = 2;
+    public int curJumpCount;
+
+    private void Start()
+    {
+        InitializeJumpCount();
+    }
+
+    public void InitializeJumpCount()
+    {
+        curJumpCount = maxJumpCount;
+    }
 
     private void Update()
     {
@@ -28,16 +39,6 @@ public class PlayerController : MonoBehaviour
     {
         if (movementStateMachine.curState != null)
             movementStateMachine.curState.FixedUpdate();
-    }
-
-    public void ISMouseClick(bool click)
-    {
-        isClick = click;
-    }
-
-    public bool CheckMouseClick()
-    {
-        return isClick;
     }
 
     public void SetInputDirection(int dir) // 1, 0, -1 방향 다 받아오는 함수
@@ -78,12 +79,16 @@ public class PlayerController : MonoBehaviour
 
     public void Jump()
     {
+        if (curJumpCount <= 0) return;
+
+        curJumpCount--;
+        rigid.velocity = new Vector2(rigid.velocity.x, 0);
         rigid.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
     public bool CheckGround()
     {
-        Debug.DrawRay(rigid.position, Vector3.down, new Color(0, 1, 0));
+        Debug.DrawRay(rigid.position, Vector3.down, new Color(0, 0.1f, 0));
         RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 0.1f, LayerMask.GetMask("Platform")); 
        
         if (rayHit.collider != null)

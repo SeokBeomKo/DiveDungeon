@@ -15,7 +15,6 @@ public class InputCenter : MonoBehaviour
         inputHandler.OnPlayerDodge += ChangeDodgeState;
         inputHandler.OnPlayerJump += ChangeJumpState;
         inputHandler.OnPlayerAttack += ChangeAttackState;
-        inputHandler.OnPlayerStopAttack += StopAttackState;
 
         inputHandler.OnPlayerCheckDir += CheckDirection;
     }
@@ -36,19 +35,26 @@ public class InputCenter : MonoBehaviour
 
     void ChangeJumpState()
     {
-        stateMachine.ChangeStateInput(PlayerMovementEnums.JUMPREADY);
+        if (controller.curJumpCount == 0) return;
+
+        if(stateMachine.curState is PlayerAttackState)
+        {
+            controller.Jump();
+            return;
+        }
+        if (stateMachine.curState is PlayerIdleState)
+        {
+            stateMachine.ChangeStateInput(PlayerMovementEnums.JUMPREADY);
+            return;
+        }
+        stateMachine.ChangeStateInput(PlayerMovementEnums.JUMP);
     }
 
     void ChangeAttackState()
     {
         stateMachine.ChangeStateInput(PlayerMovementEnums.ATTACK);
-        controller.ISMouseClick(true);
     }
 
-    void StopAttackState()
-    {
-        controller.ISMouseClick(false);
-    }
 
     void CheckDirection(int dir)
     {

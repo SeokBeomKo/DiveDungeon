@@ -10,7 +10,6 @@ public class InputHandler : MonoBehaviour
     public event PlayerInputHandler OnPlayerDodge;
     public event PlayerInputHandler OnPlayerJump;
     public event PlayerInputHandler OnPlayerAttack;
-    public event PlayerInputHandler OnPlayerStopAttack;
 
     public delegate void DirectionInputHandler(int dir);
     public event DirectionInputHandler OnPlayerCheckDir;
@@ -47,11 +46,6 @@ public class InputHandler : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             OnPlayerAttack?.Invoke();
-        }
-
-        if(Input.GetMouseButtonUp(0))
-        {
-            OnPlayerStopAttack?.Invoke();
         }
 
 #endif
