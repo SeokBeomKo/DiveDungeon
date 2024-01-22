@@ -9,6 +9,7 @@ public class InputHandler : MonoBehaviour
     public event PlayerInputHandler OnPlayerMove;
     public event PlayerInputHandler OnPlayerDodge;
     public event PlayerInputHandler OnPlayerJump;
+    public event PlayerInputHandler OnPlayerDownJump;
 
     public delegate void InputIntHandler(int value);
     public event InputIntHandler OnPlayerCheckDir;
@@ -47,7 +48,13 @@ public class InputHandler : MonoBehaviour
         // 공격
         OnPlayerAttack?.Invoke(Input.GetMouseButton(0));
 
-
+        // 아래 점프
+        if(Input.GetAxisRaw("Vertical") == -1/* && Input.GetButton("Jump")*/)
+        {
+            OnPlayerDownJump?.Invoke();
+        }
 #endif
     }
 }
+    
+

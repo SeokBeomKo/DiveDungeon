@@ -12,6 +12,7 @@ public enum PlayerMovementEnums
     LAND,               // 착지 
     DODGE,              // 구르기, 대시
     ATTACK,             // 공격
+    DOWNJUMP,           // 아래 점프
     SPECIALATTACK,      // 특수 공격
     WALLJUMP,           // 벽 점프
 }

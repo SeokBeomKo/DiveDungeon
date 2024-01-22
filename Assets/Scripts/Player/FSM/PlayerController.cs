@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private int maxJumpCount = 2;
     public float jumpForce;
     public int curJumpCount;
+    public bool isDownJump;
 
     [Header("공격 관련 값")]
     public bool isAttack;
@@ -102,5 +103,21 @@ public class PlayerController : MonoBehaviour
              return true;
         }
         return false;
+    }
+
+    public void IgnoreLayerCoroutine()
+    {
+        StartCoroutine(IgnoreLayer());
+    }
+
+
+    IEnumerator IgnoreLayer()
+    {
+        Debug.Log("A");
+        isDownJump = false;
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Platform"), true);
+        yield return new WaitForSeconds(0.2f);
+        isDownJump = true;
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Platform"), false);
     }
 }

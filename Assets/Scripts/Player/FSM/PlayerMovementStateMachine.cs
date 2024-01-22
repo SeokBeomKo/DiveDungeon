@@ -22,6 +22,7 @@ public class PlayerMovementStateMachine : MonoBehaviour
             {PlayerMovementEnums.FALL, new PlayerFallState(this) },
             {PlayerMovementEnums.LAND, new PlayerLandState(this) },
             {PlayerMovementEnums.ATTACK, new PlayerAttackState(this) },
+            {PlayerMovementEnums.DOWNJUMP, new PlayerDownJumpState(this) },
         };
 
         if(stateDictionary.TryGetValue(PlayerMovementEnums.IDLE, out IPlayerState newState))

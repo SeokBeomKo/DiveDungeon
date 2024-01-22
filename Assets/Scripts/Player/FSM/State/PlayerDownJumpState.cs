@@ -2,49 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerIdleState : IPlayerState
+public class PlayerDownJumpState : MonoBehaviour, IPlayerState
 {
     public PlayerController player { get; set; }
     public PlayerMovementStateMachine stateMachine { get; set; }
 
-
-    // 생성자의 주요 목적은 객체를 초기화하고 초기 상태로 설정하는 것
-    public PlayerIdleState(PlayerMovementStateMachine _stateMachine)
+    public PlayerDownJumpState(PlayerMovementStateMachine _stateMachine)
     {
         stateMachine = _stateMachine;
         player = stateMachine.playerController;
     }
-
     public HashSet<PlayerMovementEnums> inputHash { get; } = new HashSet<PlayerMovementEnums>()
     {
-        PlayerMovementEnums.MOVE,
-        PlayerMovementEnums.JUMPREADY,
         PlayerMovementEnums.DODGE,
-        PlayerMovementEnums.ATTACK,
-        PlayerMovementEnums.DOWNJUMP
+        PlayerMovementEnums.ATTACK
     };
 
     public HashSet<PlayerMovementEnums> logicHash { get; } = new HashSet<PlayerMovementEnums>()
     {
+        PlayerMovementEnums.LAND
     };
-
     public void Update()
     {
-        
+        if (player.CheckGround() && player.isDownJump)
+        {
+            stateMachine.ChangeStateLogic(PlayerMovementEnums.LAND);
+            return;
+        }
     }
 
     public void FixedUpdate()
     {
-
+        player.Move();
+        player.SetFacingDirection();
     }
 
     public void OnEnter()
     {
-        player.animator.Play("Idle");
+        player.animator.Play("Fall");
+        player.IgnoreLayerCoroutine();
     }
 
     public void OnExit()
     {
-
+        
     }
 }
