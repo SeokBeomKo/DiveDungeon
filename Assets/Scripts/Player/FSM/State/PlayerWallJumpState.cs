@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMoveState : IPlayerState
+public class PlayerWallJumpState : IPlayerState
 {
     public PlayerController player { get; set; }
     public PlayerMovementStateMachine stateMachine { get; set; }
 
-    public PlayerMoveState(PlayerMovementStateMachine _stateMachine)
+    public PlayerWallJumpState(PlayerMovementStateMachine _stateMachine)
     {
         stateMachine = _stateMachine;
         player = stateMachine.playerController;
@@ -15,35 +15,34 @@ public class PlayerMoveState : IPlayerState
 
     public HashSet<PlayerMovementEnums> inputHash { get; } = new HashSet<PlayerMovementEnums>()
     {
-        PlayerMovementEnums.IDLE,
-        PlayerMovementEnums.JUMP,
-        PlayerMovementEnums.DODGE,
-        PlayerMovementEnums.ATTACK,
-        PlayerMovementEnums.DOWNJUMP
     };
 
     public HashSet<PlayerMovementEnums> logicHash { get; } = new HashSet<PlayerMovementEnums>()
     {
-        PlayerMovementEnums.FALL
+        PlayerMovementEnums.IDLE
     };
 
+    // 방향 키 떼었을 경우 Fall 
+
     public void Update()
-    {        
+    {
+        if(player.CheckGround())
+        {
+            stateMachine.ChangeStateLogic(PlayerMovementEnums.IDLE);
+        }
     }
 
     public void FixedUpdate()
     {
-        player.Move();
-        player.SetFacingDirection();
+        player.WallSlide();
     }
 
     public void OnEnter()
     {
-        player.animator.Play("Move");
+        player.animator.Play("WallSlide");
     }
 
     public void OnExit()
     {
-        player.rigid.velocity = Vector3.zero;
     }
 }

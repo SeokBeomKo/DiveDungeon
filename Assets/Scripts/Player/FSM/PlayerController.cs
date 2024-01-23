@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     public SpriteRenderer spriteRenderer;
     public PlayerMovementStateMachine movementStateMachine;
+    public BoxCollider2D boxCollider;
 
     [Header("이동 관련 값")]
     public float maxSpeed;
@@ -22,6 +23,10 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
     public int curJumpCount;
     public bool isDownJump;
+    
+    [Header("벽 점프 관련 값")]
+    public bool isWallSliding;
+    public float wallSlidingSpeed;
 
     [Header("공격 관련 값")]
     public bool isAttack;
@@ -105,11 +110,22 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
+    public bool CheckWall()
+    {
+        // 상자의 원점, 원점에 대한 크기, 각도, 상자가 투영되는 방향, 거리
+        RaycastHit2D rayHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.right * direction, 0.1f, LayerMask.GetMask("Wall"));
+        return rayHit.collider != null;
+    }
+
+    public void WallSlide()
+    {
+        rigid.velocity = new Vector2(rigid.velocity.x, Mathf.Clamp(rigid.velocity.y, -wallSlidingSpeed, float.MaxValue));
+    }
+
     public void IgnoreLayerCoroutine()
     {
         StartCoroutine(IgnoreLayer());
     }
-
 
     IEnumerator IgnoreLayer()
     {
