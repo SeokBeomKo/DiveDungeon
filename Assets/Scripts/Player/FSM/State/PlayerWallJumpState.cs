@@ -19,7 +19,8 @@ public class PlayerWallJumpState : IPlayerState
 
     public HashSet<PlayerMovementEnums> logicHash { get; } = new HashSet<PlayerMovementEnums>()
     {
-        PlayerMovementEnums.IDLE
+        PlayerMovementEnums.FALL,
+        PlayerMovementEnums.LAND
     };
 
     // 방향 키 떼었을 경우 Fall 
@@ -28,7 +29,14 @@ public class PlayerWallJumpState : IPlayerState
     {
         if(player.CheckGround())
         {
-            stateMachine.ChangeStateLogic(PlayerMovementEnums.IDLE);
+            stateMachine.ChangeStateLogic(PlayerMovementEnums.LAND);
+            return;
+        }
+
+        if(!player.CheckWall())
+        {
+            stateMachine.ChangeStateLogic(PlayerMovementEnums.FALL);
+            return;
         }
     }
 

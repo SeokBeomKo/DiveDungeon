@@ -1725,7 +1725,7 @@ MonoBehaviour:
   curJumpCount: 0
   isDownJump: 0
   isWallSliding: 0
-  wallSlidingSpeed: 2
+  wallSlidingSpeed: 1
   isAttack: 0
 --- !u!114 &1139222527
 MonoBehaviour:
