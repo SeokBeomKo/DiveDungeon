@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,25 +10,25 @@ public class PlayerController : MonoBehaviour
     public PlayerMovementStateMachine movementStateMachine;
     public BoxCollider2D boxCollider;
 
-    [Header("ÀÌµ¿ °ü·Ã °ª")]
+    [Header("ì´ë™ ê´€ë ¨ ê°’")]
     public float maxSpeed;
     public float moveSpeed;
 
-    [Header("¹æÇâ °ü·Ã °ª")]
+    [Header("ë°©í–¥ ê´€ë ¨ ê°’")]
     public int direction = 1;  // 1:R -1:L
     public bool isRight;
 
-    [Header("Á¡ÇÁ °ü·Ã °ª")]
+    [Header("ì í”„ ê´€ë ¨ ê°’")]
     private int maxJumpCount = 2;
     public float jumpForce;
     public int curJumpCount;
     public bool isDownJump;
     
-    [Header("º® Á¡ÇÁ °ü·Ã °ª")]
+    [Header("ë²½ ì í”„ ê´€ë ¨ ê°’")]
     public bool isWallSliding;
     public float wallSlidingSpeed;
 
-    [Header("°ø°İ °ü·Ã °ª")]
+    [Header("ê³µê²© ê´€ë ¨ ê°’")]
     public bool isAttack;
 
     private void Start()
@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(movementStateMachine.curState);
         if (movementStateMachine.curState != null)
             movementStateMachine.curState.Update();
     }
@@ -53,13 +54,13 @@ public class PlayerController : MonoBehaviour
             movementStateMachine.curState.FixedUpdate();
     }
 
-    public void SetInputDirection(int dir) // 1, 0, -1 ¹æÇâ ´Ù ¹Ş¾Æ¿À´Â ÇÔ¼ö
+    public void SetInputDirection(int dir) // 1, 0, -1 ë°©í–¥ ë‹¤ ë°›ì•„ì˜¤ëŠ” í•¨ìˆ˜
     {
         direction = dir;
-        spriteRenderer.flipX = !isRight; // -1ÀÌ¸é true ¹İÈ¯ -> µÚÁı¾îÁü
+        spriteRenderer.flipX = !isRight; // -1ì´ë©´ true ë°˜í™˜ -> ë’¤ì§‘ì–´ì§
     }
 
-    public void SetFacingDirection() // -1°ú 1¸¸ ¹Ş¾Æ¿À´Â ÇÔ¼ö
+    public void SetFacingDirection() // -1ê³¼ 1ë§Œ ë°›ì•„ì˜¤ëŠ” í•¨ìˆ˜
     {
         if (direction == 1)
             isRight = true;
@@ -112,8 +113,7 @@ public class PlayerController : MonoBehaviour
 
     public bool CheckWall()
     {
-        // »óÀÚÀÇ ¿øÁ¡, ¿øÁ¡¿¡ ´ëÇÑ Å©±â, °¢µµ, »óÀÚ°¡ Åõ¿µµÇ´Â ¹æÇâ, °Å¸®
-        RaycastHit2D rayHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.right * direction, 0.1f, LayerMask.GetMask("Wall"));
+        RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.right * direction, 0.3f, LayerMask.GetMask("Wall"));
         return rayHit.collider != null;
     }
 

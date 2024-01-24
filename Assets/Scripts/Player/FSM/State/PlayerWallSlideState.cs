@@ -2,57 +2,58 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerJumpState : IPlayerState
+public class PlayerWallSlideState : IPlayerState
 {
+    int grabDirection;
+
     public PlayerController player { get; set; }
     public PlayerMovementStateMachine stateMachine { get; set; }
 
-    public PlayerJumpState(PlayerMovementStateMachine _stateMachine)
+    public PlayerWallSlideState(PlayerMovementStateMachine _stateMachine)
     {
         stateMachine = _stateMachine;
         player = stateMachine.playerController;
     }
+
     public HashSet<PlayerMovementEnums> inputHash { get; } = new HashSet<PlayerMovementEnums>()
     {
-        PlayerMovementEnums.DODGE,
-        PlayerMovementEnums.ATTACK,
-        PlayerMovementEnums.JUMP
     };
 
     public HashSet<PlayerMovementEnums> logicHash { get; } = new HashSet<PlayerMovementEnums>()
     {
         PlayerMovementEnums.FALL,
-        PlayerMovementEnums.WALLSLIDE
+        PlayerMovementEnums.LAND
     };
+
     public void Update()
     {
-        if (player.rigid.velocity.y < 0)
+        if (player.CheckGround())
         {
-            stateMachine.ChangeStateLogic(PlayerMovementEnums.FALL);
+            stateMachine.ChangeStateLogic(PlayerMovementEnums.LAND);
             return;
         }
 
-        if(!player.CheckGround() && player.CheckWall() && player.direction != 0)
+        if (!player.CheckWall() || player.direction == 0 || grabDirection != player.direction)
         {
-            stateMachine.ChangeStateLogic(PlayerMovementEnums.WALLSLIDE);
+            stateMachine.ChangeStateLogic(PlayerMovementEnums.FALL);
             return;
         }
     }
 
     public void FixedUpdate()
     {
-        player.Move();
-        player.SetFacingDirection();
+        player.WallSlide();
     }
 
     public void OnEnter()
     {
-        player.Jump();
-        player.animator.Play("Jump");
+        player.animator.Play("WallSlide");
+        player.isWallSliding = true;
+        grabDirection = player.direction;
     }
 
     public void OnExit()
     {
-        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Platform"), true);
+        player.isWallSliding = false;
     }
 }

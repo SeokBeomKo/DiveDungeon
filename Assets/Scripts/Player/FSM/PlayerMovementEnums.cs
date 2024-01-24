@@ -14,5 +14,6 @@ public enum PlayerMovementEnums
     ATTACK,             // 공격
     DOWNJUMP,           // 아래 점프
     SPECIALATTACK,      // 특수 공격
+    WALLSLIDE,          // 벽 슬라이드
     WALLJUMP,           // 벽 점프
 }
