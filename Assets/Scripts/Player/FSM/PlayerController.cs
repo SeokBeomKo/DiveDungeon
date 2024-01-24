@@ -24,9 +24,18 @@ public class PlayerController : MonoBehaviour
     public int curJumpCount;
     public bool isDownJump;
     
-    [Header("벽 점프 관련 값")]
+    [Header("벽 슬라이드 관련 값")]
     public bool isWallSliding;
     public float wallSlidingSpeed;
+
+    [Header("벽 점프 관련 값")]
+    public bool isWallJump;
+    public int WallJumpDirection;
+    public float wallJumpTime = 0.2f;
+    public float wallJumpCounter;
+    public float wallJumpDuration = 0.4f;
+    public Vector2 wallJumpPower = new Vector2(8f, 16f);
+
 
     [Header("공격 관련 값")]
     public bool isAttack;
@@ -121,6 +130,41 @@ public class PlayerController : MonoBehaviour
     {
         rigid.velocity = new Vector2(rigid.velocity.x, Mathf.Clamp(rigid.velocity.y, -wallSlidingSpeed, float.MaxValue));
     }
+
+    public void WallJump()
+    {
+        if (isWallSliding)
+        {
+            WallJumpDirection = -direction;
+            wallJumpCounter = wallJumpTime;
+            CancelInvoke(nameof(StopWallJump));
+        }
+        else
+        {
+            wallJumpCounter -= Time.deltaTime;
+        }
+
+        if(wallJumpCounter > 0f)
+        {
+            isWallJump = true;
+            rigid.velocity = new Vector2(WallJumpDirection * wallJumpPower.x, wallJumpPower.y);
+            wallJumpCounter = 0;
+
+            if(WallJumpDirection != direction)
+            {
+                isRight = !isRight;
+                direction *= -1;
+            }
+
+            Invoke(nameof(StopWallJump), wallJumpDuration);
+        }
+    }
+
+    void StopWallJump()
+    {
+        isWallJump = false;
+    }
+
 
     public void IgnoreLayerCoroutine()
     {
