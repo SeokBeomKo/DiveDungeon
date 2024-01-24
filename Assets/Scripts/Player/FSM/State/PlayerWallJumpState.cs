@@ -33,7 +33,7 @@ public class PlayerWallJumpState : IPlayerState
             return;
         }
 
-        if(!player.CheckWall())
+        if (!player.CheckWall() || player.direction != 0)
         {
             stateMachine.ChangeStateLogic(PlayerMovementEnums.FALL);
             return;
