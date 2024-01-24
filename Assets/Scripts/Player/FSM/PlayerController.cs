@@ -131,6 +131,13 @@ public class PlayerController : MonoBehaviour
         rigid.velocity = new Vector2(rigid.velocity.x, Mathf.Clamp(rigid.velocity.y, -wallSlidingSpeed, float.MaxValue));
     }
 
+    public void SetWallJump()
+    {
+        WallJumpDirection = -direction;
+        wallJumpCounter = wallJumpTime;
+        CancelInvoke(nameof(StopWallJump));
+    }
+
     public void WallJump()
     {
         if (isWallSliding)
