@@ -23,13 +23,13 @@ public class PlayerFallState : IPlayerState
     public HashSet<PlayerMovementEnums> logicHash { get; } = new HashSet<PlayerMovementEnums>()
     {
         PlayerMovementEnums.LAND,
-        PlayerMovementEnums.WALLJUMP
+        PlayerMovementEnums.WALLSLIDE
     };
     public void Update()
     {
         if (!player.CheckGround() && player.CheckWall() && player.direction != 0)
         {
-            stateMachine.ChangeStateLogic(PlayerMovementEnums.WALLJUMP);
+            stateMachine.ChangeStateLogic(PlayerMovementEnums.WALLSLIDE);
             return;
         }
     }

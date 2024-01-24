@@ -19,35 +19,22 @@ public class PlayerWallJumpState : IPlayerState
 
     public HashSet<PlayerMovementEnums> logicHash { get; } = new HashSet<PlayerMovementEnums>()
     {
-        PlayerMovementEnums.FALL,
-        PlayerMovementEnums.LAND
+        PlayerMovementEnums.WALLSLIDE,
+        PlayerMovementEnums.FALL
     };
-
-    // 방향 키 떼었을 경우 Fall 
 
     public void Update()
     {
-        if(player.CheckGround())
-        {
-            stateMachine.ChangeStateLogic(PlayerMovementEnums.LAND);
-            return;
-        }
-
-        if(!player.CheckWall())
-        {
-            stateMachine.ChangeStateLogic(PlayerMovementEnums.FALL);
-            return;
-        }
+        
     }
 
     public void FixedUpdate()
     {
-        player.WallSlide();
     }
 
     public void OnEnter()
     {
-        player.animator.Play("WallSlide");
+        player.animator.Play("Jump");
     }
 
     public void OnExit()
