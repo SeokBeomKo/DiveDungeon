@@ -51,6 +51,7 @@ public class InputHandler : MonoBehaviour
         // 아래 점프
         if(Input.GetAxisRaw("Vertical") == -1)
         {
+            Debug.Log("인풋핸들러 다운 점프");
             OnPlayerDownJump?.Invoke();
         }
 #endif

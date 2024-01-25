@@ -1604,7 +1604,7 @@ GameObject:
   - component: {fileID: 1139222526}
   - component: {fileID: 1139222529}
   - component: {fileID: 1139222530}
-  m_Layer: 9
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2302,7 +2302,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1411767919}
   - component: {fileID: 1411767920}
-  m_Layer: 9
+  m_Layer: 6
   m_Name: hitCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2694,7 +2694,7 @@ GameObject:
   - component: {fileID: 1865651865}
   - component: {fileID: 1865651864}
   - component: {fileID: 1865651863}
-  m_Layer: 9
+  m_Layer: 6
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}

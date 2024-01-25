@@ -148,16 +148,17 @@ public class PlayerController : MonoBehaviour
 
     public void IgnoreLayerCoroutine()
     {
+        Debug.Log("플레이어 컨트롤러 코루틴틴");
         StartCoroutine(IgnoreLayer());
     }
 
     IEnumerator IgnoreLayer()
     {
         Debug.Log("A");
-        isDownJump = false;
+        //isDownJump = false;
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Platform"), true);
-        yield return new WaitForSeconds(0.2f);
-        isDownJump = true;
+        yield return new WaitForSeconds(0.3f);
+        //isDownJump = true;
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Platform"), false);
     }
 }

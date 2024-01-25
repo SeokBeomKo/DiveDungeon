@@ -40,6 +40,5 @@ public class PlayerJumpState : IPlayerState
 
     public void OnExit()
     {
-        //Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Platform"), true);
     }
 }

@@ -22,9 +22,10 @@ public class PlayerDownJumpState : MonoBehaviour, IPlayerState
     {
         PlayerMovementEnums.LAND
     };
+
     public void Update()
     {
-        if (player.CheckGround() && player.isDownJump)
+        if (player.CheckGround()/* && player.isDownJump*/)
         {
             stateMachine.ChangeStateLogic(PlayerMovementEnums.LAND);
             return;
@@ -41,6 +42,7 @@ public class PlayerDownJumpState : MonoBehaviour, IPlayerState
     {
         player.animator.Play("Fall");
         player.IgnoreLayerCoroutine();
+        Debug.Log("다운점프 온엔터");
     }
 
     public void OnExit()
