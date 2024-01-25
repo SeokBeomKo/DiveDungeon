@@ -46,12 +46,8 @@ public class EnemyRangeController : EnemyController
 
     public override void Preparation()
     {
-        Debug.Log("Preparation");
-        
         predictionLine.SetPosition(0, shootPosition.position);
         predictionHit = Physics2D.Raycast(shootPosition.position, new Vector2(direction,0), Mathf.Infinity, predictionLayerMask);
-
-        Debug.Log(predictionHit);
 
         if(predictionHit.collider == null)
         {

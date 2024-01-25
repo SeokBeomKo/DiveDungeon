@@ -638,6 +638,12 @@ MonoBehaviour:
   isDownJump: 0
   isWallSliding: 0
   wallSlidingSpeed: 1
+  isWallJump: 0
+  WallJumpDirection: 0
+  wallJumpTime: 0.2
+  wallJumpCounter: 0
+  wallJumpDuration: 0.4
+  wallJumpPower: {x: 8, y: 16}
   isAttack: 0
 --- !u!114 &821050571
 MonoBehaviour:
@@ -670,7 +676,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
     oldSize: {x: 0.46875, y: 0.5625}
-    newSize: {x: 0.46875, y: 0.5625}
+    newSize: {x: 1.625, y: 0.84375}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -745,7 +751,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.46875, y: 0.5625}
+  m_Size: {x: 1.625, y: 0.84375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -782,7 +788,6 @@ GameObject:
   - component: {fileID: 850056528}
   - component: {fileID: 850056527}
   - component: {fileID: 850056526}
-  - component: {fileID: 850056525}
   - component: {fileID: 850056524}
   - component: {fileID: 850056532}
   m_Layer: 11
@@ -825,18 +830,6 @@ MonoBehaviour:
   predictionLayerMask:
     serializedVersion: 2
     m_Bits: 1024
---- !u!114 &850056525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 850056523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3685e3b2b90e03f47adeebdfbbfe116c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &850056526
 MonoBehaviour:
   m_ObjectHideFlags: 0
