@@ -25,7 +25,15 @@ public class PlayerWallJumpState : IPlayerState
 
     public void Update()
     {
+        player.wallJumpCounter -= Time.deltaTime;
         
+        if(player.wallJumpCounter < 0f)
+        {
+            //if (player.rigid.velocity.y < 0f)
+                stateMachine.ChangeStateLogic(PlayerMovementEnums.FALL);
+        }
+
+            // 점프 (실제 애드포스) > 상승 > 낙하 > 착지 단일 책임 원칙 지금은 점프 스테이트가 2가지 역할을 하고있어 상승중일때 포함되고 점프 애드포스 기능또한 포함되어있어 그니까지금
     }
 
     public void FixedUpdate()
@@ -34,10 +42,13 @@ public class PlayerWallJumpState : IPlayerState
 
     public void OnEnter()
     {
+        player.isWallJump = true;
         player.animator.Play("Jump");
+        player.WallJump();
     }
 
     public void OnExit()
     {
+        player.isWallJump = false;
     }
 }

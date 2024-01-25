@@ -48,6 +48,11 @@ public class InputCenter : MonoBehaviour
             stateMachine.ChangeStateInput(PlayerMovementEnums.JUMPREADY);
             return;
         }
+        if (stateMachine.curState is PlayerWallSlideState)
+        {
+            stateMachine.ChangeStateInput(PlayerMovementEnums.WALLJUMP);
+            return;
+        }
         stateMachine.ChangeStateInput(PlayerMovementEnums.JUMP);
     }
 

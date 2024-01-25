@@ -17,6 +17,7 @@ public class PlayerWallSlideState : IPlayerState
 
     public HashSet<PlayerMovementEnums> inputHash { get; } = new HashSet<PlayerMovementEnums>()
     {
+        PlayerMovementEnums.WALLJUMP
     };
 
     public HashSet<PlayerMovementEnums> logicHash { get; } = new HashSet<PlayerMovementEnums>()
@@ -47,13 +48,14 @@ public class PlayerWallSlideState : IPlayerState
 
     public void OnEnter()
     {
+        player.curJumpCount = 1; // 일단 이렇게 하고 나중에 수정하기 !!!!!
+
         player.animator.Play("WallSlide");
-        player.isWallSliding = true;
         grabDirection = player.direction;
+        player.SetWallJump();
     }
 
     public void OnExit()
     {
-        player.isWallSliding = false;
     }
 }

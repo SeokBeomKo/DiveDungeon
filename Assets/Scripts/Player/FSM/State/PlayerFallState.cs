@@ -27,9 +27,14 @@ public class PlayerFallState : IPlayerState
     };
     public void Update()
     {
-        if (!player.CheckGround() && player.CheckWall() && player.direction != 0)
+        if (!player.CheckGround() && player.CheckWall() && player.direction != 0 && !player.isWallJump)
         {
             stateMachine.ChangeStateLogic(PlayerMovementEnums.WALLSLIDE);
+            return;
+        }
+        if (player.CheckGround())
+        {
+            stateMachine.ChangeStateAny(PlayerMovementEnums.LAND);
             return;
         }
     }
@@ -38,12 +43,6 @@ public class PlayerFallState : IPlayerState
     {
         player.Move();
         player.SetFacingDirection();
-
-        if (player.CheckGround())
-        {
-            stateMachine.ChangeStateAny(PlayerMovementEnums.LAND);
-            return;
-        }
     }
 
     public void OnEnter()

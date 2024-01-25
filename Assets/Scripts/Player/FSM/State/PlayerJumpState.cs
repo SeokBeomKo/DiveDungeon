@@ -32,7 +32,7 @@ public class PlayerJumpState : IPlayerState
             return;
         }
 
-        if(!player.CheckGround() && player.CheckWall() && player.direction != 0)
+        if(!player.CheckGround() && player.CheckWall() && player.direction != 0 && !player.isWallJump)
         {
             stateMachine.ChangeStateLogic(PlayerMovementEnums.WALLSLIDE);
             return;
@@ -44,7 +44,7 @@ public class PlayerJumpState : IPlayerState
         player.Move();
         player.SetFacingDirection();
     }
-
+    
     public void OnEnter()
     {
         player.Jump();
