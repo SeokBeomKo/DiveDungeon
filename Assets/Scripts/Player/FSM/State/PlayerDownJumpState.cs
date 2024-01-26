@@ -42,7 +42,6 @@ public class PlayerDownJumpState : IPlayerState
     {
         player.animator.Play("Fall");
         player.IgnoreLayerCoroutine();
-        Debug.Log("다운점프 온엔터");
     }
 
     public void OnExit()

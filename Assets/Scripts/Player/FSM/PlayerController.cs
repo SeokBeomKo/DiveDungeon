@@ -106,10 +106,21 @@ public class PlayerController : MonoBehaviour
         rigid.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
+    public int CheckGroundLayer()
+    {
+        RaycastHit2D rayHit = Physics2D.Raycast(rigid.position + Vector2.down * 0.1f, Vector2.down, 0.2f);
+
+        if (rayHit.collider == null) return 0;
+
+        return rayHit.collider.gameObject.layer;
+    }
+
     public bool CheckGround()
     {
-        Debug.DrawRay(rigid.position, Vector3.down, new Color(0, 0.1f, 0));
-        RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 0.1f, LayerMask.GetMask("Platform")); 
+        //Debug.DrawRay(rigid.position, Vector3.down, new Color(0, 0.1f, 0));
+
+        int layerMask = LayerMask.GetMask("Platform", "Ground");
+        RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector2.down, 0.1f, layerMask); 
        
         if (rayHit.collider != null)
         {
@@ -149,13 +160,11 @@ public class PlayerController : MonoBehaviour
 
     public void IgnoreLayerCoroutine()
     {
-        Debug.Log("플레이어 컨트롤러 코루틴틴");
         StartCoroutine(IgnoreLayer());
     }
 
     IEnumerator IgnoreLayer()
     {
-        Debug.Log("A");
         isDownJump = false;
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Platform"), true);
         yield return new WaitForSeconds(0.3f);

@@ -53,8 +53,8 @@ public class InputCenter : MonoBehaviour
 
     void ChangeDownJumpState()
     {
-        Debug.Log("인풋센터 다운점프");
-        stateMachine.ChangeStateInput(PlayerMovementEnums.DOWNJUMP);
+        if(controller.CheckGroundLayer() == LayerMask.NameToLayer("Platform"))
+           stateMachine.ChangeStateInput(PlayerMovementEnums.DOWNJUMP);
     }
 
     void ChangeAttackState(bool value)

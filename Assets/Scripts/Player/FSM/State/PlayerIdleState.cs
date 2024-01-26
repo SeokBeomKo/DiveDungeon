@@ -30,7 +30,8 @@ public class PlayerIdleState : IPlayerState
 
     public void Update()
     {
-        
+        int result = player.CheckGroundLayer();
+        Debug.Log(result);
     }
 
     public void FixedUpdate()
