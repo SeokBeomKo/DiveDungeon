@@ -137,6 +137,7 @@ public class PlayerController : MonoBehaviour
 
     public void WallJump()
     {
+        curJumpCount--;
         rigid.velocity = new Vector2(wallJumpDirection * wallJumpPower.x, wallJumpPower.y);
 
         if (wallJumpDirection != direction)
@@ -155,10 +156,10 @@ public class PlayerController : MonoBehaviour
     IEnumerator IgnoreLayer()
     {
         Debug.Log("A");
-        //isDownJump = false;
+        isDownJump = false;
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Platform"), true);
         yield return new WaitForSeconds(0.3f);
-        //isDownJump = true;
+        isDownJump = true;
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Platform"), false);
     }
 }

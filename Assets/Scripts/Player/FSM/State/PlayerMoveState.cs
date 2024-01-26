@@ -29,6 +29,10 @@ public class PlayerMoveState : IPlayerState
 
     public void Update()
     {        
+        if(!player.CheckGround())
+        {
+            stateMachine.ChangeStateLogic(PlayerMovementEnums.FALL);
+        }
     }
 
     public void FixedUpdate()

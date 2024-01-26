@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDownJumpState : MonoBehaviour, IPlayerState
+public class PlayerDownJumpState : IPlayerState
 {
     public PlayerController player { get; set; }
     public PlayerMovementStateMachine stateMachine { get; set; }
@@ -25,7 +25,7 @@ public class PlayerDownJumpState : MonoBehaviour, IPlayerState
 
     public void Update()
     {
-        if (player.CheckGround()/* && player.isDownJump*/)
+        if (player.CheckGround() && player.isDownJump)
         {
             stateMachine.ChangeStateLogic(PlayerMovementEnums.LAND);
             return;
