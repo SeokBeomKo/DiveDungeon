@@ -12,15 +12,8 @@ public class PlayerRedHoodType : PlayerType
     float skillTime = 5.0f;
     bool isChange = false;
 
-    IEnumerator CheckSkillTime()
-    {
-        yield return new WaitForSeconds(skillTime);
 
-        player.stateMachine.ChangeStateAny(PlayerMovementEnums.SKILL);
-    }
-
-
-    // ==== 재정의 함수 ====
+    // ========== 재정의 함수 ==========
     public override void RiseUpdate()
     {
         if (player.rigid.velocity.y < 0)
@@ -51,7 +44,7 @@ public class PlayerRedHoodType : PlayerType
     }
 
 
-    // ==== 공격 ====
+    // ========== 공격 ==========
     int curIndex;
 
     public override void AttackUpdate()
@@ -113,7 +106,7 @@ public class PlayerRedHoodType : PlayerType
         if (curIndex > 3) curIndex = 1;
     }
 
-    // ==== 특수 스킬 ====
+    // ========== 특수 스킬 ==========
     public override void SkillUpdate()
     {
         if(player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f)
@@ -121,6 +114,7 @@ public class PlayerRedHoodType : PlayerType
             player.stateMachine.ChangeStateLogic(PlayerMovementEnums.IDLE);
         }
     }
+
     public override void SkillFixedUpdate()
     {
 
@@ -130,6 +124,7 @@ public class PlayerRedHoodType : PlayerType
         player.isSkillOn = true;
         player.animator.Play("Change");
     }
+
     public override void SkillOnExit()
     {
         if (!isChange)
@@ -144,5 +139,13 @@ public class PlayerRedHoodType : PlayerType
             player.isSkillOn = false;
             player.animator.runtimeAnimatorController = redHood;
         }
+    }
+
+    // ========== 필요한 함수 ==========
+    IEnumerator CheckSkillTime()
+    {
+        yield return new WaitForSeconds(skillTime);
+
+        player.stateMachine.ChangeStateAny(PlayerMovementEnums.SKILL);
     }
 }

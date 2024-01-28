@@ -6,8 +6,47 @@ public abstract class PlayerType : MonoBehaviour
 {
     public PlayerController player;
 
-    
-    // 상승
+    // =========== 대시 (구르기) ============
+
+    public virtual void DodgeUpdate()
+    {
+        if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.35f)
+        {
+            if (player.CheckGround())
+            {
+                player.stateMachine.ChangeStateLogic(PlayerMovementEnums.IDLE);
+                return;
+            }
+            else
+            {
+                player.stateMachine.ChangeStateLogic(PlayerMovementEnums.FALL);
+                return;
+            }
+        }
+    }
+
+    public virtual void DodgeFixedUpdate()
+    {
+        player.Dodge();
+    }
+
+    public virtual void DodgeOnEnter()
+    {
+        player.animator.Play("Dodge");
+
+        player.moveSpeed *= 5f;
+        player.maxSpeed *= 2f;
+    }
+
+    public virtual void DodgeOnExit()
+    {
+        player.rigid.velocity = new Vector2(0, player.rigid.velocity.y);
+
+        player.moveSpeed /= 5f;
+        player.maxSpeed /= 2f;
+    }
+
+    // ============ 상승 ============
     public virtual void RiseUpdate()
     {
         if (player.rigid.velocity.y < 0)
@@ -30,8 +69,8 @@ public abstract class PlayerType : MonoBehaviour
 
     }
 
-    
-    // 하강
+
+    // ============ 하강 ============
     public virtual void FallUpdate()
     {
         if (player.CheckGround())
@@ -57,13 +96,13 @@ public abstract class PlayerType : MonoBehaviour
     }
 
 
-    // 공격
+    // ============ 공격 ============
     public abstract void AttackUpdate();
     public abstract void AttackFixedUpdate();
     public abstract void AttackOnEnter();
     public abstract void AttackOnExit();
 
-    // 특수 스킬
+    // ============ 특수 스킬 ============
     public abstract void SkillUpdate();
     public abstract void SkillFixedUpdate();
     public abstract void SkillOnEnter();
