@@ -18,7 +18,7 @@ public class PlayerIdleState : IPlayerState
     public HashSet<PlayerMovementEnums> inputHash { get; } = new HashSet<PlayerMovementEnums>()
     {
         PlayerMovementEnums.MOVE,
-        PlayerMovementEnums.JUMPREADY,
+        PlayerMovementEnums.JUMP,
         PlayerMovementEnums.DODGE,
         PlayerMovementEnums.ATTACK,
         PlayerMovementEnums.DOWNJUMP
@@ -30,7 +30,8 @@ public class PlayerIdleState : IPlayerState
 
     public void Update()
     {
-        
+        int result = player.CheckGroundLayer();
+        Debug.Log(result);
     }
 
     public void FixedUpdate()

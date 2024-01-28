@@ -14,37 +14,24 @@ public class PlayerJumpState : IPlayerState
     }
     public HashSet<PlayerMovementEnums> inputHash { get; } = new HashSet<PlayerMovementEnums>()
     {
-        PlayerMovementEnums.DODGE,
-        PlayerMovementEnums.ATTACK,
-        PlayerMovementEnums.JUMP
     };
 
     public HashSet<PlayerMovementEnums> logicHash { get; } = new HashSet<PlayerMovementEnums>()
     {
-        PlayerMovementEnums.FALL,
-        PlayerMovementEnums.WALLSLIDE
+        PlayerMovementEnums.RISE
     };
     public void Update()
     {
-        if (player.rigid.velocity.y < 0)
+        if(player.rigid.velocity.y > 0)
         {
-            stateMachine.ChangeStateLogic(PlayerMovementEnums.FALL);
-            return;
-        }
-
-        if(!player.CheckGround() && player.CheckWall() && player.direction != 0)
-        {
-            stateMachine.ChangeStateLogic(PlayerMovementEnums.WALLSLIDE);
-            return;
+            stateMachine.ChangeStateLogic(PlayerMovementEnums.RISE);
         }
     }
 
     public void FixedUpdate()
     {
-        player.Move();
-        player.SetFacingDirection();
     }
-
+    
     public void OnEnter()
     {
         player.Jump();
@@ -53,6 +40,5 @@ public class PlayerJumpState : IPlayerState
 
     public void OnExit()
     {
-        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Platform"), true);
     }
 }

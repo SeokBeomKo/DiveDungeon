@@ -49,7 +49,7 @@ public class InputHandler : MonoBehaviour
         OnPlayerAttack?.Invoke(Input.GetMouseButton(0));
 
         // 아래 점프
-        if(Input.GetAxisRaw("Vertical") == -1/* && Input.GetButton("Jump")*/)
+        if(Input.GetAxisRaw("Vertical") == -1)
         {
             OnPlayerDownJump?.Invoke();
         }

@@ -25,16 +25,14 @@ public class PlayerController : MonoBehaviour
     public bool isDownJump;
     
     [Header("벽 슬라이드 관련 값")]
-    public bool isWallSliding;
     public float wallSlidingSpeed;
 
     [Header("벽 점프 관련 값")]
+    public Vector2 wallJumpPower;
     public bool isWallJump;
-    public int WallJumpDirection;
-    public float wallJumpTime = 0.2f;
+    public float wallJumpDirection;
+    public float jumpingTime;
     public float wallJumpCounter;
-    public float wallJumpDuration = 0.4f;
-    public Vector2 wallJumpPower = new Vector2(8f, 16f);
 
 
     [Header("공격 관련 값")]
@@ -108,10 +106,21 @@ public class PlayerController : MonoBehaviour
         rigid.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
+    public int CheckGroundLayer()
+    {
+        RaycastHit2D rayHit = Physics2D.Raycast(rigid.position + Vector2.down * 0.1f, Vector2.down, 0.2f);
+
+        if (rayHit.collider == null) return 0;
+
+        return rayHit.collider.gameObject.layer;
+    }
+
     public bool CheckGround()
     {
-        Debug.DrawRay(rigid.position, Vector3.down, new Color(0, 0.1f, 0));
-        RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 0.1f, LayerMask.GetMask("Platform")); 
+        //Debug.DrawRay(rigid.position, Vector3.down, new Color(0, 0.1f, 0));
+
+        int layerMask = LayerMask.GetMask("Platform", "Ground");
+        RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector2.down, 0.1f, layerMask); 
        
         if (rayHit.collider != null)
         {
@@ -131,40 +140,23 @@ public class PlayerController : MonoBehaviour
         rigid.velocity = new Vector2(rigid.velocity.x, Mathf.Clamp(rigid.velocity.y, -wallSlidingSpeed, float.MaxValue));
     }
 
+    public void SetWallJump()
+    {
+        wallJumpDirection = -direction;
+        wallJumpCounter = jumpingTime;
+    }
+
     public void WallJump()
     {
-        if (isWallSliding)
-        {
-            WallJumpDirection = -direction;
-            wallJumpCounter = wallJumpTime;
-            CancelInvoke(nameof(StopWallJump));
-        }
-        else
-        {
-            wallJumpCounter -= Time.deltaTime;
-        }
+        curJumpCount--;
+        rigid.velocity = new Vector2(wallJumpDirection * wallJumpPower.x, wallJumpPower.y);
 
-        if(wallJumpCounter > 0f)
+        if (wallJumpDirection != direction)
         {
-            isWallJump = true;
-            rigid.velocity = new Vector2(WallJumpDirection * wallJumpPower.x, wallJumpPower.y);
-            wallJumpCounter = 0;
-
-            if(WallJumpDirection != direction)
-            {
-                isRight = !isRight;
-                direction *= -1;
-            }
-
-            Invoke(nameof(StopWallJump), wallJumpDuration);
+            isRight = !isRight;
+            direction *= -1;
         }
     }
-
-    void StopWallJump()
-    {
-        isWallJump = false;
-    }
-
 
     public void IgnoreLayerCoroutine()
     {
@@ -173,10 +165,9 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator IgnoreLayer()
     {
-        Debug.Log("A");
         isDownJump = false;
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Platform"), true);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.3f);
         isDownJump = true;
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Platform"), false);
     }

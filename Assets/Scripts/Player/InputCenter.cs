@@ -43,9 +43,9 @@ public class InputCenter : MonoBehaviour
             controller.Jump();
             return;
         }
-        if (stateMachine.curState is PlayerIdleState)
+        if (stateMachine.curState is PlayerWallSlideState)
         {
-            stateMachine.ChangeStateInput(PlayerMovementEnums.JUMPREADY);
+            stateMachine.ChangeStateInput(PlayerMovementEnums.WALLJUMP);
             return;
         }
         stateMachine.ChangeStateInput(PlayerMovementEnums.JUMP);
@@ -53,7 +53,8 @@ public class InputCenter : MonoBehaviour
 
     void ChangeDownJumpState()
     {
-        stateMachine.ChangeStateInput(PlayerMovementEnums.DOWNJUMP);
+        if(controller.CheckGroundLayer() == LayerMask.NameToLayer("Platform"))
+           stateMachine.ChangeStateInput(PlayerMovementEnums.DOWNJUMP);
     }
 
     void ChangeAttackState(bool value)

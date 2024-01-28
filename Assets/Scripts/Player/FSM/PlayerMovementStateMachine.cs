@@ -17,13 +17,14 @@ public class PlayerMovementStateMachine : MonoBehaviour
             {PlayerMovementEnums.IDLE, new PlayerIdleState(this) },
             {PlayerMovementEnums.MOVE, new PlayerMoveState(this) },
             {PlayerMovementEnums.DODGE, new PlayerDodgeState(this) },
-            {PlayerMovementEnums.JUMPREADY, new PlayerJumpReadyState(this) },
             {PlayerMovementEnums.JUMP, new PlayerJumpState(this) },
+            {PlayerMovementEnums.RISE, new PlayerRiseState(this) },
             {PlayerMovementEnums.FALL, new PlayerFallState(this) },
             {PlayerMovementEnums.LAND, new PlayerLandState(this) },
             {PlayerMovementEnums.ATTACK, new PlayerAttackState(this) },
             {PlayerMovementEnums.DOWNJUMP, new PlayerDownJumpState(this) },
             {PlayerMovementEnums.WALLSLIDE, new PlayerWallSlideState(this) },
+            {PlayerMovementEnums.WALLJUMP, new PlayerWallJumpState(this) },
         };
 
         if(stateDictionary.TryGetValue(PlayerMovementEnums.IDLE, out IPlayerState newState))

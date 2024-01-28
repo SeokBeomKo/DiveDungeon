@@ -6,8 +6,8 @@ public enum PlayerMovementEnums
 {
     IDLE,               // 기본
     MOVE,               // 이동
-    JUMPREADY,          // 점프준비
     JUMP,               // 점프
+    RISE,               // 상승
     FALL,               // 하강
     LAND,               // 착지 
     DODGE,              // 구르기, 대시
