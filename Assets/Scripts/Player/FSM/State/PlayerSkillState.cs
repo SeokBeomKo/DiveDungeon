@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttackState : IPlayerState
+public class PlayerSkillState : IPlayerState
 {
     public PlayerController player { get; set; }
     public PlayerMovementStateMachine stateMachine { get; set; }
 
-    public PlayerAttackState(PlayerMovementStateMachine _stateMachine)
+    public PlayerSkillState(PlayerMovementStateMachine _stateMachine)
     {
         stateMachine = _stateMachine;
         player = stateMachine.playerController;
@@ -19,16 +19,12 @@ public class PlayerAttackState : IPlayerState
 
     public HashSet<PlayerMovementEnums> logicHash { get; } = new HashSet<PlayerMovementEnums>()
     {
-        PlayerMovementEnums.IDLE,
-        PlayerMovementEnums.JUMP,
-        PlayerMovementEnums.FALL
+        PlayerMovementEnums.IDLE
     };
-
-    int curIndex;
 
     public void Update()
     {
-        player.type.AttackUpdate();
+        player.type.SkillUpdate();
     }
 
     public void FixedUpdate()
@@ -37,11 +33,11 @@ public class PlayerAttackState : IPlayerState
 
     public void OnEnter()
     {
-        player.type.AttackOnEnter();
+        player.type.SkillOnEnter();
     }
 
     public void OnExit()
     {
+        player.type.SkillOnExit();
     }
-   
 }

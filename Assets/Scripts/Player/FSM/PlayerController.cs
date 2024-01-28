@@ -7,8 +7,8 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rigid;
     public Animator animator;
     public SpriteRenderer spriteRenderer;
-    public PlayerMovementStateMachine movementStateMachine;
-    public BoxCollider2D boxCollider;
+    public PlayerMovementStateMachine stateMachine;
+    public PlayerType type;
 
     [Header("이동 관련 값")]
     public float maxSpeed;
@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour
     public float jumpingTime;
     public float wallJumpCounter;
 
+    [Header("스킬 관련 값")]
+    public bool isSkillOn = false;
 
     [Header("공격 관련 값")]
     public bool isAttack;
@@ -50,15 +52,15 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(movementStateMachine.curState);
-        if (movementStateMachine.curState != null)
-            movementStateMachine.curState.Update();
+        // Debug.Log(movementStateMachine.curState);
+        if (stateMachine.curState != null)
+            stateMachine.curState.Update();
     }
 
     private void FixedUpdate()
     {
-        if (movementStateMachine.curState != null)
-            movementStateMachine.curState.FixedUpdate();
+        if (stateMachine.curState != null)
+            stateMachine.curState.FixedUpdate();
     }
 
     public void SetInputDirection(int dir) // 1, 0, -1 방향 다 받아오는 함수

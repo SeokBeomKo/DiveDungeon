@@ -10,6 +10,7 @@ public class InputHandler : MonoBehaviour
     public event PlayerInputHandler OnPlayerDodge;
     public event PlayerInputHandler OnPlayerJump;
     public event PlayerInputHandler OnPlayerDownJump;
+    public event PlayerInputHandler OnPlayerSkill;
 
     public delegate void InputIntHandler(int value);
     public event InputIntHandler OnPlayerCheckDir;
@@ -52,6 +53,11 @@ public class InputHandler : MonoBehaviour
         if(Input.GetAxisRaw("Vertical") == -1)
         {
             OnPlayerDownJump?.Invoke();
+        }
+
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            OnPlayerSkill?.Invoke();
         }
 #endif
     }

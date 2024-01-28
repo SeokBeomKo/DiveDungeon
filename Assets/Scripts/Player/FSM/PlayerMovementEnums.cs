@@ -13,7 +13,7 @@ public enum PlayerMovementEnums
     DODGE,              // 구르기, 대시
     ATTACK,             // 공격
     DOWNJUMP,           // 아래 점프
-    SPECIALATTACK,      // 특수 공격
+    SKILL,              // 특수 스킬
     WALLSLIDE,          // 벽 슬라이드
     WALLJUMP,           // 벽 점프
 }
