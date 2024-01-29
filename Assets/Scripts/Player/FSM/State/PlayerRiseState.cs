@@ -28,28 +28,17 @@ public class PlayerRiseState : IPlayerState
 
     public void Update()
     {
-        if (player.rigid.velocity.y < 0)
-        {
-            stateMachine.ChangeStateLogic(PlayerMovementEnums.FALL);
-            return;
-        }
-
-        if (!player.CheckGround() && player.CheckWall() && player.direction != 0 && !player.isWallJump)
-        {
-            stateMachine.ChangeStateLogic(PlayerMovementEnums.WALLSLIDE);
-            return;
-        }
+        player.type.RiseUpdate();
     }
 
     public void FixedUpdate()
     {
-        player.Move();
-        player.SetFacingDirection();
+        player.type.RiseFixedUpdate();
     }
 
     public void OnEnter()
     {
-        player.animator.Play("Jump");
+        player.type.RiseOnEnter();
     }
 
     public void OnExit()

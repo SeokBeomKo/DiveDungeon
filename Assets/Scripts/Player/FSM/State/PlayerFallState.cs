@@ -27,27 +27,17 @@ public class PlayerFallState : IPlayerState
     };
     public void Update()
     {
-        if (!player.CheckGround() && player.CheckWall() && player.direction != 0 && !player.isWallJump)
-        {
-            stateMachine.ChangeStateLogic(PlayerMovementEnums.WALLSLIDE);
-            return;
-        }
-        if (player.CheckGround())
-        {
-            stateMachine.ChangeStateAny(PlayerMovementEnums.LAND);
-            return;
-        }
+        player.type.FallUpdate();
     }
 
     public void FixedUpdate()
     {
-        player.Move();
-        player.SetFacingDirection();
+        player.type.FallFixedUpdate();
     }
 
     public void OnEnter()
     {
-        player.animator.Play("Fall");
+        player.type.FallOnEnter();
     }
 
     public void OnExit()

@@ -16,6 +16,7 @@ public class InputCenter : MonoBehaviour
         inputHandler.OnPlayerJump += ChangeJumpState;
         inputHandler.OnPlayerDownJump += ChangeDownJumpState;
         inputHandler.OnPlayerAttack += ChangeAttackState;
+        inputHandler.OnPlayerSkill += ChangeSkillState;
 
         inputHandler.OnPlayerCheckDir += CheckDirection;
     }
@@ -63,6 +64,15 @@ public class InputCenter : MonoBehaviour
         {
             stateMachine.ChangeStateInput(PlayerMovementEnums.ATTACK);
             controller.isAttack = true;
+            return;
+        }
+    }
+
+    void ChangeSkillState()
+    {
+        if (!controller.isSkillOn)
+        {
+            stateMachine.ChangeStateAny(PlayerMovementEnums.SKILL);
             return;
         }
     }

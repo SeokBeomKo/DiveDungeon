@@ -25,6 +25,7 @@ public class PlayerMovementStateMachine : MonoBehaviour
             {PlayerMovementEnums.DOWNJUMP, new PlayerDownJumpState(this) },
             {PlayerMovementEnums.WALLSLIDE, new PlayerWallSlideState(this) },
             {PlayerMovementEnums.WALLJUMP, new PlayerWallJumpState(this) },
+            {PlayerMovementEnums.SKILL, new PlayerSkillState(this) },
         };
 
         if(stateDictionary.TryGetValue(PlayerMovementEnums.IDLE, out IPlayerState newState))

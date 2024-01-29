@@ -25,35 +25,21 @@ public class PlayerDodgeState : IPlayerState
     };
     public void Update()
     {
-        if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.35f)
-        {
-            if (player.CheckGround())
-                stateMachine.ChangeStateLogic(PlayerMovementEnums.IDLE);
-            else
-                stateMachine.ChangeStateLogic(PlayerMovementEnums.FALL);
-
-            return;
-        }
+        player.type.DodgeUpdate();
     }
 
     public void FixedUpdate()
     {
-        player.Dodge();
+        player.type.DodgeFixedUpdate();
     }
 
     public void OnEnter()
     {
-        player.animator.Play("Dodge");
-
-        player.moveSpeed *= 5f;
-        player.maxSpeed *= 1.8f;
+        player.type.DodgeOnEnter();
     }
 
     public void OnExit()
     {
-        player.rigid.velocity = new Vector2(0, player.rigid.velocity.y);
-
-        player.moveSpeed /= 5f;
-        player.maxSpeed /= 1.8f;
+        player.type.DodgeOnExit();
     }
 }
