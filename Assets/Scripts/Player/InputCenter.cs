@@ -66,6 +66,7 @@ public class InputCenter : MonoBehaviour
             controller.isAttack = true;
             return;
         }
+        //controller.isAttack = false;
     }
 
     void ChangeSkillState()

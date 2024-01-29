@@ -80,12 +80,11 @@ public class PlayerRedHoodType : PlayerType
         }
 
         // 점프하는 상태
-        player.stateMachine.ChangeStateLogic(PlayerMovementEnums.JUMP);
+        player.stateMachine.ChangeStateLogic(PlayerMovementEnums.RISE);
     }
 
     public override void AttackFixedUpdate()
     {
-
     }
 
     public override void AttackOnEnter()

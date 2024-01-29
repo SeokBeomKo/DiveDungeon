@@ -15,12 +15,13 @@ public class PlayerAttackState : IPlayerState
 
     public HashSet<PlayerMovementEnums> inputHash { get; } = new HashSet<PlayerMovementEnums>()
     {
+        PlayerMovementEnums.DOWNJUMP
     };
 
     public HashSet<PlayerMovementEnums> logicHash { get; } = new HashSet<PlayerMovementEnums>()
     {
         PlayerMovementEnums.IDLE,
-        PlayerMovementEnums.JUMP,
+        PlayerMovementEnums.RISE,
         PlayerMovementEnums.FALL
     };
 
@@ -33,6 +34,7 @@ public class PlayerAttackState : IPlayerState
 
     public void FixedUpdate()
     {
+        player.type.AttackFixedUpdate();
     }
 
     public void OnEnter()
