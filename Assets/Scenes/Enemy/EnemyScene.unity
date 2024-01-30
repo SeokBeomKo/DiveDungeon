@@ -568,7 +568,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &331189976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -597,6 +597,7 @@ MonoBehaviour:
   rigid: {fileID: 331189980}
   spriteRenderer: {fileID: 331189981}
   stateMachine: {fileID: 331189978}
+  type: {fileID: 0}
   enemyDamager: {fileID: 1842740853}
   maxSpeed: 2
   moveSpeed: 20
@@ -983,8 +984,9 @@ GameObject:
   - component: {fileID: 850056529}
   - component: {fileID: 850056528}
   - component: {fileID: 850056527}
+  - component: {fileID: 850056534}
+  - component: {fileID: 850056533}
   - component: {fileID: 850056526}
-  - component: {fileID: 850056524}
   - component: {fileID: 850056532}
   m_Layer: 11
   m_Name: ArcherGoblin
@@ -993,39 +995,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &850056524
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 850056523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d313a975e62de1841bfb307804ebb8ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 850056530}
-  rigid: {fileID: 850056528}
-  spriteRenderer: {fileID: 850056529}
-  stateMachine: {fileID: 850056526}
-  enemyDamager: {fileID: 0}
-  maxSpeed: 5
-  moveSpeed: 10
-  detectionRange: 7.5
-  attackDistance: 5
-  direction: 0
-  damage: 1
-  maxPatrolTime: 1
-  curPatrolTime: 0
-  maxPreparationTime: 1
-  curPreparationTime: 0
-  shootPosition: {fileID: 1175077646}
-  projectile: {fileID: 1961268595787423719, guid: 79e87f37f7df6d641a606f553660d71c, type: 3}
-  predictionLine: {fileID: 850056532}
-  predictionLayerMask:
-    serializedVersion: 2
-    m_Bits: 1024
 --- !u!114 &850056526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1038,7 +1007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b4c362ff40830e48bfbda4d1615477d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 850056524}
+  controller: {fileID: 850056533}
 --- !u!61 &850056527
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1275,6 +1244,53 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &850056533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850056523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3667c6abd09bc154396f9d8be24c94b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 850056530}
+  rigid: {fileID: 850056528}
+  spriteRenderer: {fileID: 850056529}
+  stateMachine: {fileID: 850056526}
+  type: {fileID: 850056534}
+  enemyDamager: {fileID: 1579778683}
+  maxSpeed: 5
+  moveSpeed: 10
+  detectionRange: 5
+  attackDistance: 2
+  direction: 0
+  damage: 1
+  maxPatrolTime: 1
+  curPatrolTime: 0
+  maxPreparationTime: 1
+  curPreparationTime: 0
+--- !u!114 &850056534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850056523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fea6765398e82fe43bef0847377c88f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 850056533}
+  shootPosition: {fileID: 1175077646}
+  projectile: {fileID: 1961268595787423719, guid: 79e87f37f7df6d641a606f553660d71c, type: 3}
+  predictionLine: {fileID: 850056532}
+  predictionLayerMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &1022220264
 GameObject:
   m_ObjectHideFlags: 0
@@ -1297,7 +1313,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1022220265
 Transform:
   m_ObjectHideFlags: 0
@@ -1462,6 +1478,7 @@ MonoBehaviour:
   rigid: {fileID: 1022220269}
   spriteRenderer: {fileID: 1022220266}
   stateMachine: {fileID: 1022220272}
+  type: {fileID: 0}
   enemyDamager: {fileID: 1609852991}
   maxSpeed: 2
   moveSpeed: 20

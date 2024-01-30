@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class EnemyType : MonoBehaviour
 {
-    EnemyController controller;
+    public EnemyController controller;
 
     // : >> Idle
     public virtual void IdleUpdate()
@@ -110,6 +110,8 @@ public abstract class EnemyType : MonoBehaviour
     public virtual void AttackFixedUpdate(){}
     public virtual void AttackEnter(){controller.EnterAttack();}
     public virtual void AttackExit(){}
+
+    public virtual void OnAttack(){}
     // : << Attack
 
     // : >> Hit

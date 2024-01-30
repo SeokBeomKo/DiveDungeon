@@ -14,21 +14,17 @@ public class EnemyAttackState : IEnemyState
     }
     public void Update()
     {
-        if (controller.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f)
-        {
-            stateMachine.ChangeState(EnemyStateEnums.IDLE);
-            return;
-        }
+        controller.type.AttackUpdate();
     }
     public void FixedUpdate()
     {
     }
     public void OnEnter()
     {
-        controller.EnterAttack();
+        controller.type.AttackEnter();
     }
     public void OnExit()
     {
-        controller.ExitAttack();
+        controller.type.AttackExit();
     }
 }

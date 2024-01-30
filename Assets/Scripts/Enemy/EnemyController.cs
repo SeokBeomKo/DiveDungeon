@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-abstract public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
     [SerializeField]    public Animator             animator;
     [SerializeField]    public Rigidbody2D          rigid;
@@ -55,32 +55,7 @@ abstract public class EnemyController : MonoBehaviour
         }
     }
 
-    public abstract void Idle();
 
-    public abstract void Patrol();
-    public void EnterPatrol()
-    {
-        maxPatrolTime = Random.Range(2,4);
-        curPatrolTime = 0;
-        direction = Random.Range(0, 2) * 2 - 1;
-        EnterMove();
-    }
-    public void ExitPatrol()
-    {
-        ExitMove();
-    }
-
-    public abstract void Trace();
-    public void EnterTrace()
-    {
-        EnterMove();
-    }
-    public void ExitTrace()
-    {
-        ExitMove();
-    }
-
-    public abstract void Preparation();
     public virtual void EnterPreparation()
     {
         animator.Play("Preparation");
@@ -90,7 +65,6 @@ abstract public class EnemyController : MonoBehaviour
         curPreparationTime = 0;
     }   
 
-    public abstract void Attack();
     public void EnterAttack()
     {
         animator.Play("Attack");
@@ -99,12 +73,12 @@ abstract public class EnemyController : MonoBehaviour
     {
 
     }
-    public abstract void OnAttack();
 
     public void Move()
     {
         rigid.AddForce(Vector3.right * direction * moveSpeed);
     }
+
     public void EnterMove()
     {
         animator.Play("Move");
