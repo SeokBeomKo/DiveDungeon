@@ -5,23 +5,22 @@ using UnityEngine;
 public class GhostEffect : MonoBehaviour
 {
     public float ghostDelay;
-    private float ghostDelaySeconds;
-
+    private float ghostDelayTime;
     public GameObject ghost;
     public bool makeGhost = false;
 
     void Start()
     {
-        ghostDelaySeconds = ghostDelay;
+        ghostDelayTime = ghostDelay;
     }
 
     void Update()
     {
         if (makeGhost)
         {
-            if (ghostDelaySeconds > 0)
+            if (ghostDelayTime > 0)
             {
-                ghostDelaySeconds -= Time.deltaTime;
+                ghostDelayTime -= Time.deltaTime;
             }
             else
             {
@@ -35,7 +34,7 @@ public class GhostEffect : MonoBehaviour
                 currentGhost.GetComponent<SpriteRenderer>().flipX = isFlipX;
                 //currentGhost.transform.localScale = this.transform.localScale;
 
-                ghostDelaySeconds = ghostDelay;
+                ghostDelayTime = ghostDelay;
                 Destroy(currentGhost, 0.5f);
             }
         }

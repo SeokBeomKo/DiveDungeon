@@ -7,7 +7,7 @@ public class PlayerFutureGirlType : PlayerType
     // ========== 재정의 함수 ==========
     public override void DodgeUpdate()
     {
-        if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.8f)
+        if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.7f)
         {
             if (player.CheckGround())
             {

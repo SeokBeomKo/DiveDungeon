@@ -27,6 +27,11 @@ public class PlayerController : MonoBehaviour
     public int curJumpCount;
     public bool isDownJump;
     
+    [Header("대시 관련 값")]
+    public bool isDash;
+    public float maxDashTime;
+    private float currentDashTime = 0;
+
     [Header("벽 슬라이드 관련 값")]
     public float wallSlidingSpeed;
 
@@ -97,8 +102,8 @@ public class PlayerController : MonoBehaviour
 
     public void Dodge()
     {
-        Vector2 dir = isRight ? Vector2.right : Vector2.left * moveSpeed;
-        rigid.AddForce(dir, ForceMode2D.Impulse);
+        Vector2 dir = isRight ? Vector2.right : Vector2.left;
+        rigid.AddForce(dir * moveSpeed, ForceMode2D.Impulse);
         SetMoveSpeed();
     }
 
@@ -108,6 +113,25 @@ public class PlayerController : MonoBehaviour
         rigid.velocity = new Vector2(dir.x * moveSpeed, 0f);
         SetMoveSpeed();
     }
+
+
+    /*public void FutureDash()
+    {
+        ghost.makeGhost = true;
+        currentDashTime += Time.deltaTime;
+        isDash = true;
+
+        Vector2 dir = isRight ? Vector2.right : Vector2.left;
+        rigid.velocity = new Vector2(dir.x * moveSpeed, 0f);
+        SetMoveSpeed();
+
+        if (currentDashTime > maxDashTime)
+        {
+            currentDashTime = 0;
+            isDash = false;
+            ghost.makeGhost = false;
+        }
+    }*/
 
     public void Jump()
     {
