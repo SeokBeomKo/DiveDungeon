@@ -22,11 +22,6 @@ public class EnemyAttackState : IEnemyState
     }
     public void FixedUpdate()
     {
-        // if (Vector2.Distance(controller.FindPlayerInRadius().transform.position, controller.transform.position) > controller.attackDistance)
-        // {
-        //     stateMachine.ChangeState(EnemyStateEnums.IDLE);
-        //     return;
-        // }
     }
     public void OnEnter()
     {

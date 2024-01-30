@@ -14,22 +14,18 @@ public class EnemyPreparationState : IEnemyState
     }
     public void Update()
     {
-        if (controller.CheckAttack())
-        {
-            stateMachine.ChangeState(EnemyStateEnums.ATTACK);
-            return;
-        }
-        controller.Preparation();
+        controller.type.PreparationUpdate();
     }
     public void FixedUpdate()
     {
+        controller.type.PreparationFixedUpdate();
     }
     public void OnEnter()
     {
-        controller.EnterPreparation();
+        controller.type.PreparationEnter();
     }
     public void OnExit()
     {
-        controller.ExitPreparation();
+        controller.type.PreparationExit();
     }
 }

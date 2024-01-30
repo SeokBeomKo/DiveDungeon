@@ -15,29 +15,18 @@ public class EnemyTraceState : IEnemyState
     }
     public void Update()
     {
-
+        controller.type.TraceUpdate();
     }
     public void FixedUpdate()
     {
-        if (controller.FindPlayerInRadius() == null)
-        {
-            stateMachine.ChangeState(EnemyStateEnums.IDLE);
-            return;
-        }
-        if (Vector2.Distance(controller.FindPlayerInRadius().transform.position, controller.transform.position) <= controller.attackDistance)
-        {
-            stateMachine.ChangeState(EnemyStateEnums.PREPARATION);
-            return;
-        }
-
-        controller.Trace();
+        controller.type.TraceFixedUpdate();
     }
     public void OnEnter()
     {
-        controller.EnterTrace();
+        controller.type.TraceEnter();
     }
     public void OnExit()
     {
-        controller.ExitTrace();
+        controller.type.TraceExit();
     }
 }
