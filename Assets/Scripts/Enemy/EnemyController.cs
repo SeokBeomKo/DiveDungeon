@@ -10,8 +10,6 @@ public class EnemyController : MonoBehaviour
     [SerializeField]    public EnemyStateMachine    stateMachine;
     [SerializeField]    public EnemyType            type;
 
-    [SerializeField]    public EnemyDamager         enemyDamager;
-
     public float maxSpeed;
     public float moveSpeed;
 
