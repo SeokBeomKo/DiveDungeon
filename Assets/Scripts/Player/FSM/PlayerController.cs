@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour
     public PlayerMovementStateMachine stateMachine;
     public PlayerType type;
 
+    public GhostEffect ghost;
+
+
     [Header("이동 관련 값")]
     public float maxSpeed;
     public float moveSpeed;
@@ -96,6 +99,13 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 dir = isRight ? Vector2.right : Vector2.left * moveSpeed;
         rigid.AddForce(dir, ForceMode2D.Impulse);
+        SetMoveSpeed();
+    }
+
+    public void Dash()
+    {
+        Vector2 dir = isRight ? Vector2.right : Vector2.left;
+        rigid.velocity = new Vector2(dir.x * moveSpeed, 0f);
         SetMoveSpeed();
     }
 

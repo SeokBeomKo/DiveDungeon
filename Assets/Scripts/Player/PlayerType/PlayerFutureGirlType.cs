@@ -7,7 +7,7 @@ public class PlayerFutureGirlType : PlayerType
     // ========== 재정의 함수 ==========
     public override void DodgeUpdate()
     {
-        if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
+        if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.8f)
         {
             if (player.CheckGround())
             {
@@ -21,6 +21,32 @@ public class PlayerFutureGirlType : PlayerType
             }
         }
     }
+
+    public override void DodgeFixedUpdate()
+    {
+        player.Dash();
+    }
+
+    public override void DodgeOnEnter()
+    {
+        player.animator.Play("Dodge");
+
+        player.moveSpeed *= 5f;
+        player.maxSpeed *= 2f;
+
+        player.ghost.makeGhost = true;
+    }
+
+    public override void DodgeOnExit()
+    {
+        player.rigid.velocity = new Vector2(0, player.rigid.velocity.y);
+
+        player.moveSpeed /= 5f;
+        player.maxSpeed /= 2f;
+
+        player.ghost.makeGhost = false;
+    }
+
 
     // ========== 공격 ==========
     public override void AttackUpdate()

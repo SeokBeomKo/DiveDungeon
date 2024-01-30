@@ -85,6 +85,7 @@ public class PlayerRedHoodType : PlayerType
 
     public override void AttackFixedUpdate()
     {
+        player.SetFacingDirection();
     }
 
     public override void AttackOnEnter()
