@@ -9,7 +9,7 @@ public class EnemyNormalController : EnemyController
 
     }
 
-    public override void Move()
+    public void Move()
     {
         rigid.AddForce(Vector3.right * direction * moveSpeed);
     }

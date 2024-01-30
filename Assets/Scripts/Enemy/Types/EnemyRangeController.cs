@@ -18,7 +18,7 @@ public class EnemyRangeController : EnemyController
 
     }
 
-    public override void Move()
+    public void Move()
     {
         rigid.AddForce(Vector3.right * direction * moveSpeed);
     }

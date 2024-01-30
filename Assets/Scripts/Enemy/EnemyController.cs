@@ -8,6 +8,7 @@ abstract public class EnemyController : MonoBehaviour
     [SerializeField]    public Rigidbody2D          rigid;
     [SerializeField]    public SpriteRenderer       spriteRenderer;
     [SerializeField]    public EnemyStateMachine    stateMachine;
+    [SerializeField]    public EnemyType            type;
 
     [SerializeField]    public EnemyDamager         enemyDamager;
 
@@ -31,7 +32,6 @@ abstract public class EnemyController : MonoBehaviour
 
     private void Update() 
     {
-        Debug.Log(stateMachine.curState);
         if (stateMachine != null)
             stateMachine.curState.Update();
     }
@@ -101,7 +101,10 @@ abstract public class EnemyController : MonoBehaviour
     }
     public abstract void OnAttack();
 
-    public abstract void Move();
+    public void Move()
+    {
+        rigid.AddForce(Vector3.right * direction * moveSpeed);
+    }
     public void EnterMove()
     {
         animator.Play("Move");
