@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -6413306416389541010}
   - component: {fileID: 6761620566516019611}
   m_Layer: 0
-  m_Name: Projectile
+  m_Name: ArcherGoblinProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

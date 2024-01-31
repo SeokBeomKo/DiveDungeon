@@ -5,22 +5,22 @@ using UnityEngine;
 public class EnemyProjectile : MonoBehaviour
 {
     [SerializeField] Rigidbody2D rigid;
-    private int direction = 0;
+    private Vector2 direction = Vector2.zero;
     public float speed;
 
-    public void SettingValue(int _direction)
+    public void SettingValue(Vector2 _direction)
     {
         direction = _direction;
     }
 
     private void OnEnable() 
     {
-        rigid.velocity = new Vector2(speed * direction, 0);
+        rigid.velocity = direction * speed;
     }
 
     void FixedUpdate()
     {
-        rigid.velocity = new Vector2(speed * direction, 0);
+        rigid.velocity = direction * speed;
     }
     
 }

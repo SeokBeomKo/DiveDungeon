@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyRangeType : EnemyType
+public class EnemyHorizontalRangeType : EnemyType
 {
     [SerializeField] Transform shootPosition;
     [SerializeField] GameObject projectile;
@@ -41,6 +41,6 @@ public class EnemyRangeType : EnemyType
     {
         GameObject inst = Instantiate(projectile);
         inst.transform.position = shootPosition.position;
-        inst.GetComponent<EnemyProjectile>().SettingValue(controller.direction);
+        inst.GetComponent<EnemyProjectile>().SettingValue(new Vector2(controller.direction,0));
     }
 }
