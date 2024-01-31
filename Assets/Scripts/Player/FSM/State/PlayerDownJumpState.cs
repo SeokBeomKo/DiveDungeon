@@ -40,7 +40,7 @@ public class PlayerDownJumpState : IPlayerState
 
     public void OnEnter()
     {
-        player.animator.Play("Fall");
+        player.PlayAnimation("Fall");
         player.IgnoreLayerCoroutine();
     }
 

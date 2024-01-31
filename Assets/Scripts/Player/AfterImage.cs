@@ -8,7 +8,7 @@ public class AfterImage : MonoBehaviour
     private Shader shader;
     public Color color;
 
-    private void start()
+    private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         shader = Shader.Find("GUI/Text Shader");

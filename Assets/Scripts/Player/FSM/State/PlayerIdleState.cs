@@ -39,7 +39,7 @@ public class PlayerIdleState : IPlayerState
 
     public void OnEnter()
     {
-        player.animator.Play("Idle");
+        player.PlayAnimation("Idle");
     }
 
     public void OnExit()

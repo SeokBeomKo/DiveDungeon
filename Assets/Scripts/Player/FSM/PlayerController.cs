@@ -29,8 +29,8 @@ public class PlayerController : MonoBehaviour
     
     [Header("대시 관련 값")]
     public bool isDash;
-    public float maxDashTime;
-    private float currentDashTime = 0;
+    public float dashTime;
+    // private float currentDashTime = 0;
 
     [Header("벽 슬라이드 관련 값")]
     public float wallSlidingSpeed;
@@ -51,11 +51,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         InitializeJumpCount();
-    }
 
-    public void InitializeJumpCount()
-    {
-        curJumpCount = maxJumpCount;
     }
 
     private void Update()
@@ -71,6 +67,8 @@ public class PlayerController : MonoBehaviour
             stateMachine.curState.FixedUpdate();
     }
 
+
+    // >>>
     public void SetInputDirection(int dir) // 1, 0, -1 방향 다 받아오는 함수
     {
         direction = dir;
@@ -114,25 +112,6 @@ public class PlayerController : MonoBehaviour
         SetMoveSpeed();
     }
 
-
-    /*public void FutureDash()
-    {
-        ghost.makeGhost = true;
-        currentDashTime += Time.deltaTime;
-        isDash = true;
-
-        Vector2 dir = isRight ? Vector2.right : Vector2.left;
-        rigid.velocity = new Vector2(dir.x * moveSpeed, 0f);
-        SetMoveSpeed();
-
-        if (currentDashTime > maxDashTime)
-        {
-            currentDashTime = 0;
-            isDash = false;
-            ghost.makeGhost = false;
-        }
-    }*/
-
     public void Jump()
     {
         if (curJumpCount <= 0) return;
@@ -140,6 +119,11 @@ public class PlayerController : MonoBehaviour
         curJumpCount--;
         rigid.velocity = new Vector2(rigid.velocity.x, 0);
         rigid.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+    }
+
+    public void InitializeJumpCount()
+    {
+        curJumpCount = maxJumpCount;
     }
 
     public int CheckGroundLayer()
@@ -207,4 +191,44 @@ public class PlayerController : MonoBehaviour
         isDownJump = true;
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Platform"), false);
     }
+
+
+    public void PlayAnimation(string name)
+    {
+        animator.Play(name);
+    }
 }
+
+
+
+
+
+// ==============
+/*public IEnumerator FutureDash()
+    {
+        isDash = true;
+        Vector2 dir = isRight ? Vector2.right : Vector2.left;
+        rigid.velocity = new Vector2(dir.x * moveSpeed, 0f);
+        SetMoveSpeed();
+
+        yield return new WaitForSeconds(dashTime);
+        isDash = false;
+    }*/
+
+/*public void FutureDash()
+{
+    ghost.makeGhost = true;
+    currentDashTime += Time.deltaTime;
+    isDash = true;
+
+    Vector2 dir = isRight ? Vector2.right : Vector2.left;
+    rigid.velocity = new Vector2(dir.x * moveSpeed, 0f);
+    SetMoveSpeed();
+
+    if (currentDashTime > maxDashTime)
+    {
+        currentDashTime = 0;
+        isDash = false;
+        ghost.makeGhost = false;
+    }
+}*/

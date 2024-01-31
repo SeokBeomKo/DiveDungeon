@@ -50,7 +50,7 @@ public class PlayerWallSlideState : IPlayerState
     {
         player.curJumpCount = 1; // 일단 이렇게 하고 나중에 수정하기 !!!!!
 
-        player.animator.Play("WallSlide");
+        player.PlayAnimation("WallSlide");
         grabDirection = player.direction;
         player.SetWallJump();
     }

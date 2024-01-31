@@ -5,53 +5,12 @@ using UnityEngine;
 public class PlayerFutureGirlType : PlayerType
 {
     // ========== 재정의 함수 ==========
-    public override void DodgeUpdate()
-    {
-        if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.7f)
-        {
-            if (player.CheckGround())
-            {
-                player.stateMachine.ChangeStateLogic(PlayerMovementEnums.IDLE);
-                return;
-            }
-            else
-            {
-                player.stateMachine.ChangeStateLogic(PlayerMovementEnums.FALL);
-                return;
-            }
-        }
-    }
-
-    public override void DodgeFixedUpdate()
-    {
-        player.Dash();
-    }
-
-    public override void DodgeOnEnter()
-    {
-        player.animator.Play("Dodge");
-
-        player.moveSpeed *= 5f;
-        player.maxSpeed *= 2f;
-
-        player.ghost.makeGhost = true;
-    }
-
-    public override void DodgeOnExit()
-    {
-        player.rigid.velocity = new Vector2(0, player.rigid.velocity.y);
-
-        player.moveSpeed /= 5f;
-        player.maxSpeed /= 2f;
-
-        player.ghost.makeGhost = false;
-    }
 
 
     // ========== 공격 ==========
     public override void AttackUpdate()
     {
-        player.animator.Play("Attack");
+        player.PlayAnimation("Attack");
         if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.99f) return;
         
         // 플레이어가 땅에 있는지 체크
@@ -80,7 +39,7 @@ public class PlayerFutureGirlType : PlayerType
 
     public override void AttackOnEnter()
     {
-        player.animator.Play("Attack");
+        player.PlayAnimation("Attack");
     }
 
     public override void AttackOnExit()

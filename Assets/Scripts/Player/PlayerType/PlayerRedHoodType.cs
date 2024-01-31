@@ -43,6 +43,45 @@ public class PlayerRedHoodType : PlayerType
         }
     }
 
+    // ========== 구르기 ==========
+    public override void DodgeUpdate()
+    {
+        // 초 세서 IDLE 상태로 바뀌게 수정하기  
+        if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.35f)
+        {
+            if (player.CheckGround())
+            {
+                player.stateMachine.ChangeStateLogic(PlayerMovementEnums.IDLE);
+                return;
+            }
+            else
+            {
+                player.stateMachine.ChangeStateLogic(PlayerMovementEnums.FALL);
+                return;
+            }
+        }
+    }
+
+    public override void DodgeFixedUpdate()
+    {
+        player.Dodge();
+    }
+
+    public override void DodgeOnEnter()
+    {
+        player.PlayAnimation("Dodge");
+
+        player.moveSpeed *= 5f;
+        player.maxSpeed *= 2f;
+    }
+
+    public override void DodgeOnExit()
+    {
+        player.rigid.velocity = new Vector2(0, player.rigid.velocity.y);
+
+        player.moveSpeed /= 5f;
+        player.maxSpeed /= 2f;
+    }
 
     // ========== 공격 ==========
     int curIndex;

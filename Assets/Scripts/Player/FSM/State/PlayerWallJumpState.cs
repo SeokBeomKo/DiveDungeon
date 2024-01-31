@@ -43,7 +43,7 @@ public class PlayerWallJumpState : IPlayerState
     public void OnEnter()
     {
         player.isWallJump = true;
-        player.animator.Play("Jump");
+        player.PlayAnimation("Jump");
         player.WallJump();
     }
 

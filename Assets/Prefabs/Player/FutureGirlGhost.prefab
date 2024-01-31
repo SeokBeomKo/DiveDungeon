@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 1095091717062316583}
   - component: {fileID: 8908201796283508028}
   - component: {fileID: 2139372114988766177}
+  - component: {fileID: -9022885870712209730}
   m_Layer: 0
-  m_Name: Ghost
+  m_Name: FutureGirlGhost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 8a8633955bf1d804a9a3b3d029939ab5, type: 3}
-  m_Color: {r: 0.49019608, g: 0.49019608, b: 0.49019608, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -106,3 +107,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-9022885870712209730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3873982885791138890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7f784efbea00d14191c4cec3c7d69f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 1, g: 1, b: 1, a: 0}

@@ -35,7 +35,7 @@ public class PlayerJumpState : IPlayerState
     public void OnEnter()
     {
         player.Jump();
-        player.animator.Play("Jump");
+        player.PlayAnimation("Jump");
     }
 
     public void OnExit()
