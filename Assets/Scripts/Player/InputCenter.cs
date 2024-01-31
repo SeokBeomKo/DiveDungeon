@@ -58,14 +58,11 @@ public class InputCenter : MonoBehaviour
            stateMachine.ChangeStateInput(PlayerMovementEnums.DOWNJUMP);
     }
 
-    void ChangeAttackState(bool value)
+    void ChangeAttackState()
     {
-        if (value)
-        {
-            stateMachine.ChangeStateInput(PlayerMovementEnums.ATTACK);
-            controller.isAttack = true;
-            return;
-        }
+        stateMachine.ChangeStateInput(PlayerMovementEnums.ATTACK);
+        controller.isAttack = true;
+        return;
         //controller.isAttack = false;
     }
 
