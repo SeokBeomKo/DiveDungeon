@@ -39,15 +39,15 @@ public class EnemyOmniRangeType : EnemyType
 
     public override void PreparationExit()
     {
-        target = null;
         controller.curPreparationTime = 0;
         predictionLine.enabled = false;
+        target = null;
     }
 
     public override void OnAttack()
     {
         GameObject inst = Instantiate(projectile);
         inst.transform.position = shootPosition.position;
-        inst.GetComponent<EnemyProjectile>().SettingValue(direction);
+        inst.GetComponent<EnemyProjectile>().SettingValue(direction.normalized);
     }
 }
