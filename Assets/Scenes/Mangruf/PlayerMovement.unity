@@ -2244,6 +2244,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1371295261}
+  - component: {fileID: 1371295262}
   m_Layer: 6
   m_Name: Direction
   m_TagString: Untagged
@@ -2258,7 +2259,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1371295260}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.036643296, w: 0.99932843}
   m_LocalPosition: {x: 0, y: 0.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2266,7 +2267,20 @@ Transform:
   - {fileID: 1536225954}
   m_Father: {fileID: 881260146}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 724.2}
+--- !u!114 &1371295262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1371295260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6e31dd5a5fcb314cb2ae6e7b266fff0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  joystick: {fileID: 1764516192}
 --- !u!1 &1411767918
 GameObject:
   m_ObjectHideFlags: 0
@@ -2609,6 +2623,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rect: {fileID: 1764516191}
   handle: {fileID: 1063201765}
+  radius: 0
 --- !u!114 &1764516193
 MonoBehaviour:
   m_ObjectHideFlags: 0

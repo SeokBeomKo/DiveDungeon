@@ -12,21 +12,27 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
     public RectTransform handle;
     
     private Vector2 touch = Vector2.zero;
-    private float widthHalf;
+    
+    public float radius;
+    private float angle;
 
     private void Start()
     {
-        widthHalf = rect.sizeDelta.x * 0.5f;
+        radius = rect.sizeDelta.x * 0.5f;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        touch = (eventData.position - rect.anchoredPosition) / widthHalf;
+        touch = (eventData.position - rect.anchoredPosition) / radius;
         if (touch.magnitude > 1) // magnitude : 벡터의 길이 반환
         {
             touch = touch.normalized;
         }
-        handle.anchoredPosition = touch * widthHalf;
+        handle.anchoredPosition = touch * radius;
+
+        angle = Mathf.Atan2(touch.y, touch.x) * Mathf.Rad2Deg;
+        if (angle < 0) angle += 360;
+        Debug.Log((int)angle);
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -37,5 +43,10 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPoint
     public void OnPointerUp(PointerEventData eventData)
     {
         handle.anchoredPosition = Vector2.zero;
+    }
+
+    public int GetAngle()
+    {
+        return (int)angle;
     }
 }
