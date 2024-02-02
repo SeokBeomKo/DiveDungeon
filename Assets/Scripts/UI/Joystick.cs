@@ -1,52 +1,76 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.EventSystems;  // 오브젝트의 터치와 관련
 
-public class Joystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
+public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
-    [Header("조이스틱 배경 RectTransform")]
-    public RectTransform rect;
+    [Header("배경 RectTransform")]
+    public RectTransform background;
 
-    [Header("핸들 RectTransform")]
-    public RectTransform handle;
+    [Header("조이스틱 RectTransform")]
+    public RectTransform joystick;
     
-    private Vector2 touch = Vector2.zero;
-    
-    public float radius;
-    private float angle;
+    public Vector2 touchPosition;
+    public float angle;
 
-    private void Start()
-    {
-        radius = rect.sizeDelta.x * 0.5f;
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        touch = (eventData.position - rect.anchoredPosition) / radius;
-        if (touch.magnitude > 1) // magnitude : 벡터의 길이 반환
-        {
-            touch = touch.normalized;
-        }
-        handle.anchoredPosition = touch * radius;
-
-        angle = Mathf.Atan2(touch.y, touch.x) * Mathf.Rad2Deg;
-        if (angle < 0) angle += 360;
-        Debug.Log((int)angle);
-    }
-
+    // 터치 시작 시 1회 호출
     public void OnPointerDown(PointerEventData eventData)
     {
         OnDrag(eventData);
     }
 
-    public void OnPointerUp(PointerEventData eventData)
+    // 터치 상태일 때 매 프레임 호출
+    public void OnDrag(PointerEventData eventData)
     {
-        handle.anchoredPosition = Vector2.zero;
+        touchPosition = Vector2.zero;
+
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle
+            (background, eventData.position, eventData.pressEventCamera, out touchPosition)) 
+        {
+            // touchPosition 을 이미지 크기로 나눔
+            touchPosition.x = touchPosition.x / background.sizeDelta.x ;
+            touchPosition.y = touchPosition.y / background.sizeDelta.y;
+
+            touchPosition = new Vector2(touchPosition.x * 2 - 1, touchPosition.y * 2 - 1);
+
+            // 각도 계산
+            angle = -Mathf.Atan2(touchPosition.x, touchPosition.y) * Mathf.Rad2Deg; // - 붙여주면 시계방향에서 반시계 방향으로 
+            if (angle < 0) angle += 360;
+
+            // magnitude : 벡터의 길이 반환
+            if (touchPosition.magnitude > 1)  
+            {
+                touchPosition = touchPosition.normalized;
+            }
+        }
+
+        // 가상 조이스틱 컨트롤러 
+        joystick.anchoredPosition =
+            new Vector2(touchPosition.x * background.sizeDelta.x / 2, touchPosition.y * background.sizeDelta.y / 2);
+
+        //Debug.Log(touchPosition);
     }
 
-    public int GetAngle()
+    // 터치 종료 시 1회 호출
+    public void OnPointerUp(PointerEventData eventData)
     {
-        return (int)angle;
+        joystick.anchoredPosition = Vector2.zero;
+        //touchPosition = Vector2.zero;
+    }
+
+    public float GetHorizontal()
+    {
+        return touchPosition.x;
+    }
+
+    public float GetVertical()
+    {
+        return touchPosition.y;
+    }
+
+    public float GetAngle()
+    {
+        return angle;
     }
 }

@@ -7,10 +7,8 @@ public abstract class PlayerType : MonoBehaviour
     public PlayerController player;
 
     // =========== 대시 (구르기) ============
-
     public virtual void DodgeUpdate()
     {
-        // 초 세서 IDLE 상태로 바뀌게 수정하기  
         if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.60f)
         {
             if (player.CheckGround())
