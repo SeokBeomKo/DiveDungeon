@@ -7,10 +7,9 @@ public abstract class PlayerType : MonoBehaviour
     public PlayerController player;
 
     // =========== 대시 (구르기) ============
-
     public virtual void DodgeUpdate()
     {
-        if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.35f)
+        if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.60f)
         {
             if (player.CheckGround())
             {
@@ -27,15 +26,17 @@ public abstract class PlayerType : MonoBehaviour
 
     public virtual void DodgeFixedUpdate()
     {
-        player.Dodge();
+        player.Dash();
     }
 
     public virtual void DodgeOnEnter()
     {
-        player.animator.Play("Dodge");
+        player.PlayAnimation("Dodge");
 
         player.moveSpeed *= 5f;
         player.maxSpeed *= 2f;
+
+        player.ghost.makeGhost = true;
     }
 
     public virtual void DodgeOnExit()
@@ -44,6 +45,8 @@ public abstract class PlayerType : MonoBehaviour
 
         player.moveSpeed /= 5f;
         player.maxSpeed /= 2f;
+
+        player.ghost.makeGhost = false;
     }
 
     // ============ 상승 ============
@@ -55,15 +58,18 @@ public abstract class PlayerType : MonoBehaviour
             return;
         }
     }
+
     public virtual void RiseFixedUpdate()
     {
         player.Move();
         player.SetFacingDirection();
     }
+
     public virtual void RiseOnEnter()
     {
-        player.animator.Play("Jump");
+        player.PlayAnimation("Jump");
     }
+
     public virtual void RiseOnExit()
     {
 
@@ -79,6 +85,7 @@ public abstract class PlayerType : MonoBehaviour
             return;
         }
     }
+
     public virtual void FallFixedUpdate()
     {
         player.Move();
@@ -87,7 +94,7 @@ public abstract class PlayerType : MonoBehaviour
 
     public virtual void FallOnEnter()
     {
-        player.animator.Play("Fall");
+        player.PlayAnimation("Fall");
     }
 
     public virtual void FallOnExit()

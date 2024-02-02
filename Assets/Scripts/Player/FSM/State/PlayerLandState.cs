@@ -40,7 +40,7 @@ public class PlayerLandState : IPlayerState
     public void OnEnter()
     {
         player.InitializeJumpCount();
-        player.animator.Play("Land");
+        player.PlayAnimation("Land");
     }
 
     public void OnExit()

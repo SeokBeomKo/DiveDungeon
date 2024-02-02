@@ -43,7 +43,7 @@ public class PlayerMoveState : IPlayerState
 
     public void OnEnter()
     {
-        player.animator.Play("Move");
+        player.PlayAnimation("Move");
     }
 
     public void OnExit()
