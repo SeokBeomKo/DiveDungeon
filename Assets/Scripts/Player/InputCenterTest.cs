@@ -2,18 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputCenter : MonoBehaviour
+public class InputCenterTest : MonoBehaviour
 {
-    public Joystick joystick;
-    public PlayerMovementStateMachine stateMachine;
     public PlayerController controller;
+    public PlayerMovementStateMachine stateMachine;
+    public InputHandler inputHandler;
 
     private void Start()
     {
-        joystick.OnPlayerIdle += ChangeIdleState;
-        joystick.OnPlayerMove += ChangeMoveState;
-        joystick.OnPlayerDownJump += ChangeDownJumpState;
-        joystick.OnPlayerCheckDir += CheckDirection;
+        inputHandler.OnPlayerIdle += ChangeIdleState;
+        inputHandler.OnPlayerMove += ChangeMoveState;
+        inputHandler.OnPlayerDodge += ChangeDodgeState;
+        inputHandler.OnPlayerJump += ChangeJumpState;
+        inputHandler.OnPlayerDownJump += ChangeDownJumpState;
+        inputHandler.OnPlayerAttack += ChangeAttackState;
+        inputHandler.OnPlayerSkill += ChangeSkillState;
+
+        inputHandler.OnPlayerCheckDir += CheckDirection;
     }
 
     void ChangeIdleState()
@@ -22,20 +27,19 @@ public class InputCenter : MonoBehaviour
     }
     void ChangeMoveState()
     {
-        Debug.Log("¿òÁ÷ÀÓ");
         stateMachine.ChangeStateInput(PlayerMovementEnums.MOVE);
     }
 
-    public void ChangeDodgeState()
+    void ChangeDodgeState()
     {
         stateMachine.ChangeStateInput(PlayerMovementEnums.DODGE);
     }
 
-    public void ChangeJumpState()
+    void ChangeJumpState()
     {
         if (controller.curJumpCount == 0) return;
 
-        if (stateMachine.curState is PlayerAttackState)
+        if(stateMachine.curState is PlayerAttackState)
         {
             controller.Jump();
             return;
@@ -50,11 +54,11 @@ public class InputCenter : MonoBehaviour
 
     void ChangeDownJumpState()
     {
-        if (controller.CheckGroundLayer() == LayerMask.NameToLayer("Platform"))
-            stateMachine.ChangeStateInput(PlayerMovementEnums.DOWNJUMP);
+        if(controller.CheckGroundLayer() == LayerMask.NameToLayer("Platform"))
+           stateMachine.ChangeStateInput(PlayerMovementEnums.DOWNJUMP);
     }
 
-    public void ChangeAttackState()
+    void ChangeAttackState()
     {
         stateMachine.ChangeStateInput(PlayerMovementEnums.ATTACK);
         controller.isAttack = true;
@@ -73,6 +77,6 @@ public class InputCenter : MonoBehaviour
 
     void CheckDirection(int dir)
     {
-        controller.SetInputDirection(dir);
+        controller.SetInputDirection(dir) ;
     }
 }

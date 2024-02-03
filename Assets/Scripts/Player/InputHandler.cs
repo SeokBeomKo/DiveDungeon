@@ -16,8 +16,10 @@ public class InputHandler : MonoBehaviour
     public delegate void InputIntHandler(int value);
     public event InputIntHandler OnPlayerCheckDir;
 
+
     private void Update()
     {
+
 #if UNITY_EDITOR
         // ¿Ãµø
         if (Input.GetAxisRaw("Horizontal") != 0)

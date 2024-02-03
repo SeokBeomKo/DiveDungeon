@@ -8,6 +8,6 @@ public class DashDirection : MonoBehaviour
 
     public void Update()
     {
-        transform.rotation = Quaternion.Euler(0, 0, joystick.GetAngle());
+        transform.rotation = Quaternion.Euler(0, 0, joystick.GetDashAngle());
     }
 }

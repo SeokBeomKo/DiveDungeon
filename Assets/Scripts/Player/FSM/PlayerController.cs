@@ -9,9 +9,7 @@ public class PlayerController : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public PlayerMovementStateMachine stateMachine;
     public PlayerType type;
-
     public GhostEffect ghost;
-
 
     [Header("이동 관련 값")]
     public float maxSpeed;
@@ -30,7 +28,7 @@ public class PlayerController : MonoBehaviour
     [Header("대시 관련 값")]
     public bool isDash;
     public float dashTime;
-    // private float currentDashTime = 0;
+    public Vector2 dashDirection;
 
     [Header("벽 슬라이드 관련 값")]
     public float wallSlidingSpeed;
@@ -92,6 +90,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void SetDashDirection(Vector2 direction)
+    {
+        dashDirection = direction;
+    }
+
     public void Move()
     {
         rigid.AddForce(Vector2.right * direction * moveSpeed, ForceMode2D.Impulse);
@@ -111,6 +114,8 @@ public class PlayerController : MonoBehaviour
         rigid.velocity = new Vector2(dir.x * moveSpeed, 0f);
         SetMoveSpeed();
     }
+
+
 
     public void Jump()
     {
