@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     [Header("대시 관련 값")]
     public bool isDash;
     public float dashTime;
-    public Vector2 dashDirection;
+    public Vector2 dashDirection = new Vector2(0, 1);
 
     [Header("벽 슬라이드 관련 값")]
     public float wallSlidingSpeed;

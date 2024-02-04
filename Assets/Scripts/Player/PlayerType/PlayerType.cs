@@ -9,7 +9,7 @@ public abstract class PlayerType : MonoBehaviour
     // =========== 대시 (구르기) ============
     public virtual void DodgeUpdate()
     {
-        if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.60f)
+        if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.40f)
         {
             if (player.CheckGround())
             {
