@@ -14,15 +14,16 @@ public class InputCenter : MonoBehaviour
         joystick.OnPlayerMove += ChangeMoveState;
         joystick.OnPlayerDownJump += ChangeDownJumpState;
         joystick.OnPlayerCheckDir += CheckDirection;
+        joystick.OnPlayerCheckDashDir += CheckDashDirection;
     }
 
     void ChangeIdleState()
     {
         stateMachine.ChangeStateInput(PlayerMovementEnums.IDLE);
     }
+
     void ChangeMoveState()
     {
-        Debug.Log("¿òÁ÷ÀÓ");
         stateMachine.ChangeStateInput(PlayerMovementEnums.MOVE);
     }
 
@@ -59,7 +60,6 @@ public class InputCenter : MonoBehaviour
         stateMachine.ChangeStateInput(PlayerMovementEnums.ATTACK);
         controller.isAttack = true;
         return;
-        //controller.isAttack = false;
     }
 
     void ChangeSkillState()
@@ -74,5 +74,10 @@ public class InputCenter : MonoBehaviour
     void CheckDirection(int dir)
     {
         controller.SetInputDirection(dir);
+    }
+
+    void CheckDashDirection(Vector2 dir)
+    {
+        controller.SetDashDirection(dir);
     }
 }

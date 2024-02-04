@@ -5,7 +5,10 @@ using UnityEngine;
 public class PlayerFutureGirlType : PlayerType
 {
     // ========== 재정의 함수 ==========
-
+    public override void DodgeFixedUpdate()
+    {
+        player.eightWayDash();
+    }
 
     // ========== 공격 ==========
     public override void AttackUpdate()

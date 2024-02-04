@@ -17,7 +17,6 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     public float angle;
 
     private float dragThreshold = 0.7f;
-    private bool isDrag = false;
 
     // >>>>
     public delegate void InputHandler();
@@ -27,6 +26,9 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     public delegate void InputIntHandler(int value);
     public event InputIntHandler OnPlayerCheckDir;
+
+    public delegate void InputVectorHandler(Vector2 vector);
+    public event InputVectorHandler OnPlayerCheckDashDir;
     // <<<<
 
 
@@ -61,11 +63,15 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
             if (angle < 0) angle += 360;
         }
 
+        // 대시 좌표
+        float x = Mathf.Cos(Mathf.Atan2(touchPosition.y, touchPosition.x));
+        float y = Mathf.Sin(Mathf.Atan2(touchPosition.y, touchPosition.x));
+        dashDirection = new Vector2(x, y);
+        OnPlayerCheckDashDir?.Invoke(dashDirection);
+
         // 가상 조이스틱 컨트롤러 
         joystick.anchoredPosition =
             new Vector2(touchPosition.x * background.sizeDelta.x / 2 * dragThreshold, touchPosition.y * background.sizeDelta.y / 2 * dragThreshold);
-
-        dashDirection = touchPosition;
 
         int inputDirection = MovementDirection(touchPosition);
         OnPlayerCheckDir?.Invoke(inputDirection);
@@ -96,11 +102,10 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         else if (touchPos.x < -0.1)
             return -1;
 
-
         return 0;
     }
 
-    public Vector2 GetDashCoordinates()
+    public Vector2 GetDashDirection()
     {
         return dashDirection;
     }

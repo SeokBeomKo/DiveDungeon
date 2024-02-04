@@ -90,9 +90,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void SetDashSpeed()
+    {
+        if(Mathf.Abs(rigid.velocity.x) > maxSpeed || Mathf.Abs(rigid.velocity.y) > maxSpeed)
+        {
+            rigid.velocity = new Vector2(dashDirection.x * maxSpeed, dashDirection.y * maxSpeed);
+        }
+    }
+
     public void SetDashDirection(Vector2 direction)
     {
         dashDirection = direction;
+        dashDirection.Normalize();
     }
 
     public void Move()
@@ -115,7 +124,11 @@ public class PlayerController : MonoBehaviour
         SetMoveSpeed();
     }
 
-
+    public void eightWayDash()
+    {
+        rigid.velocity = dashDirection * moveSpeed;
+        SetDashSpeed();
+    }
 
     public void Jump()
     {
