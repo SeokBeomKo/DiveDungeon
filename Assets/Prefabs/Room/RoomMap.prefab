@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3966489630430132210}
   - component: {fileID: 3966489630430132209}
-  - component: {fileID: 3681131444644502017}
+  - component: {fileID: 4547202159719860764}
   m_Layer: 0
   m_Name: RoomMap
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3681131444644502017
+--- !u!114 &4547202159719860764
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,30 +94,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 3966489630430132223}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bed51bfa3408390419d8640040777f5d, type: 3}
+  m_Script: {fileID: 11500000, guid: 2daf8c1898c76442f81dbd2ec176fbca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spU: {fileID: 21300000, guid: 38112ee8475e01b428f631e8147b8f7b, type: 3}
-  spD: {fileID: 21300000, guid: c6c6c8ddacd4fe44a9311d13f3c680e2, type: 3}
-  spR: {fileID: 21300000, guid: 3752718be962fbe4297885505d308ead, type: 3}
-  spL: {fileID: 21300000, guid: d67ad11ac434e4640814694c4aeb8aac, type: 3}
-  spUD: {fileID: 21300000, guid: 61281fa0b77082d42afe80887b2bf36c, type: 3}
-  spRL: {fileID: 21300000, guid: 5e4b3b4ff81011c4eb9135e5d5e0f988, type: 3}
-  spUR: {fileID: 21300000, guid: c27900f9669d424409bac8525aadf030, type: 3}
-  spUL: {fileID: 21300000, guid: 2ea40dfccb5a0d94db8b83cd54cd6280, type: 3}
-  spDR: {fileID: 21300000, guid: 4d264f64d99d0ee49b162af86b724223, type: 3}
-  spDL: {fileID: 21300000, guid: c2aab3a4dfe1b1a419abef82ed3e1c00, type: 3}
-  spULD: {fileID: 21300000, guid: dbea7027607035f44a91eca6f32e0ef1, type: 3}
-  spRUL: {fileID: 21300000, guid: e8cf6a293f4c9a34abdb93577edb07a0, type: 3}
-  spDRU: {fileID: 21300000, guid: db8ab2d5f85f0704687d1196faeabc4f, type: 3}
-  spLDR: {fileID: 21300000, guid: 9392f9588eca3144f94a3fd6bf39a7bf, type: 3}
-  spUDRL: {fileID: 21300000, guid: d43504d0f223972449ef06ca69ac065d, type: 3}
+  spU: {fileID: 21300000, guid: bd605aa0cde29e04cae0d394bcc40a16, type: 3}
+  spD: {fileID: 21300000, guid: 609e6b040696bfc409fb90c9404906ba, type: 3}
+  spR: {fileID: 21300000, guid: a76b0549e05a71d429ab2f8547e58f74, type: 3}
+  spL: {fileID: 21300000, guid: 0e664f8e7a480024182770de58fedbcc, type: 3}
+  spUD: {fileID: 21300000, guid: 3229e5168dcf6054fbd4629dfde3861c, type: 3}
+  spRL: {fileID: 21300000, guid: 2c6db53dc9e509f438f27f60974deeb4, type: 3}
+  spUR: {fileID: 21300000, guid: c168d8e5e7c1e764c8b25d6c0dc6701a, type: 3}
+  spUL: {fileID: 21300000, guid: 84b6a7f0829799646a1fb7c66ea77d25, type: 3}
+  spDR: {fileID: 21300000, guid: 5959ba9dbb86e36478d42524d1622e97, type: 3}
+  spDL: {fileID: 21300000, guid: 212a3caf298eeda4e8aa229d0df5662a, type: 3}
+  spULD: {fileID: 21300000, guid: e577ec32abe895e4396f5af82c3281d3, type: 3}
+  spRUL: {fileID: 21300000, guid: 22fb0b71bbf084e40bf64a06a4430dfd, type: 3}
+  spDRU: {fileID: 21300000, guid: f426482a02546f040ad384b71ae00ec0, type: 3}
+  spLDR: {fileID: 21300000, guid: 0fe38dbc8db1c4e41ae4eeb4deb24fbf, type: 3}
+  spUDRL: {fileID: 21300000, guid: bf052605fca15c64f8ede61aa3cefd44, type: 3}
   up: 0
   down: 0
   left: 0
   right: 0
   type: 0
-  enterColor: {r: 0, g: 1, b: 0, a: 0.7058824}
-  roomColor: {r: 1, g: 1, b: 1, a: 0.7058824}
-  shopColor: {r: 1, g: 1, b: 0, a: 0.7058824}
-  exitColor: {r: 1, g: 0, b: 0, a: 0.7058824}
+  enterColor: {r: 0, g: 1, b: 0, a: 0.39215687}
+  roomColor: {r: 1, g: 1, b: 1, a: 0.39215687}
+  shopColor: {r: 1, g: 1, b: 0, a: 0.39215687}
+  exitColor: {r: 1, g: 0, b: 0, a: 0.39215687}

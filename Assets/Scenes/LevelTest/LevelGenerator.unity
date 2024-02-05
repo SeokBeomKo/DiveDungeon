@@ -164,12 +164,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 467913826}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b0d5d21d1e941d46a2ba993072ce863, type: 3}
+  m_Script: {fileID: 11500000, guid: 0267105b298c24fcfa2e7adf26542d4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldSize: {x: 4, y: 4}
-  roomWhiteObj: {fileID: 3966489630430132223, guid: 4d70f7a6aae3b764a9f722ee8eab5f56, type: 3}
-  mapRoot: {fileID: 1988418787}
 --- !u!1 &874209181
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,9 +208,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 874209181}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20c1ba813d900b0419a532d710c4ebe8, type: 3}
+  m_Script: {fileID: 11500000, guid: e430bf3a63b9a41d2b1ee4806c51e269, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldSize: {x: 10, y: 10}
+  roomWhiteObj: {fileID: 3966489630430132223, guid: cde36b9d79b414d9fa59b41c127e9a19, type: 3}
+  mapRoot: {fileID: 1988418787}
 --- !u!1 &1316741757
 GameObject:
   m_ObjectHideFlags: 0
