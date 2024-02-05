@@ -22,7 +22,7 @@ public class InputHandler : MonoBehaviour
 
 #if UNITY_EDITOR
         // ¿Ãµø
-        /*if (Input.GetAxisRaw("Horizontal") != 0)
+       /* if (Input.GetAxisRaw("Horizontal") != 0)
         {
             OnPlayerMove?.Invoke();
         }

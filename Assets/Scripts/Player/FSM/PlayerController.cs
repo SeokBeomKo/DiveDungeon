@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     [Header("대시 관련 값")]
     public bool isDash;
     public float dashTime;
-    public Vector2 dashDirection = new Vector2(0, 1);
+    public Vector2 dashDirection;
 
     [Header("벽 슬라이드 관련 값")]
     public float wallSlidingSpeed;
@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         InitializeJumpCount();
-
+        dashDirection = new Vector2(0, 1);
     }
 
     private void Update()
@@ -155,22 +155,21 @@ public class PlayerController : MonoBehaviour
 
     public bool CheckGround()
     {
-        //Debug.DrawRay(rigid.position, Vector3.down, new Color(0, 0.1f, 0));
-
         int layerMask = LayerMask.GetMask("Platform", "Ground");
-        RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector2.down, 0.1f, layerMask); 
-       
-        if (rayHit.collider != null)
-        {
-             return true;
-        }
-        return false;
+        RaycastHit2D rayHit = Physics2D.BoxCast(rigid.position, new Vector2(0.5f, 0.1f), 0f, Vector2.down, 0.1f, layerMask);
+
+        return rayHit.collider != null;
     }
 
     public bool CheckWall()
     {
         RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.right * direction, 0.3f, LayerMask.GetMask("Wall"));
-        return rayHit.collider != null;
+        
+        if (rayHit.collider != null)
+        {
+             return true;
+        }
+        return false;
     }
 
     public void WallSlide()

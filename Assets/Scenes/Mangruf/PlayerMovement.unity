@@ -243,7 +243,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 232127203}
-  - component: {fileID: 232127204}
   m_Layer: 6
   m_Name: hitCollider
   m_TagString: Untagged
@@ -266,32 +265,6 @@ Transform:
   m_Father: {fileID: 881260146}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &232127204
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 232127202}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.28125}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 0.46875, y: 0.5625}
-    newSize: {x: 0.46875, y: 0.5625}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.46875, y: 0.5625}
-  m_EdgeRadius: 0
 --- !u!1 &269691769
 GameObject:
   m_ObjectHideFlags: 0
@@ -662,7 +635,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.46933982}
+  m_Offset: {x: 0, y: 0.35069317}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -673,7 +646,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.061320364}
+  m_Size: {x: 1, y: 0.29861364}
   m_EdgeRadius: 0
 --- !u!212 &408748786
 SpriteRenderer:
@@ -1239,13 +1212,13 @@ GameObject:
   - component: {fileID: 881260146}
   - component: {fileID: 881260145}
   - component: {fileID: 881260144}
-  - component: {fileID: 881260143}
   - component: {fileID: 881260142}
   - component: {fileID: 881260141}
   - component: {fileID: 881260140}
   - component: {fileID: 881260147}
   - component: {fileID: 881260139}
   - component: {fileID: 881260138}
+  - component: {fileID: 881260148}
   m_Layer: 6
   m_Name: Player_FutureGirl
   m_TagString: Untagged
@@ -1326,7 +1299,7 @@ MonoBehaviour:
   ghost: {fileID: 881260147}
   maxSpeed: 5
   moveSpeed: 10
-  direction: 1
+  direction: 0
   isRight: 0
   jumpForce: 15
   curJumpCount: 0
@@ -1355,32 +1328,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 881260141}
---- !u!61 &881260143
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 881260137}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 1
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.28125}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 0.46875, y: 0.75}
-    newSize: {x: 0.46875, y: 0.75}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.46875, y: 0.5625}
-  m_EdgeRadius: 0
 --- !u!50 &881260144
 Rigidbody2D:
   serializedVersion: 4
@@ -1487,6 +1434,22 @@ MonoBehaviour:
   ghostDelay: 0.03
   ghost: {fileID: 3873982885791138890, guid: 96c1f44bbdac6314da917bea2ce5aa82, type: 3}
   makeGhost: 0
+--- !u!70 &881260148
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881260137}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.31425}
+  m_Size: {x: 0.46875, y: 0.6285}
+  m_Direction: 0
 --- !u!1 &889471126
 GameObject:
   m_ObjectHideFlags: 0

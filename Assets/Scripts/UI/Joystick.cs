@@ -80,6 +80,11 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
         if (inputDirection == 0)
         {
+            if (touchPosition.y < -0.3)
+            {
+                OnPlayerDownJump?.Invoke();
+            }
+
             OnPlayerIdle?.Invoke();
             return;
         }

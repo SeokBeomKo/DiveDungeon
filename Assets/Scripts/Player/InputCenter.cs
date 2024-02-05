@@ -52,7 +52,10 @@ public class InputCenter : MonoBehaviour
     void ChangeDownJumpState()
     {
         if (controller.CheckGroundLayer() == LayerMask.NameToLayer("Platform"))
+        {
             stateMachine.ChangeStateInput(PlayerMovementEnums.DOWNJUMP);
+            return;
+        }
     }
 
     public void ChangeAttackState()
