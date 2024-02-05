@@ -83,6 +83,7 @@ public class PlayerRedHoodType : PlayerType
         player.maxSpeed /= 2f;
     }
 
+
     // ========== АјАн ==========
     int curIndex;
 
