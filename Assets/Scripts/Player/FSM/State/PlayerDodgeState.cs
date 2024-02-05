@@ -25,16 +25,19 @@ public class PlayerDodgeState : IPlayerState
     };
     public void Update()
     {
+        Debug.Log("Update");
         player.type.DodgeUpdate();
     }
 
     public void FixedUpdate()
     {
+        Debug.Log("FUpdate");
         player.type.DodgeFixedUpdate();
     }
 
     public void OnEnter()
     {
+        Debug.Log("Enter");
         player.type.DodgeOnEnter();
     }
 

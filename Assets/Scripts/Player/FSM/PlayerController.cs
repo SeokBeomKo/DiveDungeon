@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(stateMachine.curState);
+        // Debug.Log(stateMachine.curState);
         if (stateMachine.curState != null)
             stateMachine.curState.Update();
     }

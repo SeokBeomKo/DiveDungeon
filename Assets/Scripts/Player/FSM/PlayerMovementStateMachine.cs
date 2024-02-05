@@ -59,8 +59,8 @@ public class PlayerMovementStateMachine : MonoBehaviour
 
         if(stateDictionary.TryGetValue(newStateType, out IPlayerState newState))
         {
+            newState.OnEnter();
             curState = newState;
-            curState.OnEnter();
         }
     }
 

@@ -22,7 +22,7 @@ public class InputHandler : MonoBehaviour
 
 #if UNITY_EDITOR
         // 이동
-        if (Input.GetAxisRaw("Horizontal") != 0)
+        /*if (Input.GetAxisRaw("Horizontal") != 0)
         {
             OnPlayerMove?.Invoke();
         }
@@ -32,11 +32,12 @@ public class InputHandler : MonoBehaviour
             OnPlayerIdle?.Invoke();
         }
 
-        OnPlayerCheckDir?.Invoke((int)Input.GetAxisRaw("Horizontal"));
+        OnPlayerCheckDir?.Invoke((int)Input.GetAxisRaw("Horizontal"));*/
 
         // 대시
         if (Input.GetButtonDown("Fire3"))
         {
+            Debug.Log("인풋핸들러");
             OnPlayerDodge?.Invoke();
         }
 
@@ -64,6 +65,7 @@ public class InputHandler : MonoBehaviour
         }
 #endif
     }
+
 }
     
 
