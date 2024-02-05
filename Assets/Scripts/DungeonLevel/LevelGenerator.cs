@@ -6,9 +6,8 @@ public class LevelGenerator : MonoBehaviour
 {
     [SerializeField] public Vector2 worldSize; // : 월드의 크기 값 ( 중앙 기준점을 중심으로 반경 )
     Room[,] rooms;      // : 2 차원 배열 방의 집합 ( 실제 방이 존재하는 그리드 값 )
-    List<Vector2> takenPositions = new List<Vector2>(); // : 이미 존재하는 방의 위치를 저장하는 리스트
+    public List<Vector2> takenPositions = new List<Vector2>(); // : 이미 존재하는 방의 위치를 저장하는 리스트
     int gridSizeX, gridSizeY, numberOfRooms = 15; // : 그리드 크기와 방의 개수를 정의
-    bool createdShop = false, createdExit = false;
 
     public GameObject roomWhiteObj; // : 방의 프리팹 오브젝트
     public Transform mapRoot; // : 맵의 루트 Transform
@@ -185,21 +184,22 @@ public class LevelGenerator : MonoBehaviour
     	        Room room = rooms[x, y];
     	        if (room != null) 
                 {
-    	            // : 위쪽 방향의 문을 설정합니다. 
+                    // : 위쪽 방향의 문을 설정합니다. 
                     // : 현재 위치가 맵의 상단 경계를 넘지 않고, 위쪽에 방이 있는 경우에만 문을 만듭니다.
-                    room.doorBot = y - 1 >= 0 && rooms[x, y - 1] != null;
-
+                    if (y + 1 < maxY && rooms[x, y + 1] != null)
+                        room.direction = room.direction | Directions.UP;
                     // : 아래쪽 방향의 문을 설정합니다. 
                     // : 현재 위치가 맵의 하단 경계를 넘지 않고, 아래쪽에 방이 있는 경우에만 문을 만듭니다.
-                    room.doorTop = y + 1 < maxY && rooms[x, y + 1] != null;
-
+                    if (y - 1 >= 0 && rooms[x, y - 1] != null)
+                        room.direction = room.direction | Directions.DOWN;
                     // : 왼쪽 방향의 문을 설정합니다.
                     // : 현재 위치가 맵의 왼쪽 경계를 넘지 않고, 왼쪽에 방이 있는 경우에만 문을 만듭니다.
-                    room.doorLeft = x - 1 >= 0 && rooms[x - 1, y] != null;
-
+                    if (x - 1 >= 0 && rooms[x - 1, y] != null)
+                        room.direction = room.direction | Directions.LEFT;
                     // : 오른쪽 방향의 문을 설정합니다.
                     // : 현재 위치가 맵의 오른쪽 경계를 넘지 않고, 오른쪽에 방이 있는 경우에만 문을 만듭니다.
-                    room.doorRight = x + 1 < maxX && rooms[x + 1, y] != null;
+                    if(x + 1 < maxX && rooms[x + 1, y] != null)
+                        room.direction = room.direction | Directions.RIGHT;
     	        }
     	    }
     	}
@@ -221,11 +221,8 @@ public class LevelGenerator : MonoBehaviour
             drawPos.y *= 8;  
 
             MapSpriteSelector mapper = Object.Instantiate(roomWhiteObj, drawPos, Quaternion.identity).GetComponent<MapSpriteSelector>();
-            mapper.type = room.type;       
-            mapper.up = room.doorTop;      
-            mapper.down = room.doorBot;    
-            mapper.right = room.doorRight; 
-            mapper.left = room.doorLeft;   
+            mapper.type = room.type;   
+            mapper.direction = room.direction;      
 
             mapper.gameObject.transform.parent = mapRoot;
         }   
