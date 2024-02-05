@@ -146,6 +146,7 @@ public class PlayerRedHoodType : PlayerType
         if (curIndex > 3) curIndex = 1;
     }
 
+
     // ========== 특수 스킬 ==========
     public override void SkillUpdate()
     {

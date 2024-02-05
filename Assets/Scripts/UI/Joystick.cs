@@ -21,15 +21,15 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     // >>>>
     public delegate void InputHandler();
-    public event InputHandler OnPlayerIdle;
-    public event InputHandler OnPlayerMove;
-    public event InputHandler OnPlayerDownJump;
+    public event InputHandler OnIdle;
+    public event InputHandler OnMove;
+    public event InputHandler OnDownJump;
 
     public delegate void InputIntHandler(int value);
-    public event InputIntHandler OnPlayerCheckDir;
+    public event InputIntHandler OnCheckDirection;
 
     public delegate void InputVectorHandler(Vector2 vector);
-    public event InputVectorHandler OnPlayerCheckDashDir;
+    public event InputVectorHandler OnCheckDashDirection;
     // <<<<
 
 
@@ -72,24 +72,24 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         float x = Mathf.Cos(Mathf.Atan2(touchPosition.y, touchPosition.x));
         float y = Mathf.Sin(Mathf.Atan2(touchPosition.y, touchPosition.x));
         dashDirection = new Vector2(x, y);
-        OnPlayerCheckDashDir?.Invoke(dashDirection);
+        OnCheckDashDirection?.Invoke(dashDirection);
 
         // 이동 방향
         int inputDirection = MovementDirection(touchPosition);
-        OnPlayerCheckDir?.Invoke(inputDirection);
+        OnCheckDirection?.Invoke(inputDirection);
 
         if (inputDirection == 0)
         {
             if (touchPosition.y < -0.3)
             {
-                OnPlayerDownJump?.Invoke();
+                OnDownJump?.Invoke();
             }
 
-            OnPlayerIdle?.Invoke();
+            OnIdle?.Invoke();
             return;
         }
 
-        OnPlayerMove?.Invoke();
+        OnMove?.Invoke();
     }
 
     // 터치 종료 시 1회 호출
@@ -98,8 +98,8 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         joystick.anchoredPosition = Vector2.zero;
         touchPosition = Vector2.zero;
 
-        OnPlayerCheckDir?.Invoke(0);
-        OnPlayerIdle?.Invoke();
+        OnCheckDirection?.Invoke(0);
+        OnIdle?.Invoke();
     }
 
     public int MovementDirection(Vector2 touchPos)

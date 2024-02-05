@@ -5,16 +5,19 @@ using UnityEngine;
 public class InputCenter : MonoBehaviour
 {
     public Joystick joystick;
+    public InputButton button;
     public PlayerMovementStateMachine stateMachine;
     public PlayerController controller;
 
     private void Start()
     {
-        joystick.OnPlayerIdle += ChangeIdleState;
-        joystick.OnPlayerMove += ChangeMoveState;
-        joystick.OnPlayerDownJump += ChangeDownJumpState;
-        joystick.OnPlayerCheckDir += CheckDirection;
-        joystick.OnPlayerCheckDashDir += CheckDashDirection;
+        joystick.OnIdle += ChangeIdleState;
+        joystick.OnMove += ChangeMoveState;
+        joystick.OnDownJump += ChangeDownJumpState;
+        joystick.OnCheckDirection += CheckDirection;
+        joystick.OnCheckDashDirection += CheckDashDirection;
+
+        button.OnDash += ChangeDodgeState;
     }
 
     void ChangeIdleState()
