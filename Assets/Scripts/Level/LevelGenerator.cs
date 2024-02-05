@@ -7,7 +7,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] public Vector2 worldSize; // : 월드의 크기 값 ( 중앙 기준점을 중심으로 반경 )
     Room[,] rooms;      // : 2 차원 배열 방의 집합 ( 실제 방이 존재하는 그리드 값 )
     List<Vector2> takenPositions = new List<Vector2>(); // : 이미 존재하는 방의 위치를 저장하는 리스트
-    int gridSizeX, gridSizeY, numberOfRooms = 20; // : 그리드 크기와 방의 개수를 정의
+    int gridSizeX, gridSizeY, numberOfRooms = 15; // : 그리드 크기와 방의 개수를 정의
     bool createdShop = false, createdExit = false;
 
     public GameObject roomWhiteObj; // : 방의 프리팹 오브젝트
@@ -73,13 +73,17 @@ public class LevelGenerator : MonoBehaviour
     int shopindex, exitindex;
     void SettingType()
     {
-        shopindex = Mathf.RoundToInt(Random.value * (takenPositions.Count - 1));
+        do 
+        {
+            shopindex = Mathf.RoundToInt(Random.value * (takenPositions.Count - 1));
+        } while (rooms[(int) takenPositions[shopindex].x + gridSizeX, (int) takenPositions[shopindex].y + gridSizeY].type != RoomType.ROOM);
+        
         rooms[(int) takenPositions[shopindex].x + gridSizeX, (int) takenPositions[shopindex].y + gridSizeY].type = RoomType.SHOP;
 
         do 
         {
             exitindex = Mathf.RoundToInt(Random.value * (takenPositions.Count - 1));
-        } while (shopindex == exitindex);
+        } while (rooms[(int) takenPositions[exitindex].x + gridSizeX, (int) takenPositions[exitindex].y + gridSizeY].type != RoomType.ROOM);
         rooms[(int) takenPositions[exitindex].x + gridSizeX, (int) takenPositions[exitindex].y + gridSizeY].type = RoomType.EXIT;
     }
 
