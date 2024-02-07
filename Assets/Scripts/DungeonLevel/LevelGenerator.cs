@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
 {
-    [SerializeField] public Vector2 worldSize; // : 월드의 크기 값 ( 중앙 기준점을 중심으로 반경 )
-    Room[,] rooms;      // : 2 차원 배열 방의 집합 ( 실제 방이 존재하는 그리드 값 )
+    public delegate void GeneratedLevel(Room[,] rooms, List<Vector2> pos);
+    public event GeneratedLevel OnGenerateLevel;
+
+    public Dungeon dungeon;
+
+    [HideInInspector] public Vector2 worldSize; // : 월드의 크기 값 ( 중앙 기준점을 중심으로 반경 )
+    [HideInInspector] public int numberOfRooms; // : 그리드 크기와 방의 개수를 정의
+
     public List<Vector2> takenPositions = new List<Vector2>(); // : 이미 존재하는 방의 위치를 저장하는 리스트
-    int gridSizeX, gridSizeY, numberOfRooms = 15; // : 그리드 크기와 방의 개수를 정의
+    Room[,] rooms;      // : 2 차원 배열 방의 집합 ( 실제 방이 존재하는 그리드 값 )
+    int gridSizeX, gridSizeY;
 
     public GameObject roomWhiteObj; // : 방의 프리팹 오브젝트
     public Transform mapRoot; // : 맵의 루트 Transform
@@ -22,11 +29,10 @@ public class LevelGenerator : MonoBehaviour
         gridSizeY = Mathf.RoundToInt(worldSize.y); // 그리드의 세로 크기
         CreateRooms(); // 방 생성 함수 호출
         SetRoomDoors(); // 방의 문 설정 함수 호출
+        OnGenerateLevel?.Invoke(rooms, takenPositions);
         DrawMap(); // 맵 그리는 함수 호출
         // GetComponent<SheetAssigner>().Assign(rooms); // 방의 정보를 다른 스크립트로 전달하는 함수 호출
     }
-
-    RoomType settinfType;
 
     void CreateRooms()
     {

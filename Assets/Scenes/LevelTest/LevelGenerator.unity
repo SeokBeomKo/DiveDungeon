@@ -197,6 +197,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee8fdc788431aff418ce53ae202e3387, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelGenerator: {fileID: 874209184}
+  roomGenerator: {fileID: 48876579}
+  numberOfRooms: 15
+  worldSize: {x: 10, y: 10}
 --- !u!4 &414404826
 Transform:
   m_ObjectHideFlags: 0
@@ -332,7 +336,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e430bf3a63b9a41d2b1ee4806c51e269, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dungeon: {fileID: 0}
   worldSize: {x: 10, y: 10}
+  numberOfRooms: 15
   takenPositions: []
   roomWhiteObj: {fileID: 3966489630430132223, guid: cde36b9d79b414d9fa59b41c127e9a19, type: 3}
   mapRoot: {fileID: 1988418787}
