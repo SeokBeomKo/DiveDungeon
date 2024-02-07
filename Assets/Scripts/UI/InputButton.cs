@@ -6,22 +6,33 @@ public class InputButton : MonoBehaviour
 {
     public delegate void ButtonHandler();
     public event ButtonHandler OnDash;
+    public event ButtonHandler OnAttack;
+    public event ButtonHandler OffAttack;
+    public event ButtonHandler OnJump;
+    public event ButtonHandler OnSkill;
 
-    public delegate void PlayerInputHandler();
-    public event PlayerInputHandler OnPlayerDodge;
-
-    private void Update()
-    {
-#if UNITY_EDITOR
-        if (Input.GetButtonDown("Fire3"))
-        {
-            Debug.Log("ÀÎÇ²¹öÆ°");
-            OnPlayerDodge?.Invoke();
-        }
-#endif
-    }
     public void DashClick()
     {
         OnDash?.Invoke();
+    }
+
+    public void AttackPress()
+    {
+        OnAttack?.Invoke();
+    }
+
+    public void AttackRelease()
+    {
+        OffAttack?.Invoke();
+    }
+
+    public void Jumpclick()
+    {
+        OnJump?.Invoke();
+    }
+
+    public void SkillClick()
+    {
+        OnSkill?.Invoke();
     }
 }

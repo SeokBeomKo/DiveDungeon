@@ -106,10 +106,47 @@ public abstract class PlayerType : MonoBehaviour
 
 
     // ============ 공격 ============
-    public abstract void AttackUpdate();
-    public abstract void AttackFixedUpdate();
-    public abstract void AttackOnEnter();
-    public abstract void AttackOnExit();
+    public virtual void AttackUpdate()
+    {
+        if (player.CheckGround())
+            player.InitializeJumpCount();
+
+        if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.98f) return;
+        if (player.isAttack) return;
+
+        // 플레이어가 땅에 있는지 체크
+        if (player.CheckGround())
+        {
+            player.stateMachine.ChangeStateLogic(PlayerMovementEnums.IDLE);
+            // player.InitializeJumpCount();
+            return;
+        }
+
+        // 떨어지는 상태
+        if (player.rigid.velocity.y < 0)
+        {
+            player.stateMachine.ChangeStateLogic(PlayerMovementEnums.FALL);
+            return;
+        }
+        // 점프하는 상태
+        player.stateMachine.ChangeStateLogic(PlayerMovementEnums.RISE);
+        
+    }
+
+    public virtual void AttackFixedUpdate()
+    {
+        player.SetFacingDirection();
+    }
+
+    public virtual void AttackOnEnter()
+    {
+        player.PlayAnimation("Attack");
+    }
+
+    public virtual void AttackOnExit()
+    {
+
+    }
 
     // ============ 특수 스킬 ============
     public abstract void SkillUpdate();

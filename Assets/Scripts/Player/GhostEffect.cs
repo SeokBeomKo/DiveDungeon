@@ -6,6 +6,7 @@ public class GhostEffect : MonoBehaviour
 {
     public float ghostDelay;
     private float ghostDelayTime;
+    public float deleteTime;
     public GameObject ghost;
     public bool makeGhost = false;
 
@@ -35,7 +36,7 @@ public class GhostEffect : MonoBehaviour
                 //currentGhost.transform.localScale = this.transform.localScale;
 
                 ghostDelayTime = ghostDelay;
-                Destroy(currentGhost, 0.5f);
+                Destroy(currentGhost, deleteTime);
             }
         }
     }

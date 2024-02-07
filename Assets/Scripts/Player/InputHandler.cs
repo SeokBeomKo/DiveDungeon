@@ -12,6 +12,7 @@ public class InputHandler : MonoBehaviour
     public event PlayerInputHandler OnPlayerDownJump;
     public event PlayerInputHandler OnPlayerSkill;
     public event PlayerInputHandler OnPlayerAttack;
+    public event PlayerInputHandler OffPlayerAttack;
 
     public delegate void InputIntHandler(int value);
     public event InputIntHandler OnPlayerCheckDir;
@@ -48,9 +49,14 @@ public class InputHandler : MonoBehaviour
         }
 
         // 공격
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             OnPlayerAttack?.Invoke();
+        }
+
+        if(Input.GetKeyUp(KeyCode.E))
+        {
+            OffPlayerAttack?.Invoke();
         }
 
         // 아래 점프

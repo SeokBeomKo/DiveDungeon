@@ -16,6 +16,7 @@ public class InputCenterTest : MonoBehaviour
         inputHandler.OnPlayerJump += ChangeJumpState;
         inputHandler.OnPlayerDownJump += ChangeDownJumpState;
         inputHandler.OnPlayerAttack += ChangeAttackState;
+        inputHandler.OffPlayerAttack += StopAttackState;
         inputHandler.OnPlayerSkill += ChangeSkillState;
 
         inputHandler.OnPlayerCheckDir += CheckDirection;
@@ -62,8 +63,11 @@ public class InputCenterTest : MonoBehaviour
     {
         stateMachine.ChangeStateInput(PlayerMovementEnums.ATTACK);
         controller.isAttack = true;
-        return;
-        //controller.isAttack = false;
+    }
+
+    void StopAttackState()
+    {
+        controller.isAttack = false;
     }
 
     void ChangeSkillState()

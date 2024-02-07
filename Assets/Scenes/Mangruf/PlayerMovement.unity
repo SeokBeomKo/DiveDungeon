@@ -281,7 +281,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &239627513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1091,7 +1091,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!70 &590213549
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1105,8 +1105,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0030595064, y: 0.42540693}
-  m_Size: {x: 0.4598739, y: 0.92481947}
+  m_Offset: {x: 0.0030595064, y: 0.43554056}
+  m_Size: {x: 0.4598739, y: 0.8775294}
   m_Direction: 0
 --- !u!251 &590213550
 PlatformEffector2D:
@@ -1168,8 +1168,8 @@ MonoBehaviour:
   ghost: {fileID: 590213558}
   maxSpeed: 5
   moveSpeed: 10
-  direction: 1
-  isRight: 0
+  direction: 0
+  isRight: 1
   jumpForce: 15
   curJumpCount: 0
   isDownJump: 0
@@ -1272,12 +1272,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 4f89cf625dcdca74b9ddad3e148e2101, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3547739f0746e1a41ae8e8d390e16306, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.46875, y: 0.5625}
+  m_Size: {x: 1.1666666, y: 0.75}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1312,7 +1312,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 509005c60585aef48a80bf290d1dbf82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ghostDelay: 0.03
+  ghostDelay: 0.04
+  deleteTime: 0.3
   ghost: {fileID: 3873982885791138890, guid: 7872850f0a8467c40adbaba80740bba7, type: 3}
   makeGhost: 0
 --- !u!1 &618783104
@@ -1533,7 +1534,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!251 &881260138
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -1740,6 +1741,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ghostDelay: 0.03
+  deleteTime: 0
   ghost: {fileID: 3873982885791138890, guid: 96c1f44bbdac6314da917bea2ce5aa82, type: 3}
   makeGhost: 0
 --- !u!70 &881260148
@@ -2080,9 +2082,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1693822381}
-          m_TargetAssemblyTypeName: InputCenter, Assembly-CSharp
-          m_MethodName: ChangeDodgeState
+        - m_Target: {fileID: 774020478}
+          m_TargetAssemblyTypeName: InputButton, Assembly-CSharp
+          m_MethodName: DashClick
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2431,7 +2433,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates: []
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 774020478}
+          m_TargetAssemblyTypeName: InputButton, Assembly-CSharp
+          m_MethodName: Jumpclick
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1139222517
 GameObject:
   m_ObjectHideFlags: 0
@@ -3605,7 +3623,7 @@ GameObject:
   - component: {fileID: 1656981511}
   - component: {fileID: 1656981514}
   - component: {fileID: 1656981513}
-  - component: {fileID: 1656981512}
+  - component: {fileID: 1656981515}
   m_Layer: 5
   m_Name: AttackButton
   m_TagString: Untagged
@@ -3634,50 +3652,6 @@ RectTransform:
   m_AnchoredPosition: {x: -60, y: 50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 0}
---- !u!114 &1656981512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1656981510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1656981513}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1656981513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3716,6 +3690,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1656981510}
   m_CullTransparentMesh: 1
+--- !u!114 &1656981515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656981510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 774020478}
+          m_TargetAssemblyTypeName: InputButton, Assembly-CSharp
+          m_MethodName: AttackPress
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 774020478}
+          m_TargetAssemblyTypeName: InputButton, Assembly-CSharp
+          m_MethodName: AttackRelease
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1693822380
 GameObject:
   m_ObjectHideFlags: 0
@@ -3747,8 +3766,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   joystick: {fileID: 1764516192}
   button: {fileID: 774020478}
-  stateMachine: {fileID: 881260142}
-  controller: {fileID: 881260141}
+  stateMachine: {fileID: 590213554}
+  controller: {fileID: 590213552}
 --- !u!4 &1693822382
 Transform:
   m_ObjectHideFlags: 0
@@ -3959,7 +3978,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1834140241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3980,7 +3999,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1834140240}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.8814325, y: -1.9584014, z: -0.044547547}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

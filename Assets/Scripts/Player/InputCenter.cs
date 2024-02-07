@@ -18,6 +18,10 @@ public class InputCenter : MonoBehaviour
         joystick.OnCheckDashDirection += CheckDashDirection;
 
         button.OnDash += ChangeDodgeState;
+        button.OnAttack += ChangeAttackState;
+        button.OffAttack += StopAttackState;
+        button.OnJump += ChangeJumpState;
+        button.OnSkill += ChangeSkillState;
     }
 
     void ChangeIdleState()
@@ -65,7 +69,11 @@ public class InputCenter : MonoBehaviour
     {
         stateMachine.ChangeStateInput(PlayerMovementEnums.ATTACK);
         controller.isAttack = true;
-        return;
+    }
+
+    public void StopAttackState()
+    {
+        controller.isAttack = false;
     }
 
     void ChangeSkillState()
