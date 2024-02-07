@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2139372114988766177}
   - component: {fileID: -9022885870712209730}
   m_Layer: 0
-  m_Name: NinjaGhost
+  m_Name: GhostEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,8 +74,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 33e300574b9172245878bc2a0d529321, type: 3}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 8a8633955bf1d804a9a3b3d029939ab5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

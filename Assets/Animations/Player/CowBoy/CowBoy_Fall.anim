@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ninja_Land
+  m_Name: CowBoy_Fall
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,14 +20,18 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: fa008b8c39173b64f8b97f8e9a24a504, type: 3}
+      value: {fileID: 21300000, guid: b9d7397da483aa340a2ca6642050d041, type: 3}
+    - time: 0.083333336
+      value: {fileID: 21300000, guid: d5011120802b3354b8dbfa155bd6bc1d, type: 3}
     - time: 0.16666667
-      value: {fileID: 21300000, guid: fa008b8c39173b64f8b97f8e9a24a504, type: 3}
+      value: {fileID: 21300000, guid: 08b57a9eeccb6d94faf97d96aac23759, type: 3}
+    - time: 0.25
+      value: {fileID: 21300000, guid: 1e15a27d86e57a84a87308c8b37c1e33, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 60
+  m_SampleRate: 12
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -42,14 +46,16 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: fa008b8c39173b64f8b97f8e9a24a504, type: 3}
-    - {fileID: 21300000, guid: fa008b8c39173b64f8b97f8e9a24a504, type: 3}
+    - {fileID: 21300000, guid: b9d7397da483aa340a2ca6642050d041, type: 3}
+    - {fileID: 21300000, guid: d5011120802b3354b8dbfa155bd6bc1d, type: 3}
+    - {fileID: 21300000, guid: 08b57a9eeccb6d94faf97d96aac23759, type: 3}
+    - {fileID: 21300000, guid: 1e15a27d86e57a84a87308c8b37c1e33, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.18333334
+    m_StopTime: 0.33333334
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
