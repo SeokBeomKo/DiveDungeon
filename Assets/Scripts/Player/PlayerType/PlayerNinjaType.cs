@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerNinjaType : PlayerType
 {
 
-    // ========== 특수 스킬 ==========
+    // ========== Skill State ==========
     public override void SkillUpdate()
     {
 

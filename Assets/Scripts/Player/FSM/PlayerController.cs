@@ -209,43 +209,8 @@ public class PlayerController : MonoBehaviour
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Platform"), false);
     }
 
-
     public void PlayAnimation(string name)
     {
         animator.Play(name);
     }
 }
-
-
-
-
-
-// ==============
-/*public IEnumerator FutureDash()
-    {
-        isDash = true;
-        Vector2 dir = isRight ? Vector2.right : Vector2.left;
-        rigid.velocity = new Vector2(dir.x * moveSpeed, 0f);
-        SetMoveSpeed();
-
-        yield return new WaitForSeconds(dashTime);
-        isDash = false;
-    }*/
-
-/*public void FutureDash()
-{
-    ghost.makeGhost = true;
-    currentDashTime += Time.deltaTime;
-    isDash = true;
-
-    Vector2 dir = isRight ? Vector2.right : Vector2.left;
-    rigid.velocity = new Vector2(dir.x * moveSpeed, 0f);
-    SetMoveSpeed();
-
-    if (currentDashTime > maxDashTime)
-    {
-        currentDashTime = 0;
-        isDash = false;
-        ghost.makeGhost = false;
-    }
-}*/

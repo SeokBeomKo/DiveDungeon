@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerCowBoyType : PlayerType
 {
-    // ========== 특수 스킬 ==========
+    // ========== Skill State ==========
     public override void SkillUpdate()
     {
 

@@ -6,7 +6,7 @@ public abstract class PlayerType : MonoBehaviour
 {
     public PlayerController player;
 
-    // =========== 대시 (구르기) ============
+    // =========== Dodge(Dash) State ============
     public virtual void DodgeUpdate()
     {
         if (!player.animator.GetCurrentAnimatorStateInfo(0).IsName("Dodge")) return;
@@ -51,7 +51,7 @@ public abstract class PlayerType : MonoBehaviour
         player.ghost.makeGhost = false;
     }
 
-    // ============ 상승 ============
+    // ============ Rise State ============
     public virtual void RiseUpdate()
     {
         if (player.rigid.velocity.y < 0)
@@ -77,8 +77,7 @@ public abstract class PlayerType : MonoBehaviour
 
     }
 
-
-    // ============ 하강 ============
+    // ============ Fall State ============
     public virtual void FallUpdate()
     {
         if (player.CheckGround())
@@ -105,7 +104,7 @@ public abstract class PlayerType : MonoBehaviour
     }
 
 
-    // ============ 공격 ============
+    // ============ Attack State ============
     public virtual void AttackUpdate()
     {
         if (player.CheckGround())
@@ -114,7 +113,6 @@ public abstract class PlayerType : MonoBehaviour
         if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.98f) return;
         if (player.isAttack) return;
 
-        // 플레이어가 땅에 있는지 체크
         if (player.CheckGround())
         {
             player.stateMachine.ChangeStateLogic(PlayerMovementEnums.IDLE);
@@ -122,13 +120,12 @@ public abstract class PlayerType : MonoBehaviour
             return;
         }
 
-        // 떨어지는 상태
         if (player.rigid.velocity.y < 0)
         {
             player.stateMachine.ChangeStateLogic(PlayerMovementEnums.FALL);
             return;
         }
-        // 점프하는 상태
+        
         player.stateMachine.ChangeStateLogic(PlayerMovementEnums.RISE);
         
     }
@@ -148,7 +145,7 @@ public abstract class PlayerType : MonoBehaviour
 
     }
 
-    // ============ 특수 스킬 ============
+    // ============ Skill State ============
     public abstract void SkillUpdate();
     public abstract void SkillFixedUpdate();
     public abstract void SkillOnEnter();
