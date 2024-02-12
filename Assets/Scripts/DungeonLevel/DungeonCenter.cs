@@ -10,8 +10,11 @@ public class DungeonCenter : MonoBehaviour
     [SerializeField] public Room[,] rooms;
     [SerializeField] public List<Vector2> takenPositions = new List<Vector2>();
 
-    [SerializeField] public int numberOfRooms;
+    [Header("월드 크기 (반지름)")]
     [SerializeField] public Vector2 worldSize;
+    [Header("방 개수")]
+    [SerializeField] public int numberOfRooms;
+    
 
     private void Awake() 
     {
