@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class PlayerRedHoodType : PlayerType
 {
-    [Header("º¯½Å ÈÄ ¾Ö´Ï¸ÞÀÌÅÍ")]
+    [Header("Before transformation")]
     public AnimatorOverrideController whiteHood;
-    [Header("±âÁ¸ ¾Ö´Ï¸ÞÀÌÅÍ")]
+    [Header("After transformation")]
     public RuntimeAnimatorController redHood;
 
     float skillTime = 5.0f;
     bool isChange = false;
 
 
-    // ========== ÀçÁ¤ÀÇ ÇÔ¼ö ==========
+    // ========== redefinition function ==========
     public override void RiseUpdate()
     {
         if (player.rigid.velocity.y < 0)
@@ -43,10 +43,11 @@ public class PlayerRedHoodType : PlayerType
         }
     }
 
-    // ========== ±¸¸£±â ==========
+    // ========== Dodge State ==========
     public override void DodgeUpdate()
     {
-        // ÃÊ ¼¼¼­ IDLE »óÅÂ·Î ¹Ù²î°Ô ¼öÁ¤ÇÏ±â  
+        if (!player.animator.GetCurrentAnimatorStateInfo(0).IsName("Dodge")) return;
+
         if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.35f)
         {
             if (player.CheckGround())
@@ -83,12 +84,13 @@ public class PlayerRedHoodType : PlayerType
         player.maxSpeed /= 2f;
     }
 
-    // ========== °ø°Ý ==========
+
+    // ========== Attack State ==========
     int curIndex;
 
     public override void AttackUpdate()
     {
-        // °ø°Ý ÀÔ·Â °ª delay
+        // ê³µê²© ìž…ë ¥ ê°’ delay
         if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.5f)
         {
             player.isAttack = false;
@@ -96,14 +98,13 @@ public class PlayerRedHoodType : PlayerType
 
         if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.99f) return;
 
-        // °ø°Ý ¾Ö´Ï¸ÞÀÌ¼Ç ¼ø¼­´ë·Î ³ª¿À°Ô
+        // ê³µê²© ì• ë‹ˆë©”ì´ì…˜ ìˆœì„œëŒ€ë¡œ ë‚˜ì˜¤ê²Œ
         if (player.isAttack)
         {
             InitializeAttackAnimation();
             return;
         }
 
-        // ÇÃ·¹ÀÌ¾î°¡ ¶¥¿¡ ÀÖ´ÂÁö Ã¼Å©
         if (player.CheckGround())
         {
             player.stateMachine.ChangeStateLogic(PlayerMovementEnums.IDLE);
@@ -111,14 +112,12 @@ public class PlayerRedHoodType : PlayerType
             return;
         }
 
-        // ¶³¾îÁö´Â »óÅÂ
         if (player.rigid.velocity.y < 0)
         {
             player.stateMachine.ChangeStateLogic(PlayerMovementEnums.FALL);
             return;
         }
 
-        // Á¡ÇÁÇÏ´Â »óÅÂ
         player.stateMachine.ChangeStateLogic(PlayerMovementEnums.RISE);
     }
 
@@ -145,7 +144,8 @@ public class PlayerRedHoodType : PlayerType
         if (curIndex > 3) curIndex = 1;
     }
 
-    // ========== Æ¯¼ö ½ºÅ³ ==========
+
+    // ========== Skill State ==========
     public override void SkillUpdate()
     {
         if(player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f)
@@ -158,6 +158,7 @@ public class PlayerRedHoodType : PlayerType
     {
 
     }
+
     public override void SkillOnEnter()
     {
         player.isSkillOn = true;
@@ -180,7 +181,7 @@ public class PlayerRedHoodType : PlayerType
         }
     }
 
-    // ========== ÇÊ¿äÇÑ ÇÔ¼ö ==========
+    // ========== New Function ==========
     IEnumerator CheckSkillTime()
     {
         yield return new WaitForSeconds(skillTime);

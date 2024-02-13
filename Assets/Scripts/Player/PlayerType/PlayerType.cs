@@ -6,10 +6,12 @@ public abstract class PlayerType : MonoBehaviour
 {
     public PlayerController player;
 
-    // =========== 대시 (구르기) ============
+    // =========== Dodge(Dash) State ============
     public virtual void DodgeUpdate()
     {
-        if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.60f)
+        if (!player.animator.GetCurrentAnimatorStateInfo(0).IsName("Dodge")) return;
+
+        if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.40f)
         {
             if (player.CheckGround())
             {
@@ -49,7 +51,7 @@ public abstract class PlayerType : MonoBehaviour
         player.ghost.makeGhost = false;
     }
 
-    // ============ 상승 ============
+    // ============ Rise State ============
     public virtual void RiseUpdate()
     {
         if (player.rigid.velocity.y < 0)
@@ -75,8 +77,7 @@ public abstract class PlayerType : MonoBehaviour
 
     }
 
-
-    // ============ 하강 ============
+    // ============ Fall State ============
     public virtual void FallUpdate()
     {
         if (player.CheckGround())
@@ -103,13 +104,48 @@ public abstract class PlayerType : MonoBehaviour
     }
 
 
-    // ============ 공격 ============
-    public abstract void AttackUpdate();
-    public abstract void AttackFixedUpdate();
-    public abstract void AttackOnEnter();
-    public abstract void AttackOnExit();
+    // ============ Attack State ============
+    public virtual void AttackUpdate()
+    {
+        if (player.CheckGround())
+            player.InitializeJumpCount();
 
-    // ============ 특수 스킬 ============
+        if (player.animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.98f) return;
+        if (player.isAttack) return;
+
+        if (player.CheckGround())
+        {
+            player.stateMachine.ChangeStateLogic(PlayerMovementEnums.IDLE);
+            // player.InitializeJumpCount();
+            return;
+        }
+
+        if (player.rigid.velocity.y < 0)
+        {
+            player.stateMachine.ChangeStateLogic(PlayerMovementEnums.FALL);
+            return;
+        }
+        
+        player.stateMachine.ChangeStateLogic(PlayerMovementEnums.RISE);
+        
+    }
+
+    public virtual void AttackFixedUpdate()
+    {
+        player.SetFacingDirection();
+    }
+
+    public virtual void AttackOnEnter()
+    {
+        player.PlayAnimation("Attack");
+    }
+
+    public virtual void AttackOnExit()
+    {
+
+    }
+
+    // ============ Skill State ============
     public abstract void SkillUpdate();
     public abstract void SkillFixedUpdate();
     public abstract void SkillOnEnter();

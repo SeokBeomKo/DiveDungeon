@@ -9,9 +9,7 @@ public class PlayerController : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public PlayerMovementStateMachine stateMachine;
     public PlayerType type;
-
     public GhostEffect ghost;
-
 
     [Header("이동 관련 값")]
     public float maxSpeed;
@@ -30,7 +28,7 @@ public class PlayerController : MonoBehaviour
     [Header("대시 관련 값")]
     public bool isDash;
     public float dashTime;
-    // private float currentDashTime = 0;
+    public Vector2 dashDirection;
 
     [Header("벽 슬라이드 관련 값")]
     public float wallSlidingSpeed;
@@ -51,12 +49,12 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         InitializeJumpCount();
-
+        dashDirection = new Vector2(0, 1);
     }
 
     private void Update()
     {
-        Debug.Log(stateMachine.curState);
+        // Debug.Log(stateMachine.curState);
         if (stateMachine.curState != null)
             stateMachine.curState.Update();
     }
@@ -92,6 +90,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void SetDashSpeed()
+    {
+        if(Mathf.Abs(rigid.velocity.x) > maxSpeed || Mathf.Abs(rigid.velocity.y) > maxSpeed)
+        {
+            rigid.velocity = new Vector2(dashDirection.x * maxSpeed, dashDirection.y * maxSpeed);
+        }
+    }
+
+    public void SetDashDirection(Vector2 direction)
+    {
+        dashDirection = direction;
+        dashDirection.Normalize();
+    }
+
     public void Move()
     {
         rigid.AddForce(Vector2.right * direction * moveSpeed, ForceMode2D.Impulse);
@@ -110,6 +122,12 @@ public class PlayerController : MonoBehaviour
         Vector2 dir = isRight ? Vector2.right : Vector2.left;
         rigid.velocity = new Vector2(dir.x * moveSpeed, 0f);
         SetMoveSpeed();
+    }
+
+    public void eightWayDash()
+    {
+        rigid.velocity = dashDirection * moveSpeed;
+        SetDashSpeed();
     }
 
     public void Jump()
@@ -137,22 +155,21 @@ public class PlayerController : MonoBehaviour
 
     public bool CheckGround()
     {
-        //Debug.DrawRay(rigid.position, Vector3.down, new Color(0, 0.1f, 0));
-
         int layerMask = LayerMask.GetMask("Platform", "Ground");
-        RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector2.down, 0.1f, layerMask); 
-       
-        if (rayHit.collider != null)
-        {
-             return true;
-        }
-        return false;
+        RaycastHit2D rayHit = Physics2D.BoxCast(rigid.position, new Vector2(0.5f, 0.1f), 0f, Vector2.down, 0.1f, layerMask);
+
+        return rayHit.collider != null;
     }
 
     public bool CheckWall()
     {
         RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.right * direction, 0.3f, LayerMask.GetMask("Wall"));
-        return rayHit.collider != null;
+        
+        if (rayHit.collider != null)
+        {
+             return true;
+        }
+        return false;
     }
 
     public void WallSlide()
@@ -192,43 +209,8 @@ public class PlayerController : MonoBehaviour
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Platform"), false);
     }
 
-
     public void PlayAnimation(string name)
     {
         animator.Play(name);
     }
 }
-
-
-
-
-
-// ==============
-/*public IEnumerator FutureDash()
-    {
-        isDash = true;
-        Vector2 dir = isRight ? Vector2.right : Vector2.left;
-        rigid.velocity = new Vector2(dir.x * moveSpeed, 0f);
-        SetMoveSpeed();
-
-        yield return new WaitForSeconds(dashTime);
-        isDash = false;
-    }*/
-
-/*public void FutureDash()
-{
-    ghost.makeGhost = true;
-    currentDashTime += Time.deltaTime;
-    isDash = true;
-
-    Vector2 dir = isRight ? Vector2.right : Vector2.left;
-    rigid.velocity = new Vector2(dir.x * moveSpeed, 0f);
-    SetMoveSpeed();
-
-    if (currentDashTime > maxDashTime)
-    {
-        currentDashTime = 0;
-        isDash = false;
-        ghost.makeGhost = false;
-    }
-}*/

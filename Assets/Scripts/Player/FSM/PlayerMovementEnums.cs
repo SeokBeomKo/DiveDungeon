@@ -4,16 +4,16 @@ using UnityEngine;
 
 public enum PlayerMovementEnums
 {
-    IDLE,               // ±âº»
-    MOVE,               // ÀÌµ¿
-    JUMP,               // Á¡ÇÁ
-    RISE,               // »ó½Â
-    FALL,               // ÇÏ°­
-    LAND,               // ÂøÁö 
-    DODGE,              // ±¸¸£±â, ´ë½Ã
-    ATTACK,             // °ø°Ý
-    DOWNJUMP,           // ¾Æ·¡ Á¡ÇÁ
-    SKILL,              // Æ¯¼ö ½ºÅ³
-    WALLSLIDE,          // º® ½½¶óÀÌµå
-    WALLJUMP,           // º® Á¡ÇÁ
+    IDLE,               // ê¸°ë³¸
+    MOVE,               // ì´ë™
+    JUMP,               // ì í”„
+    RISE,               // ìƒìŠ¹
+    FALL,               // í•˜ë½
+    LAND,               // ì°©ì§€ 
+    DODGE,              // êµ¬ë¥´ê¸°, ëŒ€ì‰¬
+    ATTACK,             // ê³µê²©
+    DOWNJUMP,           // ì•„ëž˜ ì í”„
+    SKILL,              // ìŠ¤í‚¬
+    WALLSLIDE,          // ë²½ ìŠ¬ë¼ì´ë“œ
+    WALLJUMP,           // ë²½ ì í”„
 }

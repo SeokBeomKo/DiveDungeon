@@ -16,7 +16,7 @@ public class PlayerLandState : IPlayerState
     public HashSet<PlayerMovementEnums> inputHash { get; } = new HashSet<PlayerMovementEnums>()
     {
         PlayerMovementEnums.MOVE,
-        PlayerMovementEnums.DOWNJUMP
+        PlayerMovementEnums.JUMP
     };
 
     public HashSet<PlayerMovementEnums> logicHash { get; } = new HashSet<PlayerMovementEnums>()
