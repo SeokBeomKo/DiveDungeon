@@ -97,27 +97,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2daf8c1898c76442f81dbd2ec176fbca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spU: {fileID: 21300000, guid: bd605aa0cde29e04cae0d394bcc40a16, type: 3}
-  spD: {fileID: 21300000, guid: 609e6b040696bfc409fb90c9404906ba, type: 3}
-  spR: {fileID: 21300000, guid: a76b0549e05a71d429ab2f8547e58f74, type: 3}
-  spL: {fileID: 21300000, guid: 0e664f8e7a480024182770de58fedbcc, type: 3}
-  spUD: {fileID: 21300000, guid: 3229e5168dcf6054fbd4629dfde3861c, type: 3}
-  spRL: {fileID: 21300000, guid: 2c6db53dc9e509f438f27f60974deeb4, type: 3}
-  spUR: {fileID: 21300000, guid: c168d8e5e7c1e764c8b25d6c0dc6701a, type: 3}
-  spUL: {fileID: 21300000, guid: 84b6a7f0829799646a1fb7c66ea77d25, type: 3}
-  spDR: {fileID: 21300000, guid: 5959ba9dbb86e36478d42524d1622e97, type: 3}
-  spDL: {fileID: 21300000, guid: 212a3caf298eeda4e8aa229d0df5662a, type: 3}
-  spULD: {fileID: 21300000, guid: e577ec32abe895e4396f5af82c3281d3, type: 3}
-  spRUL: {fileID: 21300000, guid: 22fb0b71bbf084e40bf64a06a4430dfd, type: 3}
-  spDRU: {fileID: 21300000, guid: f426482a02546f040ad384b71ae00ec0, type: 3}
-  spLDR: {fileID: 21300000, guid: 0fe38dbc8db1c4e41ae4eeb4deb24fbf, type: 3}
-  spUDRL: {fileID: 21300000, guid: bf052605fca15c64f8ede61aa3cefd44, type: 3}
-  up: 0
-  down: 0
-  left: 0
-  right: 0
+  spU: {fileID: 21300000, guid: c7819f663fd32ea4a909fc558a782366, type: 3}
+  spD: {fileID: 21300000, guid: 2d5cef4f1c136714bac69db478275e54, type: 3}
+  spR: {fileID: 21300000, guid: 7dd9ed293c5769042a3cc3ccf914b72e, type: 3}
+  spL: {fileID: 21300000, guid: 1be95bf45af18c947af88845614c3935, type: 3}
+  spUD: {fileID: 21300000, guid: 726d4adc2c35adf49a696520e3bb3c01, type: 3}
+  spRL: {fileID: 21300000, guid: 6c4b0dcd7fe99814f827564a16e8d269, type: 3}
+  spUR: {fileID: 21300000, guid: db48da81c2a4b704aa94a0c563bbbd43, type: 3}
+  spUL: {fileID: 21300000, guid: 17ffd6230c49db44cb783fb1ff7ea752, type: 3}
+  spDR: {fileID: 21300000, guid: 0a6570fa33f9b3e4b9893b960ada287f, type: 3}
+  spDL: {fileID: 21300000, guid: 8edf18727d42f7946bda92f95f8ab8a9, type: 3}
+  spULD: {fileID: 21300000, guid: 98b4fa921cfec394da8adbbe80a534dd, type: 3}
+  spRUL: {fileID: 21300000, guid: 76c98fed3144d94458de2ad9eadc04e9, type: 3}
+  spDRU: {fileID: 21300000, guid: 4e19e0d3b88063b46ad8574093fe3e66, type: 3}
+  spLDR: {fileID: 21300000, guid: b3403c31138e49a4f82c695d69220e47, type: 3}
+  spUDRL: {fileID: 21300000, guid: f8bd375a6a3f70442a9144d0e96fda57, type: 3}
   type: 0
   enterColor: {r: 0, g: 1, b: 0, a: 0.39215687}
   roomColor: {r: 1, g: 1, b: 1, a: 0.39215687}
   shopColor: {r: 1, g: 1, b: 0, a: 0.39215687}
   exitColor: {r: 1, g: 0, b: 0, a: 0.39215687}
+  direction: 0

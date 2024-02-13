@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
 {
-    [SerializeField] public Vector2 worldSize; // : 월드의 크기 값 ( 중앙 기준점을 중심으로 반경 )
+    public delegate void GeneratedLevel(Room[,] rooms, List<Vector2> pos);
+    public event GeneratedLevel OnGenerateLevel;
+
+    public Dungeon dungeon;
+
+    [HideInInspector] public Vector2 worldSize; // : 월드의 크기 값 ( 중앙 기준점을 중심으로 반경 )
+    [HideInInspector] public int numberOfRooms; // : 그리드 크기와 방의 개수를 정의
+
+    public List<Vector2> takenPositions = new List<Vector2>(); // : 이미 존재하는 방의 위치를 저장하는 리스트
     Room[,] rooms;      // : 2 차원 배열 방의 집합 ( 실제 방이 존재하는 그리드 값 )
-    List<Vector2> takenPositions = new List<Vector2>(); // : 이미 존재하는 방의 위치를 저장하는 리스트
-    int gridSizeX, gridSizeY, numberOfRooms = 20; // : 그리드 크기와 방의 개수를 정의
-    bool createdShop = false, createdExit = false;
+    int gridSizeX, gridSizeY;
 
     public GameObject roomWhiteObj; // : 방의 프리팹 오브젝트
     public Transform mapRoot; // : 맵의 루트 Transform
@@ -23,11 +29,10 @@ public class LevelGenerator : MonoBehaviour
         gridSizeY = Mathf.RoundToInt(worldSize.y); // 그리드의 세로 크기
         CreateRooms(); // 방 생성 함수 호출
         SetRoomDoors(); // 방의 문 설정 함수 호출
+        OnGenerateLevel?.Invoke(rooms, takenPositions);
         DrawMap(); // 맵 그리는 함수 호출
         // GetComponent<SheetAssigner>().Assign(rooms); // 방의 정보를 다른 스크립트로 전달하는 함수 호출
     }
-
-    RoomType settinfType;
 
     void CreateRooms()
     {
@@ -73,13 +78,17 @@ public class LevelGenerator : MonoBehaviour
     int shopindex, exitindex;
     void SettingType()
     {
-        shopindex = Mathf.RoundToInt(Random.value * (takenPositions.Count - 1));
+        do 
+        {
+            shopindex = Mathf.RoundToInt(Random.value * (takenPositions.Count - 1));
+        } while (rooms[(int) takenPositions[shopindex].x + gridSizeX, (int) takenPositions[shopindex].y + gridSizeY].type != RoomType.ROOM);
+        
         rooms[(int) takenPositions[shopindex].x + gridSizeX, (int) takenPositions[shopindex].y + gridSizeY].type = RoomType.SHOP;
 
         do 
         {
             exitindex = Mathf.RoundToInt(Random.value * (takenPositions.Count - 1));
-        } while (shopindex == exitindex);
+        } while (rooms[(int) takenPositions[exitindex].x + gridSizeX, (int) takenPositions[exitindex].y + gridSizeY].type != RoomType.ROOM);
         rooms[(int) takenPositions[exitindex].x + gridSizeX, (int) takenPositions[exitindex].y + gridSizeY].type = RoomType.EXIT;
     }
 
@@ -181,21 +190,22 @@ public class LevelGenerator : MonoBehaviour
     	        Room room = rooms[x, y];
     	        if (room != null) 
                 {
-    	            // : 위쪽 방향의 문을 설정합니다. 
+                    // : 위쪽 방향의 문을 설정합니다. 
                     // : 현재 위치가 맵의 상단 경계를 넘지 않고, 위쪽에 방이 있는 경우에만 문을 만듭니다.
-                    room.doorBot = y - 1 >= 0 && rooms[x, y - 1] != null;
-
+                    if (y + 1 < maxY && rooms[x, y + 1] != null)
+                        room.direction = room.direction | Directions.UP;
                     // : 아래쪽 방향의 문을 설정합니다. 
                     // : 현재 위치가 맵의 하단 경계를 넘지 않고, 아래쪽에 방이 있는 경우에만 문을 만듭니다.
-                    room.doorTop = y + 1 < maxY && rooms[x, y + 1] != null;
-
+                    if (y - 1 >= 0 && rooms[x, y - 1] != null)
+                        room.direction = room.direction | Directions.DOWN;
                     // : 왼쪽 방향의 문을 설정합니다.
                     // : 현재 위치가 맵의 왼쪽 경계를 넘지 않고, 왼쪽에 방이 있는 경우에만 문을 만듭니다.
-                    room.doorLeft = x - 1 >= 0 && rooms[x - 1, y] != null;
-
+                    if (x - 1 >= 0 && rooms[x - 1, y] != null)
+                        room.direction = room.direction | Directions.LEFT;
                     // : 오른쪽 방향의 문을 설정합니다.
                     // : 현재 위치가 맵의 오른쪽 경계를 넘지 않고, 오른쪽에 방이 있는 경우에만 문을 만듭니다.
-                    room.doorRight = x + 1 < maxX && rooms[x + 1, y] != null;
+                    if(x + 1 < maxX && rooms[x + 1, y] != null)
+                        room.direction = room.direction | Directions.RIGHT;
     	        }
     	    }
     	}
@@ -217,11 +227,8 @@ public class LevelGenerator : MonoBehaviour
             drawPos.y *= 8;  
 
             MapSpriteSelector mapper = Object.Instantiate(roomWhiteObj, drawPos, Quaternion.identity).GetComponent<MapSpriteSelector>();
-            mapper.type = room.type;       
-            mapper.up = room.doorTop;      
-            mapper.down = room.doorBot;    
-            mapper.right = room.doorRight; 
-            mapper.left = room.doorLeft;   
+            mapper.type = room.type;   
+            mapper.direction = room.direction;      
 
             mapper.gameObject.transform.parent = mapRoot;
         }   

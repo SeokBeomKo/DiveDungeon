@@ -2,10 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum RoomType
+public class Dungeon : MonoBehaviour
 {
-    ENTER,
-    ROOM,
-    SHOP,
-    EXIT,
+    
 }
